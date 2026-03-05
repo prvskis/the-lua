@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
 
 const NAVY = '#222458'
 const PAPER = '#F6EFE4'
+
+const HERO_SLIDES = [
+  { kind: 'video', src: '/videos/hero-1.mp4' },
+  { kind: 'image', src: '/images/home/hero-2.png', alt: 'THE LUA Hero 2' },
+  { kind: 'image', src: '/images/home/hero-3.png', alt: 'THE LUA Hero 3' },
+] as const
 
 function PrimaryButton({
   children,
@@ -20,17 +26,6 @@ function PrimaryButton({
         className,
       ].join(' ')}
       style={{ backgroundColor: NAVY }}
-    >
-      {children}
-    </button>
-  )
-}
-
-function OutlineLink({ children }: { children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      className="text-[14px] text-black/70 underline underline-offset-8 decoration-black/30 hover:text-black"
     >
       {children}
     </button>
@@ -164,6 +159,38 @@ function TripCardView({ c }: { c: TripCard }) {
 }
 
 export function HomePage() {
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null)
+
+  const goToHeroSlide = (idx: number) => {
+    const next = ((idx % HERO_SLIDES.length) + HERO_SLIDES.length) % HERO_SLIDES.length
+    setActiveHeroSlide(next)
+  }
+
+  const goNextHeroSlide = () => setActiveHeroSlide((i) => (i + 1) % HERO_SLIDES.length)
+
+  useEffect(() => {
+    const active = HERO_SLIDES[activeHeroSlide]
+    const v = heroVideoRef.current
+
+    if (active.kind === 'video') {
+      if (v) {
+        v.currentTime = 0
+        const p = v.play()
+        if (p && typeof (p as Promise<void>).catch === 'function') {
+          ;(p as Promise<void>).catch(() => {})
+        }
+      }
+      return
+    }
+
+    // Ensure video stops when not active
+    if (v && !v.paused) v.pause()
+
+    const t = window.setTimeout(goNextHeroSlide, 7000)
+    return () => window.clearTimeout(t)
+  }, [activeHeroSlide])
+
   const trips: TripCard[] = [
     {
       img: '/images/home/explore-1.jpg',
@@ -199,20 +226,98 @@ export function HomePage() {
       <ScrollToTopFab />
 
       {/* HERO */}
-      <section className="relative h-[92vh] min-h-[640px] w-full">
-        <img
-          src="/images/home/hero.jpg"
-          alt="THE LUA Hero"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+      <section className="relative -mt-16 h-[calc(92vh+4rem)] min-h-[calc(640px+4rem)] w-full overflow-hidden">
+        {/* Slide 1: video */}
+        <div
+          className={[
+            'absolute inset-0 transition-opacity duration-1000 ease-in-out',
+            activeHeroSlide === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+          ].join(' ')}
+          aria-hidden={activeHeroSlide !== 0}
+        >
+          <video
+            ref={heroVideoRef}
+            className="absolute inset-0 block h-full w-full object-cover"
+            style={{ scale: 1.15 }}
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            onEnded={() => {
+              if (activeHeroSlide === 0) goNextHeroSlide()
+            }}
+            aria-hidden="true"
+          >
+            <source src="/videos/hero-1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* Slide 2: image */}
+        <div
+          className={[
+            'absolute inset-0 transition-opacity duration-1000 ease-in-out',
+            activeHeroSlide === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+          ].join(' ')}
+          aria-hidden={activeHeroSlide !== 1}
+        >
+          <img
+            src="/images/home/hero-2.png"
+            alt="THE LUA Hero 2"
+            className="absolute inset-0 block h-full w-full object-cover"
+            style={{ scale: 1.15 }}
+          />
+        </div>
+
+        {/* Slide 3: image */}
+        <div
+          className={[
+            'absolute inset-0 transition-opacity duration-1000 ease-in-out',
+            activeHeroSlide === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+          ].join(' ')}
+          aria-hidden={activeHeroSlide !== 2}
+        >
+          <img
+            src="/images/home/hero-3.png"
+            alt="THE LUA Hero 3"
+            className="absolute inset-0 block h-full w-full object-cover"
+            style={{ scale: 1.15 }}
+          />
+        </div>
 
         <div className="relative z-10 flex h-full flex-col items-center justify-end pb-14">
-          <div className="flex items-center gap-3 text-[12px] tracking-[0.5em] text-black/60">
-            <span className="inline-block h-px w-24 bg-black/30" />
-            SCROLL TO DISCOVER
-            <span className="inline-block h-px w-24 bg-black/30" />
+          {/* Indicators */}
+          <div className="mb-3 flex items-center gap-2">
+            {HERO_SLIDES.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => goToHeroSlide(idx)}
+                className={[
+                  'h-[3px] w-20 rounded-full transition-all duration-300',
+                  idx === activeHeroSlide ? 'bg-white/90' : 'bg-white/40 hover:bg-white/55',
+                ].join(' ')}
+                aria-label={`Go to hero slide ${idx + 1}`}
+                aria-current={idx === activeHeroSlide}
+              />
+            ))}
           </div>
-          <div className="mt-2 text-black/70">⌄</div>
+
+          <div className="flex items-center">
+            <span className="font-inter text-[18px] font-regular tracking-[1em] text-white/85">SCROLL TO DISCOVER</span>
+          </div>
+          <div className="mt-2 text-white/75" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
       </section>
 
