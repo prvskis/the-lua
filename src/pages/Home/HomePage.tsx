@@ -32,12 +32,21 @@ function PrimaryButton({
   )
 }
 
-function DisplayTitle({ children, center }: { children: React.ReactNode; center?: boolean }) {
+function DisplayTitle({
+  children,
+  center,
+  className = '',
+}: {
+  children: React.ReactNode
+  center?: boolean
+  className?: string
+}) {
   return (
     <h2
       className={[
         'font-regal text-[65px] leading-none tracking-[0.01px]',
         center ? 'text-center' : '',
+        className,
       ].join(' ')}
       style={{ color: NAVY }}
     >
@@ -478,12 +487,12 @@ export function HomePage() {
 
       {/* TESTIMONIALS (static version trước, sau nâng lên carousel) */}
       {/* TESTIMONIALS */}
-      <section className="py-16" style={{ backgroundColor: PAPER }}>
+      <section className="py-14" style={{ backgroundColor: PAPER }}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <DisplayTitle center>A COLLECTION OF FIVE-STAR MOMENTS</DisplayTitle>
 
           {/* BAND with texture behind cards */}
-          <div className="relative mt-10">
+          <div className="relative mt-8">
             {/* texture band (height follows cards via absolute inset) */}
             <div
               className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-center bg-no-repeat"
@@ -515,23 +524,35 @@ export function HomePage() {
               ].map((t) => (
                 <article
                   key={t.title}
-                  className="relative h-[450px] rounded-[6px] border border-black/10 bg-white p-10"
+                  className="relative flex flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8"
                 >
-                  {/* stars */}
-                  <div className="text-[18px] tracking-[0.22em] text-[#D9B07A]">
-                    ★★★★★
+                  <div className="flex-1">
+                    {/* stars */}
+                    <div className="flex items-center gap-2 mb-5 text-[#D9B07A]" aria-label="5 out of 5 stars">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <svg
+                          key={i}
+                          viewBox="0 0 24 24"
+                          className="h-6 w-6"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 3.5c.3 0 .6.18.74.46l2.47 5.13 5.66.82c.66.1.93.91.45 1.38l-4.1 3.99.97 5.63c.11.66-.58 1.16-1.17.85L12 19.8l-5.02 2.64c-.59.31-1.28-.19-1.17-.85l.97-5.63-4.1-3.99c-.48-.47-.21-1.28.45-1.38l5.66-.82 2.47-5.13c.14-.28.44-.46.74-.46z"/>
+                        </svg>
+                      ))}
+                    </div>
+
+                    <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
+                      {t.title}
+                    </h3>
+
+                    <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
+                      {t.body}
+                    </p>
                   </div>
 
-                  <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
-                    {t.title}
-                  </h3>
-
-                  <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
-                    {t.body}
-                  </p>
-
                   {/* author */}
-                  <div className="mt-10 flex items-center gap-4">
+                  <div className="mt-10 flex items-center gap-4 mt-auto">
                     <div className="h-12 w-12 overflow-hidden rounded-full bg-black/10">
                       <img
                         src={t.avatar}
@@ -549,7 +570,7 @@ export function HomePage() {
                   </div>
 
                   {/* small diamond decoration bottom-right */}
-                  <div className="pointer-events-none absolute bottom-4 right-6 text-[#D9B07A]">
+                  <div className="pointer-events-none absolute text-[30px] bottom-4 right-6 text-[#D9B07A]">
                     ✦
                   </div>
                 </article>
@@ -586,31 +607,43 @@ export function HomePage() {
 
       {/* INSTAGRAM */}
       <Section>
-        <div className="text-center">
-          <div className="mx-auto flex max-w-[620px] items-center justify-center gap-4 text-black/30">
-            <span className="inline-block h-px w-40 bg-black/20" />
-            <span className="text-[#D9B07A]">✦</span>
-            <span className="inline-block h-px w-40 bg-black/20" />
+        <div className="text-center mt-[-70px]">
+          <div className="mx-auto flex max-w-[620px] items-center gap-4 justify-center text-black/30">
+            <span className="inline-block h-px w-40 mt-[2px] bg-black/20" />
+            <span className="text-[#D9B07A] text-[40px]">✦</span>
+            <span className="inline-block h-px w-40 mt-[2px] bg-black/20" />
           </div>
 
-          <p className="mt-6 text-[18px] font-semibold tracking-[0.06em] text-[#2A2B5E]/80">
+          <p className="font-inter text-[30px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
             INSTAGRAM
           </p>
-          <DisplayTitle center>@THELUATRAIN</DisplayTitle>
+          <DisplayTitle center className="text-[45px] md:text-[50px]">
+            <span className="font-inter">@</span>THELUATRAIN
+          </DisplayTitle>
 
-          <button className="mt-4 text-[14px] text-[#2A2B5E]/70 underline underline-offset-8 decoration-[#D9B07A]/70">
+          <button
+            className="group inline-flex items-center gap-2 text-[16px] tracking-[0.12em] text-[#2A2B5E]/70 transition-colors hover:text-[#2A2B5E]"
+          >
             follow us
+
+            {/* arrow */}
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+
+            {/* underline animation */}
+            <span className="absolute mt-6 block h-px w-0 bg-[#D9B07A] transition-all duration-300 group-hover:w-[90px]" />
           </button>
         </div>
 
-        <div className="relative mt-12">
-          <div className="grid gap-6 md:grid-cols-5">
+        <div className="relative mt-8 left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-5">
             {['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'].map((k) => (
               <div
                 key={k}
-                className="overflow-hidden rounded-b-2xl bg-black/5"
+                className="overflow-hidden"
               >
-                <img src={`/images/home/${k}.jpg`} alt={k} className="h-[260px] w-full object-cover" />
+                <img src={`/images/home/${k}.jpg`} alt={k} className="h-full w-full object-cover" />
               </div>
             ))}
           </div>
@@ -623,16 +656,18 @@ export function HomePage() {
             →
           </button>
         </div>
-
-        <div className="mt-16 h-[140px] w-full rounded-2xl border border-black/10 bg-[linear-gradient(135deg,rgba(30,31,75,0.08),transparent)]" />
       </Section>
 
-      {/* FOOTER placeholder: bạn đang có design footer riêng, mình sẽ tách ra component sau */}
-      <footer className="py-10" style={{ backgroundColor: NAVY }}>
-        <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8 text-white/80">
-          <div className="text-[13px]">Footer sẽ tách component theo ảnh bạn gửi ở bước kế tiếp.</div>
+      {/* TEXTURE DIVIDER */}
+      <div className="w-full bg-white py-8">
+        <div className="w-full overflow-hidden" aria-hidden="true">
+          <img
+            src="/images/home/texture-section.png"
+            alt=""
+            className="h-full w-full object-cover"
+          />
         </div>
-      </footer>
+      </div>
     </div>
   )
 }
