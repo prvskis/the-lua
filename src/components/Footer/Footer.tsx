@@ -1,3 +1,6 @@
+import { FiMail, FiMapPin, FiPhone } from "react-icons/fi"
+import { RiFacebookLine, RiInstagramLine, RiLinkedinLine, RiStarLine, RiYoutubeLine } from "react-icons/ri"
+
 export function Footer() {
     return (
       <footer className="bg-[#232566] font-inter text-[#F4E9D6]">
@@ -7,19 +10,21 @@ export function Footer() {
             <div className="grid max-w-[520px] gap-12 lg:justify-self-end lg:gap-14">
               {/* Contact */}
               <div>
-                <h3 className="font-work text-[20px] font-semibold">Contact</h3>
+                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Contact</h3>
   
-                <div className="mt-8 space-y-6 text-[15px] leading-7 text-[#F4E9D6]/90">
+                <div className="mt-2 space-y-4 text-[15px] leading-7 text-[#F4E9D6]/90">
                   <div className="flex items-start gap-4">
-                    <span className="mt-1 text-[20px] leading-none">⌕</span>
-                    <div className="space-y-2">
-                      <p>099 236 5147</p>
-                      <p>cs@THELUATRAIN.com.vn</p>
-                    </div>
+                    <FiPhone className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
+                    <p>099 236 5147</p>
                   </div>
-  
+
                   <div className="flex items-start gap-4">
-                    <span className="mt-1 text-[20px] leading-none">◉</span>
+                    <FiMail className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
+                    <p>cs@THELUATRAIN.com.vn</p>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <FiMapPin className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
                     <p className="max-w-[320px]">No 28, Ngo Quyen, Dis 1, Ho Chi Minh</p>
                   </div>
                 </div>
@@ -71,40 +76,40 @@ export function Footer() {
             {/* RIGHT */}
             <div className="grid max-w-[520px] ml-[20px] gap-10 lg:justify-self-start lg:gap-11">
               <div>
-                <h3 className="font-work text-[20px] font-semibold">Follow Us</h3>
-                <div className="mt-5 flex items-center gap-6 text-[27px] text-[#F4E9D6]/95">
+                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Follow Us</h3>
+                <div className="mt-4 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
                   <a href="#" aria-label="Facebook" className="transition hover:opacity-75">
-                    f
+                    <RiFacebookLine aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Instagram" className="transition hover:opacity-75">
-                    ◉
+                    <RiInstagramLine aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="YouTube" className="transition hover:opacity-75">
-                    ▷
+                    <RiYoutubeLine aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="LinkedIn" className="transition hover:opacity-75">
-                    in
+                    <RiLinkedinLine aria-hidden="true" />
                   </a>
                 </div>
               </div>
   
               <div>
-                <h3 className="font-work text-[20px] font-semibold">Share Your Feed Back</h3>
-                <div className="mt-5 flex items-center gap-6 text-[27px] text-[#F4E9D6]/95">
+                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Share Your Feed Back</h3>
+                <div className="mt-5 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
                   <a href="#" aria-label="Facebook" className="transition hover:opacity-75">
-                    f
+                    <RiFacebookLine aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Instagram" className="transition hover:opacity-75">
-                    ◉
+                    <RiInstagramLine aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Favorite" className="transition hover:opacity-75">
-                    ☆
+                    <RiStarLine aria-hidden="true" />
                   </a>
                 </div>
               </div>
   
               <div>
-                <h3 className="font-work text-[20px] font-semibold">Share Your Feed Back</h3>
+                <h3 className="font-work text-[24px] font-semibold">Share Your Feed Back</h3>
                 <p className="mt-3 text-[15px] leading-6 text-[#F4E9D6]/85">
                   Elevate your next THE LUA TRAIN by recceiving our newletter.
                 </p>

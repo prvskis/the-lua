@@ -11,7 +11,7 @@ export function Section({
   containerClassName?: string
 }) {
   return (
-    <section className={`py-5 sm:py-16 lg:py-20 ${className}`}>
+    <section className={`py-5 sm:py-16 lg:py-15 ${className}`}>
       <Container className={containerClassName}>{children}</Container>
     </section>
   )

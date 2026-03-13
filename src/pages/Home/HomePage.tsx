@@ -432,7 +432,15 @@ export function HomePage() {
         </div>
 
         <div className="mt-10 flex justify-end">
-          <PrimaryButton className="rounded-none rounded-tr-[20px] py-2 text-[16px] tracking-[0.06em]">SEE ALL</PrimaryButton>
+          <button className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E]">
+            <span className="relative z-10">SEE ALL</span>
+
+            <span className="absolute inset-0 scale-x-0 origin-left bg-[#2A2B5E] transition-transform duration-300 group-hover:scale-x-100" />
+
+            <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition group-hover:opacity-100">
+              SEE ALL
+            </span>
+          </button>
         </div>
       </Section>
 
@@ -659,7 +667,7 @@ export function HomePage() {
       </Section>
 
       {/* TEXTURE DIVIDER */}
-      <div className="w-full bg-white py-8">
+      <div className="w-full bg-white py-8 mb-20">
         <div className="w-full overflow-hidden" aria-hidden="true">
           <img
             src="/images/home/texture-section.png"
