@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
+import { InstagramSection } from '@/components/sections/InstagramSection'
 
 const NAVY = '#222458'
 const PAPER = '#F6EFE4'
@@ -613,58 +614,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* INSTAGRAM */}
-      <Section>
-        <div className="text-center mt-[-70px]">
-          <div className="mx-auto flex max-w-[620px] items-center gap-4 justify-center text-black/30">
-            <span className="inline-block h-px w-40 mt-[2px] bg-black/20" />
-            <span className="text-[#D9B07A] text-[40px]">✦</span>
-            <span className="inline-block h-px w-40 mt-[2px] bg-black/20" />
-          </div>
-
-          <p className="font-inter text-[30px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
-            INSTAGRAM
-          </p>
-          <DisplayTitle center className="text-[45px] md:text-[50px]">
-            <span className="font-inter">@</span>THELUATRAIN
-          </DisplayTitle>
-
-          <button
-            className="group inline-flex items-center gap-2 text-[16px] tracking-[0.12em] text-[#2A2B5E]/70 transition-colors hover:text-[#2A2B5E]"
-          >
-            follow us
-
-            {/* arrow */}
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-
-            {/* underline animation */}
-            <span className="absolute mt-6 block h-px w-0 bg-[#D9B07A] transition-all duration-300 group-hover:w-[90px]" />
-          </button>
-        </div>
-
-        <div className="relative mt-8 left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-5">
-            {['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'].map((k) => (
-              <div
-                key={k}
-                className="overflow-hidden"
-              >
-                <img src={`/images/home/${k}.jpg`} alt={k} className="h-full w-full object-cover" />
-              </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            className="absolute right-2 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/90 shadow-sm"
-            aria-label="Next"
-          >
-            →
-          </button>
-        </div>
-      </Section>
+      <InstagramSection />
 
       {/* TEXTURE DIVIDER */}
       <div className="w-full bg-white py-8 mb-20">

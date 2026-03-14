@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
+import { InstagramSection } from '@/components/sections/InstagramSection'
 import { FiMap, FiStar, FiUsers } from 'react-icons/fi'
 
 const NAVY = '#222458'
@@ -183,7 +184,7 @@ function TeamCard({ member }: { member: TeamMember }) {
         <img src={member.image} alt={member.name} className="h-[360px] w-full object-cover" />
       </div>
 
-      <div className="relative bg-[#E4D8C4] px-6 pb-7 pt-5 text-center rounded-bl-[100px]">
+      <div className="relative bg-[#F2E6D3] px-6 pb-8 pt-5 text-center rounded-bl-[100px]">
         <h3 className="font-inter text-[18px] font-extrabold tracking-[0.01em] md:text-[20px]" style={{ color: NAVY }}>
           {member.name}
         </h3>
@@ -557,47 +558,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* INSTAGRAM */}
-      <Section>
-        <div className="mt-[-70px] text-center">
-          <div className="mx-auto flex max-w-[620px] items-center justify-center gap-4 text-black/30">
-            <span className="mt-[2px] inline-block h-px w-40 bg-black/20" />
-            <span className="text-[40px] text-[#D9B07A]">✦</span>
-            <span className="mt-[2px] inline-block h-px w-40 bg-black/20" />
-          </div>
-
-          <p className="font-inter text-[30px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
-            INSTAGRAM
-          </p>
-          <DisplayTitle center className="text-[45px] md:text-[50px]">
-            <span className="font-inter">@</span>THELUATRAIN
-          </DisplayTitle>
-
-          <button className="group inline-flex items-center gap-2 text-[16px] tracking-[0.12em] text-[#2A2B5E]/70 transition-colors hover:text-[#2A2B5E]">
-            follow us
-            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            <span className="absolute mt-6 block h-px w-0 bg-[#D9B07A] transition-all duration-300 group-hover:w-[90px]" />
-          </button>
-        </div>
-
-        <div className="relative left-1/2 mt-8 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-5">
-            {['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'].map((k) => (
-              <div key={k} className="overflow-hidden">
-                <img src={`/images/home/${k}.jpg`} alt={k} className="h-full w-full object-cover" />
-              </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 shadow-sm"
-            aria-label="Next"
-          >
-            →
-          </button>
-        </div>
-      </Section>
+      <InstagramSection />
 
     </div>
   )

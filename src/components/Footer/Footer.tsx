@@ -1,5 +1,5 @@
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi"
-import { RiFacebookLine, RiInstagramLine, RiLinkedinLine, RiStarLine, RiYoutubeLine } from "react-icons/ri"
+import { RiFacebookFill, RiInstagramFill, RiLinkedinFill, RiStarLine, RiYoutubeFill } from "react-icons/ri"
 
 export function Footer() {
     return (
@@ -69,7 +69,7 @@ export function Footer() {
               <img
                 src="/logos/logo-set-light.png"
                 alt="THE LUA"
-                className="h-[140px] mt-20 w-auto object-contain lg:h-[165px]"
+                className="h-[160px] mt-20 w-auto object-contain lg:h-[180px]"
               />
             </div>
   
@@ -79,16 +79,16 @@ export function Footer() {
                 <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Follow Us</h3>
                 <div className="mt-4 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
                   <a href="#" aria-label="Facebook" className="transition hover:opacity-75">
-                    <RiFacebookLine aria-hidden="true" />
+                    <RiFacebookFill aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Instagram" className="transition hover:opacity-75">
-                    <RiInstagramLine aria-hidden="true" />
+                    <RiInstagramFill aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="YouTube" className="transition hover:opacity-75">
-                    <RiYoutubeLine aria-hidden="true" />
+                    <RiYoutubeFill aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="LinkedIn" className="transition hover:opacity-75">
-                    <RiLinkedinLine aria-hidden="true" />
+                    <RiLinkedinFill aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -97,10 +97,10 @@ export function Footer() {
                 <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Share Your Feed Back</h3>
                 <div className="mt-5 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
                   <a href="#" aria-label="Facebook" className="transition hover:opacity-75">
-                    <RiFacebookLine aria-hidden="true" />
+                    <RiFacebookFill aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Instagram" className="transition hover:opacity-75">
-                    <RiInstagramLine aria-hidden="true" />
+                    <RiInstagramFill aria-hidden="true" />
                   </a>
                   <a href="#" aria-label="Favorite" className="transition hover:opacity-75">
                     <RiStarLine aria-hidden="true" />
@@ -109,7 +109,7 @@ export function Footer() {
               </div>
   
               <div>
-                <h3 className="font-work text-[24px] font-semibold">Share Your Feed Back</h3>
+                <h3 className="font-work text-[25px] font-semibold">Share Your Feed Back</h3>
                 <p className="mt-3 text-[15px] leading-6 text-[#F4E9D6]/85">
                   Elevate your next THE LUA TRAIN by recceiving our newletter.
                 </p>
