@@ -1,11 +1,48 @@
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
-import { NAV_ITEMS } from "@/constants/nav"
+import { NAV_ITEMS, type NavItem as NavItemData } from "@/constants/nav"
 
 const NAVY = "#1E1F4B"
 
-function NavItem({ to, label }: { to: string; label: string }) {
+function scrollToPageBottom() {
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: "smooth",
+  })
+}
+
+function NavLabel({
+  label,
+  active = false,
+}: {
+  label: string
+  active?: boolean
+}) {
+  return (
+    <span className="relative inline-grid whitespace-nowrap">
+      <span className="invisible pointer-events-none font-semibold">{label}</span>
+      <span className={["absolute inset-0", active ? "font-semibold" : ""].join(" ")}>{label}</span>
+    </span>
+  )
+}
+
+function NavItem({ to, label, behavior }: NavItemData) {
+  if (behavior === "scroll-bottom") {
+    return (
+      <button
+        type="button"
+        onClick={scrollToPageBottom}
+        className="group relative text-black/70 transition hover:text-black"
+      >
+        <span className="relative inline-block">
+          <NavLabel label={label} />
+          <span className="absolute left-1/2 -bottom-1 h-px w-0 -translate-x-1/2 bg-black transition-all duration-300 group-hover:w-full" />
+        </span>
+      </button>
+    )
+  }
+
   return (
     <NavLink
       to={to}
@@ -19,7 +56,7 @@ function NavItem({ to, label }: { to: string; label: string }) {
     >
       {({ isActive }) => (
         <span className="relative inline-block">
-          {label}
+          <NavLabel label={label} active={isActive} />
           <span
             className={[
               "absolute left-1/2 -bottom-1 h-px -translate-x-1/2 bg-black transition-all duration-300",
@@ -51,7 +88,7 @@ export function Header() {
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
           ? "bg-white/85 backdrop-blur-md shadow-sm"
-          : "bg-gradient-to-b from-white/85 via-white/40 to-white/0 backdrop-blur-sm py-10",
+          : "bg-gradient-to-b from-white/80 via-white/40 to-white/0 backdrop-blur-sm py-10",
       ].join(" ")}
     >
       <Container

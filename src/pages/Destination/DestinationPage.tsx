@@ -73,7 +73,7 @@ function NewsletterField({
   return (
     <label className={['relative block', className].join(' ')}>
       <span
-        className="absolute left-3 top-0 z-10 -translate-y-[52%] bg-[#E4D8C4] px-2.5 font-inter text-[14px] leading-none md:text-[15px]"
+        className="absolute left-3 top-0 z-10 -translate-y-[52%] bg-[#F2E6D3] px-2.5 font-inter text-[14px] leading-none md:text-[15px]"
         style={{ color: NAVY }}
       >
         {label}
@@ -129,28 +129,6 @@ function TrainMiniIcon() {
   )
 }
 
-function CompassRose() {
-  return (
-    <svg viewBox="0 0 120 140" className="h-[108px] w-[92px]" aria-hidden="true">
-      <text x="60" y="18" textAnchor="middle" fontSize="22" fill={NAVY} className="font-inter">
-        N
-      </text>
-      <g transform="translate(60 74)">
-        <polygon points="0,-42 11,-11 0,-20 -11,-11" fill={NAVY} />
-        <polygon points="42,0 11,11 20,0 11,-11" fill={NAVY} />
-        <polygon points="0,42 -11,11 0,20 11,11" fill={NAVY} />
-        <polygon points="-42,0 -11,-11 -20,0 -11,11" fill={NAVY} />
-        <polygon points="0,-30 7,-7 0,-13 -7,-7" fill="#E4D8C4" />
-        <polygon points="30,0 7,7 13,0 7,-7" fill="#E4D8C4" />
-        <polygon points="0,30 -7,7 0,13 7,7" fill="#E4D8C4" />
-        <polygon points="-30,0 -7,-7 -13,0 -7,7" fill="#E4D8C4" />
-        <circle r="6" fill={NAVY} />
-        <circle r="2.5" fill="#E4D8C4" />
-      </g>
-    </svg>
-  )
-}
-
 function JourneyCard({ journey }: { journey: Journey }) {
   return (
     <article className="text-[#2A2B5E]">
@@ -158,7 +136,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
         <img src={journey.image} alt={journey.title} className="w-full object-cover" />
       </div>
 
-      <h3 className="mt-6 font-inter text-[20px] font-extrabold tracking-[0.01em]" style={{ color: NAVY }}>
+      <h3 className="mt-6 font-inter text-[20px] font-extrabold tracking-[0em]" style={{ color: NAVY }}>
         {journey.title}
       </h3>
 
@@ -229,7 +207,7 @@ function FilterSelect({
 function StayOnTrackSection() {
   return (
     <Section className="pt-0">
-      <div className="mx-auto max-w-[980px] rounded-tr-[110px] bg-[#E4D8C4] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
+      <div className="mx-auto max-w-[980px] rounded-tr-[110px] bg-[#F2E6D3] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
         <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]" style={{ color: NAVY }}>
           STAY ON TRACK
         </h2>
@@ -331,8 +309,8 @@ export function DestinationPage() {
       image: '/images/destination/journey-3.png',
     },
     {
-      title: 'FROM HO CHI MINH TO QUANG NAM',
-      route: 'Ho Chi Minh • Nha Trang • Da Nang • Quang Nam',
+      title: 'FROM HCM TO QUANG NAM',
+      route: 'HCM • Nha Trang • Da Nang • Quang Nam',
       tripType: 'One way',
       duration: '4 days 5 nights',
       description: 'Set off on a three-day, two-night on way journey from Ho Chi Minh to Quang Nam',
@@ -474,11 +452,8 @@ export function DestinationPage() {
 
       <Section>
         <div className="text-center">
-          <div className="mt-[-80px] text-[36px]" style={{ color: GOLD }}>
-            ✦
-          </div>
           <DisplayTitle center className="mt-6">
-            THE THE JOURNEY
+            THE JOURNEY
           </DisplayTitle>
           <p
             className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
@@ -489,7 +464,7 @@ export function DestinationPage() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-[980px] rounded-tr-[40px] bg-[#E4D8C4] px-5 py-5">
+        <div className="mx-auto mt-10 max-w-[1120px] bg-[#F2E6D3] px-5 py-5">
           <div className="grid gap-4 md:grid-cols-6">
             <FilterSelect label="Overnight" value="DAYTRIPS" />
             <FilterSelect label="Type" />
