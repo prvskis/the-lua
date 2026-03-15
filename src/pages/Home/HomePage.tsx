@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
@@ -23,7 +24,7 @@ function PrimaryButton({
     <button
       type="button"
       className={[
-        'inline-flex items-center justify-center rounded-md px-8 py-3 text-[13px] tracking-[0.2em] text-white',
+        'inline-flex items-center justify-center rounded-md px-8 py-3 text-[13px] tracking-[0.2em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(34,36,88,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2',
         className,
       ].join(' ')}
       style={{ backgroundColor: NAVY }}
@@ -72,7 +73,7 @@ function ScrollToTopFab() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-8 right-8 z-40 grid h-12 w-12 place-items-center rounded-full bg-[#EFE3D1] text-black/70 shadow-sm hover:text-black"
+      className="fixed bottom-8 right-8 z-40 grid h-12 w-12 place-items-center rounded-full bg-[#EFE3D1]/95 text-black/70 shadow-[0_12px_30px_rgba(34,36,88,0.18)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
       aria-label="Scroll to top"
     >
       ↑
@@ -100,13 +101,13 @@ function TripCardView({ c }: { c: TripCard }) {
         : 'rounded-tr-[140px]'
 
   return (
-    <article className="text-[#2A2B5E]">
+    <article className="group text-[#2A2B5E] transition-transform duration-500 hover:-translate-y-2">
       {/* IMAGE */}
       <div className={`overflow-hidden bg-black/5 ${imgRadius}`}>
         <img
           src={c.img}
           alt={c.title}
-          className="w-full object-cover"
+          className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
       </div>
 
@@ -151,15 +152,15 @@ function TripCardView({ c }: { c: TripCard }) {
       <div className="mt-2 flex items-center justify-between">
         <button
           type="button"
-          className="'font-inter font-[400] text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 hover:text-[#2A2B5E]" style={{ color: NAVY }}
+          className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          style={{ color: NAVY }}
         >
           View more
         </button>
 
         <button
           type="button"
-          className="bg-[#1E1F4B] text-[20px] py-1.5 px-6 tracking-[0.1em] text-white
-                     rounded-tr-[20px] hover:opacity-95"
+          className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
           BOOK
         </button>
@@ -171,6 +172,22 @@ function TripCardView({ c }: { c: TripCard }) {
 export function HomePage() {
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
+  const immersiveSectionRef = useRef<HTMLDivElement | null>(null)
+  const prefersReducedMotion = useReducedMotion()
+
+  const getRevealProps = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 28 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.18 },
+          transition: {
+            duration: 0.7,
+            delay,
+            ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+          },
+        }
 
   const goToHeroSlide = (idx: number) => {
     const next = ((idx % HERO_SLIDES.length) + HERO_SLIDES.length) % HERO_SLIDES.length
@@ -178,6 +195,8 @@ export function HomePage() {
   }
 
   const goNextHeroSlide = () => setActiveHeroSlide((i) => (i + 1) % HERO_SLIDES.length)
+  const scrollToImmersiveSection = () =>
+    immersiveSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
   useEffect(() => {
     const active = HERO_SLIDES[activeHeroSlide]
@@ -294,7 +313,14 @@ export function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 flex h-full flex-col items-center justify-end pb-14">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#11163F]/18 via-transparent to-[#11163F]/34" />
+
+        <motion.div
+          className="relative z-10 flex h-full flex-col items-center justify-end pb-14"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Indicators */}
           <div className="mb-3 flex items-center gap-2">
             {HERO_SLIDES.map((_, idx) => (
@@ -303,8 +329,8 @@ export function HomePage() {
                 type="button"
                 onClick={() => goToHeroSlide(idx)}
                 className={[
-                  'h-[3px] w-20 rounded-full transition-all duration-300',
-                  idx === activeHeroSlide ? 'bg-white/90' : 'bg-white/40 hover:bg-white/55',
+                  'h-[3px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
+                  idx === activeHeroSlide ? 'w-24 bg-white/90' : 'w-16 bg-white/40 hover:w-20 hover:bg-white/55',
                 ].join(' ')}
                 aria-label={`Go to hero slide ${idx + 1}`}
                 aria-current={idx === activeHeroSlide}
@@ -312,28 +338,36 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="flex items-center">
-            <span className="font-inter text-[18px] font-regular tracking-[1em] text-white/85">SCROLL TO DISCOVER</span>
-          </div>
-          <div className="mt-2 text-white/75" aria-hidden="true">
-            <svg
-              viewBox="0 0 24 24"
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </div>
-        </div>
+          <button
+            type="button"
+            onClick={scrollToImmersiveSection}
+            className="group mt-2 flex flex-col items-center text-white/85 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          >
+            <span className="font-inter text-[18px] font-regular tracking-[1em]">SCROLL TO DISCOVER</span>
+            <span className="mt-2 text-white/75 transition-transform duration-300 group-hover:translate-y-1" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </span>
+          </button>
+        </motion.div>
       </section>
 
       {/* IMMERSIVE VIETNAM */}
       <Section>
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <motion.div
+          ref={immersiveSectionRef}
+          className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
+          {...getRevealProps()}
+        >
           <div>
             <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
 
@@ -371,11 +405,11 @@ export function HomePage() {
           </div>
 
           <div className="flex flex-col items-end">
-            <div className="origin-top-right overflow-hidden rounded-tr-[160px] bg-black/5 scale-95">
+            <div className="origin-top-right overflow-hidden rounded-tr-[160px] bg-black/5 scale-95 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700 hover:scale-[0.97]">
               <img
                 src="/images/home/immersive.jpg"
                 alt="Immersive"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
               />
             </div>
 
@@ -385,11 +419,11 @@ export function HomePage() {
               </PrimaryButton>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Section>
 
       {/* WHAT'S INSIDE */}
-      <section className="py-16" style={{ backgroundColor: PAPER }}>
+      <motion.section className="py-16" style={{ backgroundColor: PAPER }} {...getRevealProps(0.05)}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <DisplayTitle center>WHAT&apos;S INSIDE</DisplayTitle>
           <p className="font-inter font-[400] mx-auto mt-4 max-w-[720px] text-center text-[20px] leading-8 text-[#2A2B5E]/70 tracking-[0.06em]" style={{ color: NAVY }}>
@@ -405,18 +439,22 @@ export function HomePage() {
             ].map((i, idx) => (
               <div
                 key={idx}
-                className={`overflow-hidden bg-black/5 ${i.radius} rounded-tr-2xl`}
+                className={`group overflow-hidden bg-black/5 ${i.radius} rounded-tr-2xl shadow-[0_18px_40px_rgba(34,36,88,0.06)] transition-transform duration-500 hover:-translate-y-2`}
               >
-                <img src={i.src} alt={i.alt} className="w-full object-cover" />
+                <img
+                  src={i.src}
+                  alt={i.alt}
+                  className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* EXPLORE THE IMMERSIVE */}
       <Section>
-        <div className="flex flex-col gap-4">
+        <motion.div className="flex flex-col gap-4" {...getRevealProps(0.05)}>
           <p className="font-inter text-[24px] font-bold tracking-[0.01em]" style={{ color: NAVY }}>
             EXPLORE THE IMMERSIVE DESTINATIONS
           </p>
@@ -424,16 +462,16 @@ export function HomePage() {
             Rooted in the immersive of classic rail travel and shaped <br />
             by contemporary comfort
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <motion.div className="mt-12 grid gap-6 md:grid-cols-3" {...getRevealProps(0.08)}>
           {trips.map((t) => (
             <TripCardView key={t.title} c={t} />
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-10 flex justify-end">
-          <button className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E]">
+        <motion.div className="mt-10 flex justify-end" {...getRevealProps(0.12)}>
+          <button className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2">
             <span className="relative z-10">SEE ALL</span>
 
             <span className="absolute inset-0 scale-x-0 origin-left bg-[#2A2B5E] transition-transform duration-300 group-hover:scale-x-100" />
@@ -442,11 +480,11 @@ export function HomePage() {
               SEE ALL
             </span>
           </button>
-        </div>
+        </motion.div>
       </Section>
 
       {/* OFFER BANNER */}
-      <section>
+      <motion.section {...getRevealProps(0.05)}>
         <div
           className="
             w-full
@@ -463,7 +501,7 @@ export function HomePage() {
           }}
         >
           <Container>
-            <div className="max-w-[640px] py-10 lg:py-[60px]">
+            <div className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px] hover:translate-x-1">
             <p className="font-regal text-[50px] tracking-[0.01em] leading-9">
               SPECIAL SPRING OFFER <br />
               EARLY BIRD SPRING OFFER
@@ -492,11 +530,11 @@ export function HomePage() {
             </div>
           </Container>
         </div>
-      </section>
+      </motion.section>
 
       {/* TESTIMONIALS (static version trước, sau nâng lên carousel) */}
       {/* TESTIMONIALS */}
-      <section className="py-14" style={{ backgroundColor: PAPER }}>
+      <motion.section className="py-14" style={{ backgroundColor: PAPER }} {...getRevealProps(0.05)}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <DisplayTitle center>A COLLECTION OF FIVE-STAR MOMENTS</DisplayTitle>
 
@@ -533,7 +571,7 @@ export function HomePage() {
               ].map((t) => (
                 <article
                   key={t.title}
-                  className="relative flex flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8"
+                  className="relative flex flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]"
                 >
                   <div className="flex-1">
                     {/* stars */}
@@ -591,7 +629,7 @@ export function HomePage() {
           <div className="mt-12 flex items-center justify-center gap-5 text-[#2A2B5E]/60">
             <button
               type="button"
-              className="text-3xl leading-none hover:text-[#2A2B5E]"
+              className="text-3xl leading-none transition-all duration-300 hover:scale-110 hover:text-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               aria-label="Previous"
             >
               ‹
@@ -605,24 +643,24 @@ export function HomePage() {
 
             <button
               type="button"
-              className="text-3xl leading-none hover:text-[#2A2B5E]"
+              className="text-3xl leading-none transition-all duration-300 hover:scale-110 hover:text-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               aria-label="Next"
             >
               ›
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <InstagramSection />
 
       {/* TEXTURE DIVIDER */}
-      <div className="w-full bg-white py-8 mb-20">
+      <div className="mb-20 w-full bg-white py-8">
         <div className="w-full overflow-hidden" aria-hidden="true">
           <img
             src="/images/home/texture-section.png"
             alt=""
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.01]"
           />
         </div>
       </div>

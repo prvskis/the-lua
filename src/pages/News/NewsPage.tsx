@@ -4,7 +4,6 @@ import { InstagramSection } from '@/components/sections/InstagramSection'
 
 const NAVY = '#222458'
 const GOLD = '#D9B07A'
-const PAPER = '#F6EFE4'
 
 type NewsItem = {
   date: string
