@@ -1,6 +1,8 @@
 import { Container } from '@/components/layout/Container'
+import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
+import { TextLineReveal } from '@/components/TextLineReveal'
 import { FiMap, FiStar, FiUsers } from 'react-icons/fi'
 
 const NAVY = '#222458'
@@ -116,15 +118,27 @@ function AboutStoryBlock({ title, description, image, reverse = false }: StoryBl
           className="mt-6 max-w-[560px] space-y-2 font-inter text-[20px] leading-8 tracking-[0.02em]"
           style={{ color: `${NAVY}CC` }}
         >
-          {description.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+          {description.map((paragraph, idx) => (
+            <TextLineReveal
+              key={paragraph}
+              as="p"
+              text={paragraph}
+              className="font-inter text-[20px] leading-8 tracking-[0.02em]"
+              style={{ color: `${NAVY}CC` }}
+              delay={idx * 0.12}
+              lineDelay={0.08}
+            />
           ))}
         </div>
       </div>
 
       <div className={['flex', reverse ? 'justify-start' : 'justify-end'].join(' ')}>
-        <div className="w-full max-w-[480px] overflow-hidden rounded-tr-[140px] bg-black/5">
-          <img src={image} alt={title} className="h-full w-full object-cover" />
+        <div className="group w-full max-w-[480px] overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+          />
         </div>
       </div>
     </div>
@@ -163,7 +177,7 @@ function WhyChooseCard({
   return (
     <article
       className={[
-        'relative aspect-[1.18/1] overflow-hidden bg-[#E4D8C4] px-5 py-4 md:px-6 md:py-5',
+        'relative aspect-[1.18/1] overflow-hidden bg-[#E4D8C4] px-5 py-4 transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)] md:px-6 md:py-5',
         shapeClass,
       ].join(' ')}
     >
@@ -179,12 +193,16 @@ function WhyChooseCard({
 
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <article className="overflow-hidden text-[#2A2B5E]">
-      <div className="overflow-hidden rounded-tr-[140px] bg-black/5">
-        <img src={member.image} alt={member.name} className="h-[360px] w-full object-cover" />
+    <article className="group overflow-hidden text-[#2A2B5E]">
+      <div className="overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+        <img
+          src={member.image}
+          alt={member.name}
+          className="h-[360px] w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+        />
       </div>
 
-      <div className="relative bg-[#F2E6D3] px-6 pb-8 pt-5 text-center rounded-bl-[100px]">
+      <div className="relative rounded-bl-[100px] bg-[#F2E6D3] px-6 pb-8 pt-5 text-center transition-colors duration-300 group-hover:bg-[#F0E2CE]">
         <h3 className="font-inter text-[18px] font-extrabold tracking-[0.01em] md:text-[20px]" style={{ color: NAVY }}>
           {member.name}
         </h3>
@@ -200,6 +218,9 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 export function AboutPage() {
+  const getStaggerDelay = (baseDelay: number, index: number, step = 0.1) =>
+    baseDelay + index * step
+
   const storyBlocks: StoryBlockProps[] = [
     {
       title: 'HERITAGE CONCEPT',
@@ -276,65 +297,92 @@ export function AboutPage() {
 
       <Section>
         <div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-inter text-[18px] tracking-[0.04em] md:text-[22px]">
-            <span className="text-[36px] leading-none" style={{ color: GOLD }}>
-              ✦
-            </span>
-            <span className="font-bold" style={{ color: NAVY }}>
-              THE LUA TRAIN
-            </span>
-            <span className="text-[25px] font-light leading-none text-[#232566]/80">|</span>
-            <span className="font-normal" style={{ color: NAVY }}>
-              ABOUT US
-            </span>
-          </div>
+          <RevealOnScroll delay={0.04}>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-inter text-[18px] tracking-[0.04em] md:text-[22px]">
+              <span className="text-[36px] leading-none" style={{ color: GOLD }}>
+                ✦
+              </span>
+              <span className="font-bold" style={{ color: NAVY }}>
+                THE LUA TRAIN
+              </span>
+              <span className="text-[25px] font-light leading-none text-[#232566]/80">|</span>
+              <span className="font-normal" style={{ color: NAVY }}>
+                ABOUT US
+              </span>
+            </div>
+          </RevealOnScroll>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:items-center lg:gap-10">
             <div>
-              <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
+              <RevealOnScroll delay={0.08}>
+                <div>
+                <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
+                </div>
+              </RevealOnScroll>
 
               <div
                 className="mt-6 max-w-[620px] space-y-5 font-inter text-[19px] leading-9 tracking-[0.04em]"
                 style={{ color: NAVY }}
               >
-                <p>
-                  THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where
-                  time slows and landscapes are gently revealed, from North to South, or in reverse.
-                </p>
-                <p>
-                  Rather than moving endlessly between destinations, life aboard THE LUA is about staying. You
-                  settle into a single space while Vietnam unfolds beyond the window, through coastlines, cities,
-                  highlands, and subtle details that might otherwise pass unnoticed.
-                </p>
-                <p>
-                  It is a journey designed to be felt as much as seen, where memory, design, cuisine, and
-                  atmosphere shape the experience as deeply as the route itself.
-                </p>
+                <TextLineReveal
+                  as="p"
+                  text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.12}
+                  lineDelay={0.09}
+                />
+                <TextLineReveal
+                  as="p"
+                  text="Rather than moving endlessly between destinations, life aboard THE LUA is about staying. You settle into a single space while Vietnam unfolds beyond the window, through coastlines, cities, highlands, and subtle details that might otherwise pass unnoticed."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.2}
+                  lineDelay={0.09}
+                />
+                <TextLineReveal
+                  as="p"
+                  text="It is a journey designed to be felt as much as seen, where memory, design, cuisine, and atmosphere shape the experience as deeply as the route itself."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.28}
+                  lineDelay={0.09}
+                />
               </div>
             </div>
 
-            <div className="flex justify-end">
-              <div className="w-full max-w-[620px] overflow-hidden rounded-tl-[140px] rounded-tr-[140px] bg-black/5">
-                <img src="/images/about/immersive.png" alt="Immersive Vietnam" className="w-full object-cover" />
+            <RevealOnScroll className="flex justify-end" delay={0.14} y={22} amount={0.08} initialScale={0.992}>
+              <div className="group w-full max-w-[620px] overflow-hidden rounded-tl-[140px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.12)]">
+                <img
+                  src="/images/about/immersive.png"
+                  alt="Immersive Vietnam"
+                  className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+                />
               </div>
-            </div>
+            </RevealOnScroll>
           </div>
         </div>
       </Section>
 
       <section className="py-16 lg:py-20" style={{ backgroundColor: PAPER }}>
         <Container>
-          <DisplayTitle center>THE STORY</DisplayTitle>
-          <p
+          <RevealOnScroll delay={0.04}>
+            <DisplayTitle center>THE STORY</DisplayTitle>
+          </RevealOnScroll>
+          <TextLineReveal
+            as="p"
+            text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
             className="mx-auto mt-5 max-w-[700px] text-center font-inter text-[19px] leading-8 tracking-[0.04em]"
             style={{ color: `${NAVY}B3` }}
-          >
-            THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse.
-          </p>
+            delay={0.08}
+            lineDelay={0.09}
+          />
 
           <div className="mt-14 space-y-24 lg:space-y-28">
-            {storyBlocks.map((block) => (
-              <AboutStoryBlock key={block.title} {...block} />
+            {storyBlocks.map((block, idx) => (
+              <RevealOnScroll key={block.title} delay={getStaggerDelay(0.08, idx, 0.12)} y={28} amount={0.12}>
+                <AboutStoryBlock {...block} />
+              </RevealOnScroll>
             ))}
           </div>
         </Container>
@@ -379,43 +427,61 @@ export function AboutPage() {
       </Section>
 
       <Section>
-        <div className="text-center">
-          <div className="text-[36px] mt-[-80px]" style={{ color: GOLD }}>
-            ✦
+        <RevealOnScroll delay={0.04} y={0} duration={0.55} initialScale={0.985}>
+          <div className="text-center">
+            <div className="mt-[-80px] text-[36px]" style={{ color: GOLD }}>
+              ✦
+            </div>
+            <DisplayTitle center className="mt-6 text-[44px] md:text-[58px]">
+              WHY CHOOSE US <span className="font-inter font-light">?</span>
+            </DisplayTitle>
+            <TextLineReveal
+              as="p"
+              text="Discover a deeper way to experience Vietnam — where culture is lived, not displayed, and every journey is crafted to immerse you in its heritage, rhythm, and spirit."
+              className="mx-auto mt-2 max-w-[680px] font-inter text-[18px] leading-[1.8] tracking-[0.04em]"
+              style={{ color: `${NAVY}B3` }}
+              delay={0.08}
+              lineDelay={0.08}
+            />
           </div>
-          <DisplayTitle center className="mt-6 text-[44px] md:text-[58px]">
-            WHY CHOOSE US <span className="font-inter font-light">?</span>
-          </DisplayTitle>
-          <p
-            className="mx-auto mt-2 max-w-[680px] font-inter text-[18px] leading-[1.8] tracking-[0.04em]"
-            style={{ color: `${NAVY}B3` }}
-          >
-            Discover a deeper way to experience Vietnam — where culture is lived, not displayed, and every journey is crafted to immerse you in its heritage, rhythm, and spirit.
-          </p>
-        </div>
+        </RevealOnScroll>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[500px_1fr] lg:items-center">
           <div className="grid grid-cols-2 gap-4">
-            <div className="overflow-hidden bg-black/5 rounded-tr-[140px]">
-              <img src="/images/about/why-1.png" alt="The Lua experience 1" className="h-full w-full object-cover" />
-            </div>
-            <div className="overflow-hidden bg-black/5 rounded-tl-[140px]">
-              <img src="/images/about/why-2.png" alt="The Lua experience 2" className="h-full w-full object-cover" />
-            </div>
-            <div className="col-span-2 overflow-hidden rounded-tr-[140px] bg-black/5">
-              <img src="/images/about/why-3.png" alt="The Lua experience 3" className="h-full w-full object-cover" />
-            </div>
+            <RevealOnScroll className="h-full" delay={0.1} y={0} amount={0.08} duration={0.55} initialScale={0.97}>
+              <div className="group h-full overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+                <img src="/images/about/why-1.png" alt="The Lua experience 1" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="h-full" delay={0.2} y={0} amount={0.08} duration={0.55} initialScale={0.97}>
+              <div className="group h-full overflow-hidden rounded-tl-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+                <img src="/images/about/why-2.png" alt="The Lua experience 2" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="col-span-2 h-full" delay={0.3} y={0} amount={0.08} duration={0.6} initialScale={0.97}>
+              <div className="group h-full overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+                <img src="/images/about/why-3.png" alt="The Lua experience 3" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+              </div>
+            </RevealOnScroll>
           </div>
 
           <div className="flex justify-center lg:justify-center">
             <div className="grid w-full max-w-[440px] gap-4 md:grid-cols-2">
-              {highlights.map((item) => (
-                <WhyChooseCard
+              {highlights.map((item, idx) => (
+                <RevealOnScroll
                   key={item.title}
-                  title={item.title}
-                  icon={item.icon}
-                  shapeClass={item.shapeClass}
-                />
+                  delay={getStaggerDelay(0.18, idx, 0.1)}
+                  y={0}
+                  amount={0.08}
+                  duration={0.55}
+                  initialScale={0.965}
+                >
+                  <WhyChooseCard
+                    title={item.title}
+                    icon={item.icon}
+                    shapeClass={item.shapeClass}
+                  />
+                </RevealOnScroll>
               ))}
             </div>
           </div>
@@ -424,22 +490,34 @@ export function AboutPage() {
 
       <section className="py-16 lg:py-20">
         <Container>
-          <div className="text-center">
-            <div className="text-[36px] mt-[-80px] mb-10" style={{ color: GOLD }}>
-              ✦
+          <RevealOnScroll delay={0.04}>
+            <div className="text-center">
+              <div className="mb-10 mt-[-80px] text-[36px]" style={{ color: GOLD }}>
+                ✦
+              </div>
+              <DisplayTitle center>MEET OUR TEAM</DisplayTitle>
             </div>
-            <DisplayTitle center>MEET OUR TEAM</DisplayTitle>
-          </div>
-          <p
-            className="mx-auto mt-5 max-w-[640px] text-center font-inter text-[18px] leading-8 tracking-[0.04em]"
-            style={{ color: `${NAVY}B3` }}
-          >
-            THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are 
-          </p>
+            <TextLineReveal
+              as="p"
+              text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are"
+              className="mx-auto mt-5 max-w-[640px] text-center font-inter text-[18px] leading-8 tracking-[0.04em]"
+              style={{ color: `${NAVY}B3` }}
+              delay={0.08}
+              lineDelay={0.08}
+            />
+          </RevealOnScroll>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {members.map((member) => (
-              <TeamCard key={member.name} member={member} />
+            {members.map((member, idx) => (
+              <RevealOnScroll
+                key={member.name}
+                delay={getStaggerDelay(0.08, idx, 0.1)}
+                y={20}
+                amount={0.08}
+                initialScale={0.992}
+              >
+                <TeamCard member={member} />
+              </RevealOnScroll>
             ))}
           </div>
         </Container>

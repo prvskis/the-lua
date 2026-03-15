@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer/Footer'
+import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation()
@@ -22,6 +23,7 @@ export function AppShell() {
     <div className="min-h-screen bg-white text-black">
       <ScrollToTopOnRouteChange />
       <Header />
+      <ScrollToTopButton />
       <main className="pt-16">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div

@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
+import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { InstagramSection } from '@/components/sections/InstagramSection'
 
 const NAVY = '#222458'
@@ -85,9 +86,13 @@ function NewsletterField({
 
 function NewsCard({ item }: { item: NewsItem }) {
   return (
-    <article className="flex h-full flex-col text-[#2A2B5E]">
-      <div className="overflow-hidden rounded-tr-[140px] bg-black/5">
-        <img src={item.image} alt={item.title} className="w-full object-cover" />
+    <article className="group flex h-full flex-col text-[#2A2B5E]">
+      <div className="overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+        />
       </div>
 
       <p
@@ -113,7 +118,7 @@ function NewsCard({ item }: { item: NewsItem }) {
 
       <button
         type="button"
-        className="mt-3 w-fit font-inter text-[15px] font-semibold tracking-[0.01em] underline underline-offset-4 decoration-[#2A2B5E]/50 hover:text-[#2A2B5E]"
+        className="mt-3 w-fit font-inter text-[15px] font-semibold tracking-[0.01em] underline underline-offset-4 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         style={{ color: NAVY }}
       >
         Discover
@@ -160,6 +165,9 @@ function StayOnTrackSection() {
 }
 
 export function NewsPage() {
+  const getStaggerDelay = (baseDelay: number, index: number, step = 0.1) =>
+    baseDelay + index * step
+
   const newsItems: NewsItem[] = [
     {
       date: 'February 2026',
@@ -218,12 +226,21 @@ export function NewsPage() {
 
       <section className="pb-16 pt-6 lg:pb-20 lg:pt-8">
         <Container>
-          <div className="mb-10">
+          <RevealOnScroll className="mb-10" delay={0.04}>
             <PageEyebrow />
-          </div>  
+          </RevealOnScroll>
           <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
-            {newsItems.map((item) => (
-              <NewsCard key={item.title} item={item} />
+            {newsItems.map((item, idx) => (
+              <RevealOnScroll
+                key={item.title}
+                delay={getStaggerDelay(0.08, idx, 0.08)}
+                y={22}
+                amount={0.06}
+                duration={0.65}
+                initialScale={0.992}
+              >
+                <NewsCard item={item} />
+              </RevealOnScroll>
             ))}
           </div>
         </Container>

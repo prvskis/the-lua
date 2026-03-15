@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Container } from '@/components/layout/Container'
+import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
 
@@ -131,9 +132,13 @@ function TrainMiniIcon() {
 
 function JourneyCard({ journey }: { journey: Journey }) {
   return (
-    <article className="text-[#2A2B5E]">
-      <div className="overflow-hidden rounded-tr-[140px] bg-black/5">
-        <img src={journey.image} alt={journey.title} className="w-full object-cover" />
+    <article className="group text-[#2A2B5E]">
+      <div className="overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+        <img
+          src={journey.image}
+          alt={journey.title}
+          className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+        />
       </div>
 
       <h3 className="mt-6 font-inter text-[20px] font-extrabold tracking-[0em]" style={{ color: NAVY }}>
@@ -166,7 +171,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
       <div className="mt-2 flex items-center justify-between">
         <button
           type="button"
-          className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 hover:text-[#2A2B5E]"
+          className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           style={{ color: NAVY }}
         >
           View more
@@ -174,7 +179,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
 
         <button
           type="button"
-          className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white hover:opacity-95"
+          className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
           BOOK
         </button>
@@ -195,7 +200,7 @@ function FilterSelect({
       <label className="font-inter text-[12px] text-[#232566]/80">{label}</label>
       <button
         type="button"
-        className="flex h-[40px] items-center justify-between rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 font-inter text-[13px] text-[#232566]/80"
+        className="flex h-[40px] items-center justify-between rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 font-inter text-[13px] text-[#232566]/80 transition-all duration-300 hover:border-[#2A2B5E]/60 hover:bg-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
       >
         <span>{value}</span>
         <span className="text-[#C5A874]">⌄</span>
@@ -252,7 +257,7 @@ function OfferBanner() {
         }}
       >
         <Container>
-          <div className="max-w-[640px] py-10 lg:py-[60px]">
+          <div className="max-w-[640px] py-10 transition-transform duration-500 hover:translate-x-1 lg:py-[60px]">
             <p className="font-regal text-[50px] leading-9 tracking-[0.01em]">
               SPECIAL SPRING OFFER <br />
               EARLY BIRD SPRING OFFER
@@ -272,7 +277,7 @@ function OfferBanner() {
               </p>
             </div>
 
-            <button className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em]" style={{ color: NAVY }}>
+            <button className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent" style={{ color: NAVY }}>
               BOOK
             </button>
           </div>
@@ -283,6 +288,9 @@ function OfferBanner() {
 }
 
 export function DestinationPage() {
+  const getStaggerDelay = (baseDelay: number, index: number, step = 0.08) =>
+    baseDelay + index * step
+
   const journeys: Journey[] = [
     {
       title: 'FROM HA NOI TO HO CHI MINH',
@@ -363,10 +371,13 @@ export function DestinationPage() {
 
       <Section>
         <div>
-          <PageEyebrow />
+          <RevealOnScroll delay={0.04}>
+            <PageEyebrow />
+          </RevealOnScroll>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:items-center lg:gap-10">
-            <div>
+            <RevealOnScroll delay={0.08}>
+              <div>
               <DisplayTitle>ITINERARY</DisplayTitle>
 
               <p className="font-inter text-[25px] font-bold" style={{ color: NAVY }}>
@@ -389,20 +400,21 @@ export function DestinationPage() {
                   craftsmanship, and quiet sophistication.
                 </p>
               </div>
-            </div>
-
-            <div className="flex justify-end">
-              <div className="w-full max-w-[620px] overflow-hidden rounded-tr-[140px] bg-black/5">
-                <img src="/images/destination/intinerary.png" alt="Destinations intro" className="w-full object-cover" />
               </div>
-            </div>
+            </RevealOnScroll>
+
+            <RevealOnScroll className="flex justify-end" delay={0.14} y={22} amount={0.08} initialScale={0.992}>
+              <div className="group w-full max-w-[620px] overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.12)]">
+                <img src="/images/destination/intinerary.png" alt="Destinations intro" className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </Section>
 
       <section>
         <Container>
-          <div className="relative mx-auto mt-12 max-w-[1100px]">
+          <RevealOnScroll className="relative mx-auto mt-12 max-w-[1100px]" delay={0.06} y={24} amount={0.08}>
             <div className="relative min-h-[700px] lg:min-h-[750px]">
               <div className="relative z-0 flex justify-center lg:absolute lg:left-0 lg:top-0 lg:w-[68%] lg:justify-start">
                 <img src="/images/destination/map.png" alt="Vietnam map" className="w-full max-w-[800px] object-contain" />
@@ -444,27 +456,29 @@ export function DestinationPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </RevealOnScroll>
         </Container>
       </section>
 
       <OfferBanner />
 
       <Section>
-        <div className="text-center">
-          <DisplayTitle center className="mt-6">
-            THE JOURNEY
-          </DisplayTitle>
-          <p
-            className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
-            style={{ color: `${NAVY}B3` }}
-          >
-            THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows
-            and landscapes are gently revealed, from North to South, or in reverse.
-          </p>
-        </div>
+        <RevealOnScroll delay={0.04}>
+          <div className="text-center">
+            <DisplayTitle center className="mt-6">
+              THE JOURNEY
+            </DisplayTitle>
+            <p
+              className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
+              style={{ color: `${NAVY}B3` }}
+            >
+              THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows
+              and landscapes are gently revealed, from North to South, or in reverse.
+            </p>
+          </div>
+        </RevealOnScroll>
 
-        <div className="mx-auto mt-10 max-w-[1120px] bg-[#F2E6D3] px-5 py-5">
+        <RevealOnScroll className="mx-auto mt-10 max-w-[1120px] bg-[#F2E6D3] px-5 py-5" delay={0.08} y={20} amount={0.08}>
           <div className="grid gap-4 md:grid-cols-6">
             <FilterSelect label="Overnight" value="DAYTRIPS" />
             <FilterSelect label="Type" />
@@ -475,11 +489,20 @@ export function DestinationPage() {
           </div>
 
           <div className="mt-3 flex justify-end font-inter text-[12px] text-[#232566]/70">× Reset</div>
-        </div>
+        </RevealOnScroll>
 
         <div className="mt-12 grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-          {journeys.map((journey) => (
-            <JourneyCard key={journey.title} journey={journey} />
+          {journeys.map((journey, idx) => (
+            <RevealOnScroll
+              key={journey.title}
+              delay={getStaggerDelay(0.08, idx, 0.06)}
+              y={18}
+              amount={0.05}
+              duration={0.65}
+              initialScale={0.994}
+            >
+              <JourneyCard journey={journey} />
+            </RevealOnScroll>
           ))}
         </div>
       </Section>
