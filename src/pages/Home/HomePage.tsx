@@ -171,7 +171,7 @@ export function HomePage() {
       whileInView: { opacity: 1, y: 0 },
       viewport: { once: true, amount: 0.18 },
       transition: {
-        duration: 2.5,
+        duration: 1,
         delay,
         ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
       },
@@ -547,10 +547,7 @@ export function HomePage() {
           }}
         >
           <Container>
-            <motion.div
-              className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px] hover:translate-x-1"
-              {...getRevealProps(0.08)}
-            >
+            <div className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px] hover:translate-x-1">
               <p className="font-regal text-[50px] tracking-[0.01em] leading-9">
                 SPECIAL SPRING OFFER <br />
                 EARLY BIRD SPRING OFFER
@@ -574,7 +571,7 @@ export function HomePage() {
               <button className="font-inter text-[16px] font-bold tracking-[0.01em] mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4" style={{ color: NAVY }}>
                 BOOK
               </button>
-            </motion.div>
+            </div>
           </Container>
         </div>
       </section>

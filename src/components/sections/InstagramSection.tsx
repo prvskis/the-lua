@@ -42,10 +42,12 @@ function RevealOnScroll({
 export function InstagramSection() {
   const trackRef = useRef<HTMLDivElement | null>(null)
   const firstSlideRef = useRef<HTMLDivElement | null>(null)
+  const galleryRef = useRef<HTMLDivElement | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [stepWidth, setStepWidth] = useState(0)
   const [transitionEnabled, setTransitionEnabled] = useState(true)
   const [isAnimating, setIsAnimating] = useState(false)
+  const isGalleryInView = useInView(galleryRef, { once: true, amount: 0.08 })
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -111,9 +113,13 @@ export function InstagramSection() {
         </div>
       </RevealOnScroll>
 
-      <RevealOnScroll delay={0.16} y={18} amount={0.06} duration={0.6}>
-        <div className="relative left-1/2 mt-8 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-[1800px] overflow-hidden">
+      <div ref={galleryRef} className="relative left-1/2 mt-8 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1800px] overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={isGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+            transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div
               ref={trackRef}
               className="flex gap-4"
@@ -124,42 +130,52 @@ export function InstagramSection() {
               onTransitionEnd={handleTransitionEnd}
             >
               {LOOPED_INSTAGRAM_KEYS.map((k, idx) => (
-                <div
+                <motion.div
                   key={`${k}-${idx}`}
                   ref={idx === 0 ? firstSlideRef : undefined}
                   className="shrink-0 basis-[80%] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
+                  initial={{ opacity: 0, y: 26 }}
+                  animate={isGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.18 + (idx % INSTAGRAM_KEYS.length) * 0.12,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                 >
                   <img
                     src={`/images/home/${k}.jpg`}
                     alt={k}
                     className="h-full w-full object-cover transition-[filter] duration-300 ease-out hover:brightness-[1.03]"
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
+          </motion.div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleNext}
-            className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
-            aria-label="Next"
+        <motion.button
+          type="button"
+          onClick={handleNext}
+          initial={{ opacity: 0, y: 12, scale: 0.98 }}
+          animate={isGalleryInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 12, scale: 0.98 }}
+          transition={{ duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          aria-label="Next"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-[18px] w-[18px] text-[#222458]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.25"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            aria-hidden="true"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-[18px] w-[18px] text-[#222458]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3.25"
-              strokeLinecap="square"
-              strokeLinejoin="miter"
-              aria-hidden="true"
-            >
-              <path d="M9.5 5.5 16 12l-6.5 6.5" />
-            </svg>
-          </button>
-        </div>
-      </RevealOnScroll>
+            <path d="M9.5 5.5 16 12l-6.5 6.5" />
+          </svg>
+        </motion.button>
+      </div>
     </Section>
   )
 }
