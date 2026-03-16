@@ -213,7 +213,7 @@ function FilterSelect({
 function StayOnTrackSection() {
   return (
     <Section className="pt-0">
-      <div className="mx-auto max-w-[980px] rounded-tr-[110px] bg-[#F2E6D3] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
+      <div className="mx-auto max-w-[1180px] rounded-tr-[110px] bg-[#F2E6D3] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
         <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]" style={{ color: NAVY }}>
           STAY ON TRACK
         </h2>
