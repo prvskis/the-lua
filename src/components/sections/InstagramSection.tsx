@@ -1,8 +1,10 @@
-import { useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Section } from '@/components/layout/Section'
 
 const NAVY = '#222458'
+const INSTAGRAM_KEYS = ['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'] as const
+const LOOPED_INSTAGRAM_KEYS = [...INSTAGRAM_KEYS, ...INSTAGRAM_KEYS]
 
 function RevealOnScroll({
   children,
@@ -38,6 +40,52 @@ function RevealOnScroll({
 }
 
 export function InstagramSection() {
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const firstSlideRef = useRef<HTMLDivElement | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [stepWidth, setStepWidth] = useState(0)
+  const [transitionEnabled, setTransitionEnabled] = useState(true)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (!trackRef.current || !firstSlideRef.current) return
+
+      const styles = window.getComputedStyle(trackRef.current)
+      const gap = Number.parseFloat(styles.columnGap || styles.gap || '0')
+      const width = firstSlideRef.current.getBoundingClientRect().width
+      setStepWidth(width + gap)
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  const handleNext = () => {
+    if (isAnimating || !stepWidth) return
+    setIsAnimating(true)
+    setCurrentIndex((prev) => prev + 1)
+  }
+
+  const handleTransitionEnd = () => {
+    if (currentIndex < INSTAGRAM_KEYS.length) {
+      setIsAnimating(false)
+      return
+    }
+
+    setTransitionEnabled(false)
+    setCurrentIndex(0)
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setTransitionEnabled(true)
+        setIsAnimating(false)
+      })
+    })
+  }
+
   return (
     <Section>
       <RevealOnScroll delay={0.04} y={18} amount={0.08} duration={0.55}>
@@ -63,41 +111,55 @@ export function InstagramSection() {
         </div>
       </RevealOnScroll>
 
-      <div className="relative left-1/2 mt-8 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-[1800px] gap-4 md:grid-cols-5">
-          {['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'].map((k, idx) => (
-            <RevealOnScroll
-              key={k}
-              delay={0.18 + idx * 0.14}
-              y={22}
-              amount={0.06}
-              duration={0.6}
-              initialScale={0.99}
+      <RevealOnScroll delay={0.16} y={18} amount={0.06} duration={0.6}>
+        <div className="relative left-1/2 mt-8 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1800px] overflow-hidden">
+            <div
+              ref={trackRef}
+              className="flex gap-4"
+              style={{
+                transform: `translateX(-${currentIndex * stepWidth}px)`,
+                transition: transitionEnabled ? 'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
+              }}
+              onTransitionEnd={handleTransitionEnd}
             >
-              <div className="overflow-hidden">
-                <img src={`/images/home/${k}.jpg`} alt={k} className="h-full w-full object-cover" />
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
+              {LOOPED_INSTAGRAM_KEYS.map((k, idx) => (
+                <div
+                  key={`${k}-${idx}`}
+                  ref={idx === 0 ? firstSlideRef : undefined}
+                  className="shrink-0 basis-[80%] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
+                >
+                  <img
+                    src={`/images/home/${k}.jpg`}
+                    alt={k}
+                    className="h-full w-full object-cover transition-[filter] duration-300 ease-out hover:brightness-[1.03]"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <RevealOnScroll
-          className="absolute right-2 top-1/2 -translate-y-1/2"
-          delay={0.98}
-          y={12}
-          amount={0.05}
-          duration={0.5}
-          initialScale={0.98}
-        >
           <button
             type="button"
-            className="grid h-12 w-12 place-items-center rounded-full bg-white/90 shadow-sm"
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
             aria-label="Next"
           >
-            →
+            <svg
+              viewBox="0 0 24 24"
+              className="h-[18px] w-[18px] text-[#222458]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3.25"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              aria-hidden="true"
+            >
+              <path d="M9.5 5.5 16 12l-6.5 6.5" />
+            </svg>
           </button>
-        </RevealOnScroll>
-      </div>
+        </div>
+      </RevealOnScroll>
     </Section>
   )
 }
