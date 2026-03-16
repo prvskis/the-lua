@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Container } from '@/components/layout/Container'
 import { TextLineReveal } from '@/components/TextLineReveal'
@@ -162,8 +162,14 @@ function TripCardView({ c }: { c: TripCard }) {
 
 export function HomePage() {
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(2)
+  const [testimonialStepWidth, setTestimonialStepWidth] = useState(0)
+  const [isTestimonialAnimating, setIsTestimonialAnimating] = useState(false)
+  const [isTestimonialTransitionEnabled, setIsTestimonialTransitionEnabled] = useState(true)
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   const immersiveSectionRef = useRef<HTMLDivElement | null>(null)
+  const testimonialTrackRef = useRef<HTMLDivElement | null>(null)
+  const firstTestimonialRef = useRef<HTMLDivElement | null>(null)
 
   const getRevealProps = (delay = 0) =>
     ({
@@ -180,6 +186,35 @@ export function HomePage() {
   const getStaggerDelay = (baseDelay: number, index: number, step = 0.08) =>
     baseDelay + index * step
 
+  const testimonials = [
+    {
+      title: 'AMAZING TRIP IN VIET NAM',
+      body:
+        'Coming here with my family. I have to say that this is one of the most amazing trip that i have experienced in 2026 and it was a truly memorable journey. The train was comfortable, elegant, and very well organized. The staff were attentive and made us feel welcome throughout the trip. We especially enjoyed watching the scenery together and sharing meals on board. It was relaxing, meaningful, and a beautiful way to experience Vietnam. I would highly recommend The Lua for families looking for a refined yet comfortable journey.',
+      name: 'Timothee Chalamet',
+      date: '11/3/2026',
+      avatar: '/images/home/avatar-1.jpg',
+    },
+    {
+      title: 'VIET NAM IS SO AWSOME',
+      body:
+        "The food here is so good. I can't stop myself eating all the Vietnamese foods. Wish i had more time to enjoy this amazing trip. The staff is very kind and i really love there humor. They kinda funny and take care of me in a little things. My husband even made a plan for the next trip in THE LUA, he even invited his friends and his co-workers. can’t deny the immersive culture they gave us and we learned a lots about Viet Nam through this trip. I will come back soon to have another amazing trip in THE LUA.",
+      name: 'Conan Gray',
+      date: '10/2/2026',
+      avatar: '/images/home/avatar-2.jpg',
+    },
+    {
+      title: 'A BEAUTIFUL WAY TO SEE VIET NAM',
+      body:
+        'This journey felt very different from a normal holiday. Everything moved at a gentle pace and gave us time to really enjoy each moment. I loved how the scenery changed through the window during the day, and how peaceful the atmosphere became in the evening. The design of the train was elegant, the service was thoughtful, and every part of the experience felt carefully prepared. It gave us a deeper connection to Viet Nam, not only through the places we passed, but through the food, the stories, and the small details on board. I would absolutely choose THE LUA again.',
+      name: 'Lily Collins',
+      date: '20/3/2026',
+      avatar: '/images/home/avatar-1.jpg',
+    },
+  ] as const
+
+  const loopedTestimonials = [...testimonials, ...testimonials, ...testimonials]
+
   const goToHeroSlide = (idx: number) => {
     const next = ((idx % HERO_SLIDES.length) + HERO_SLIDES.length) % HERO_SLIDES.length
     setActiveHeroSlide(next)
@@ -188,6 +223,25 @@ export function HomePage() {
   const goNextHeroSlide = () => setActiveHeroSlide((i) => (i + 1) % HERO_SLIDES.length)
   const scrollToImmersiveSection = () =>
     immersiveSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const goToNextTestimonial = () => {
+    if (isTestimonialAnimating || !testimonialStepWidth) return
+    setIsTestimonialAnimating(true)
+    setActiveTestimonialIndex((prev) => prev + 1)
+  }
+  const goToPreviousTestimonial = () => {
+    if (isTestimonialAnimating || !testimonialStepWidth) return
+    setIsTestimonialAnimating(true)
+    setActiveTestimonialIndex((prev) => prev - 1)
+  }
+  const goToTestimonial = (idx: number) => {
+    if (isTestimonialAnimating || !testimonialStepWidth) return
+
+    const normalized = activeTestimonialIndex % testimonials.length
+    if (idx === normalized) return
+
+    setIsTestimonialAnimating(true)
+    setActiveTestimonialIndex(testimonials.length + idx)
+  }
 
   useEffect(() => {
     const active = HERO_SLIDES[activeHeroSlide]
@@ -210,6 +264,46 @@ export function HomePage() {
     const t = window.setTimeout(goNextHeroSlide, 7000)
     return () => window.clearTimeout(t)
   }, [activeHeroSlide])
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (!testimonialTrackRef.current || !firstTestimonialRef.current) return
+
+      const styles = window.getComputedStyle(testimonialTrackRef.current)
+      const gap = Number.parseFloat(styles.columnGap || styles.gap || '0')
+      const width = firstTestimonialRef.current.getBoundingClientRect().width
+      setTestimonialStepWidth(width + gap)
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  const handleTestimonialTransitionEnd = () => {
+    const total = testimonials.length
+
+    if (activeTestimonialIndex >= total * 2 || activeTestimonialIndex < total) {
+      setIsTestimonialTransitionEnabled(false)
+      setActiveTestimonialIndex((prev) => {
+        if (prev >= total * 2) return prev - total
+        if (prev < total) return prev + total
+        return prev
+      })
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          setIsTestimonialTransitionEnabled(true)
+          setIsTestimonialAnimating(false)
+        })
+      })
+
+      return
+    }
+
+    setIsTestimonialAnimating(false)
+  }
 
   const trips: TripCard[] = [
     {
@@ -578,7 +672,7 @@ export function HomePage() {
 
       {/* TESTIMONIALS (static version trước, sau nâng lên carousel) */}
       {/* TESTIMONIALS */}
-      <section className="py-14" style={{ backgroundColor: PAPER }}>
+      <section className="py-14 mb-10" style={{ backgroundColor: PAPER }}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <motion.div {...getRevealProps(0.04)}>
             <DisplayTitle center>A COLLECTION OF FIVE-STAR MOMENTS</DisplayTitle>
@@ -596,78 +690,76 @@ export function HomePage() {
               }}
             />
 
-            <div className="relative grid items-stretch gap-10 lg:grid-cols-2 h-full">
-              {[
-                {
-                  title: 'AMAZING TRIP IN VIET NAM',
-                  body:
-                    "Coming here with my family. I have to say that this is one of the most amazing trip that i have experienced in 2026 and it was a truly memorable journey. The train was comfortable, elegant, and very well organized. The staff were attentive and made us feel welcome throughout the trip. We especially enjoyed watching the scenery together and sharing meals on board. It was relaxing, meaningful, and a beautiful way to experience Vietnam. I would highly recommend The Lua for families looking for a refined yet comfortable journey.",
-                  name: 'Timothee Chalamet',
-                  date: '11/3/2026',
-                  avatar: '/images/home/avatar-1.jpg',
-                },
-                {
-                  title: 'VIET NAM IS SO AWSOME',
-                  body:
-                    "The food here is so good. I can't stop myself eating all the Vietnamese foods. Wish i had more time to enjoy this amazing trip. The staff is very kind and i really love there humor. They kinda funny and take care of me in a little things. My husband even made a plan for the next trip in THE LUA, he even invited his friends and his co-workers. can’t deny the immersive culture they gave us and we learned a lots about Viet Nam through this trip. I will come back soon to have another amazing trip in THE LUA.",
-                  name: 'Conan Gray',
-                  date: '10/2/2026',
-                  avatar: '/images/home/avatar-2.jpg',
-                },
-              ].map((t) => (
-                  <article
-                    key={t.title}
-                    className="relative flex h-full flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]"
+            <div className="relative overflow-hidden">
+              <div
+                ref={testimonialTrackRef}
+                className="relative flex items-stretch gap-10 h-full"
+                style={{
+                  transform: `translateX(-${activeTestimonialIndex * testimonialStepWidth}px)`,
+                  transition: isTestimonialTransitionEnabled
+                    ? 'transform 780ms cubic-bezier(0.22, 1, 0.36, 1)'
+                    : 'none',
+                }}
+                onTransitionEnd={handleTestimonialTransitionEnd}
+              >
+                {loopedTestimonials.map((t, idx) => (
+                  <div
+                    key={`${t.title}-${idx}`}
+                    ref={idx === 0 ? firstTestimonialRef : undefined}
+                    className="flex shrink-0 basis-full items-stretch lg:basis-[calc((100%_-_2.5rem)/2)]"
                   >
-                  <div className="flex-1">
-                    {/* stars */}
-                    <div className="flex items-center gap-2 mb-5 text-[#D9B07A]" aria-label="5 out of 5 stars">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <svg
-                          key={i}
-                          viewBox="0 0 24 24"
-                          className="h-6 w-6"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path d="M12 3.5c.3 0 .6.18.74.46l2.47 5.13 5.66.82c.66.1.93.91.45 1.38l-4.1 3.99.97 5.63c.11.66-.58 1.16-1.17.85L12 19.8l-5.02 2.64c-.59.31-1.28-.19-1.17-.85l.97-5.63-4.1-3.99c-.48-.47-.21-1.28.45-1.38l5.66-.82 2.47-5.13c.14-.28.44-.46.74-.46z"/>
-                        </svg>
-                      ))}
-                    </div>
+                    <article className="relative flex min-h-full w-full flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]">
+                      <div className="flex-1">
+                        {/* stars */}
+                        <div className="mb-6 flex items-center gap-2 text-[#D9B07A]" aria-label="5 out of 5 stars">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <svg
+                              key={i}
+                              viewBox="0 0 24 24"
+                              className="h-6 w-6"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path d="M12 3.5c.3 0 .6.18.74.46l2.47 5.13 5.66.82c.66.1.93.91.45 1.38l-4.1 3.99.97 5.63c.11.66-.58 1.16-1.17.85L12 19.8l-5.02 2.64c-.59.31-1.28-.19-1.17-.85l.97-5.63-4.1-3.99c-.48-.47-.21-1.28.45-1.38l5.66-.82 2.47-5.13c.14-.28.44-.46.74-.46z"/>
+                            </svg>
+                          ))}
+                        </div>
 
-                    <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
-                      {t.title}
-                    </h3>
+                        <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
+                          {t.title}
+                        </h3>
 
-                    <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
-                      {t.body}
-                    </p>
+                        <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
+                          {t.body}
+                        </p>
+                      </div>
+
+                      {/* author */}
+                      <div className="mt-8 flex items-center gap-4">
+                        <div className="h-12 w-12 overflow-hidden rounded-full bg-black/10">
+                          <img
+                            src={t.avatar}
+                            alt={t.name}
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              ;(e.currentTarget as HTMLImageElement).style.display = 'none'
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <div className="text-[16px] font-semibold text-black/55">{t.name}</div>
+                          <div className="text-[14px] text-black/30">{t.date}</div>
+                        </div>
+                      </div>
+
+                      {/* small diamond decoration bottom-right */}
+                      <div className="pointer-events-none absolute bottom-4 right-6 text-[30px] text-[#D9B07A]">
+                        ✦
+                      </div>
+                    </article>
                   </div>
-
-                  {/* author */}
-                  <div className="mt-10 flex items-center gap-4 mt-auto">
-                    <div className="h-12 w-12 overflow-hidden rounded-full bg-black/10">
-                      <img
-                        src={t.avatar}
-                        alt={t.name}
-                        className="h-full w-full object-cover"
-                        onError={(e) => {
-                          ;(e.currentTarget as HTMLImageElement).style.display = 'none'
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <div className="text-[16px] font-semibold text-black/55">{t.name}</div>
-                      <div className="text-[14px] text-black/30">{t.date}</div>
-                    </div>
-                  </div>
-
-                  {/* small diamond decoration bottom-right */}
-                  <div className="pointer-events-none absolute text-[30px] bottom-4 right-6 text-[#D9B07A]">
-                    ✦
-                  </div>
-                  </article>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
@@ -675,20 +767,34 @@ export function HomePage() {
           <motion.div className="mt-12 flex items-center justify-center gap-5 text-[#2A2B5E]/60" {...getRevealProps(0.22)}>
             <button
               type="button"
+              onClick={goToPreviousTestimonial}
               className="text-3xl leading-none transition-all duration-300 hover:scale-110 hover:text-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               aria-label="Previous"
             >
               ‹
             </button>
 
-            <div className="flex items-center gap-3">
-              <span className="h-3 w-3 rounded-full bg-[#D9B07A]/70" />
-              <span className="h-3 w-3 rounded-full bg-[#2A2B5E]" />
-              <span className="h-3 w-3 rounded-full bg-[#D9B07A]/40" />
+            <div className="flex items-center gap-3 mt-2">
+              {testimonials.map((testimonial, idx) => (
+                <button
+                  key={testimonial.title}
+                  type="button"
+                  onClick={() => goToTestimonial(idx)}
+                  className={[
+                    'h-3 w-3 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2',
+                    idx === activeTestimonialIndex % testimonials.length
+                      ? 'scale-110 bg-[#2A2B5E]'
+                      : 'bg-[#D9B07A]/45 hover:bg-[#D9B07A]/70',
+                  ].join(' ')}
+                  aria-label={`Go to testimonial ${idx + 1}`}
+                  aria-current={idx === activeTestimonialIndex % testimonials.length}
+                />
+              ))}
             </div>
 
             <button
               type="button"
+              onClick={goToNextTestimonial}
               className="text-3xl leading-none transition-all duration-300 hover:scale-110 hover:text-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               aria-label="Next"
             >

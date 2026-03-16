@@ -172,8 +172,8 @@ function StayOnTrackSection() {
         </h2>
 
         <p className="mt-5 max-w-[760px] font-inter text-[17px] leading-8" style={{ color: `${NAVY}CC` }}>
-          Discover the Orient Express newsletter - explore at your leisure and be the first to discover
-          routes, inspiring itineraries, and new ways to travel with wonder.
+          Discover the Orient Express newsletter - explore at your leisure and be the first to discover routes,
+          inspiring itineraries, and new ways to travel with wonder.
         </p>
 
         <p className="mt-2 font-inter text-[18px] font-regular" style={{ color: NAVY }}>

@@ -133,7 +133,7 @@ export function InstagramSection() {
                 <motion.div
                   key={`${k}-${idx}`}
                   ref={idx === 0 ? firstSlideRef : undefined}
-                  className="shrink-0 basis-[80%] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
+                  className="group shrink-0 basis-[80%] rounded-tr-[180px] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
                   initial={{ opacity: 0, y: 26 }}
                   animate={isGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
                   transition={{
@@ -145,7 +145,7 @@ export function InstagramSection() {
                   <img
                     src={`/images/home/${k}.jpg`}
                     alt={k}
-                    className="h-full w-full object-cover transition-[filter] duration-300 ease-out hover:brightness-[1.03]"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                   />
                 </motion.div>
               ))}

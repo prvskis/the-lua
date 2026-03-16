@@ -258,30 +258,32 @@ function OfferBanner() {
         }}
       >
         <Container>
-          <div className="max-w-[640px] py-10 transition-transform duration-500 hover:translate-x-1 lg:py-[60px]">
-            <p className="font-regal text-[50px] leading-9 tracking-[0.01em]">
-              SPECIAL SPRING OFFER <br />
-              EARLY BIRD SPRING OFFER
-              <span className="mx-3 font-inter text-[50px] font-regular tracking-[0.02em]">10%</span>
-            </p>
+          <RevealOnScroll delay={0.06} y={18} amount={0.08} duration={0.6}>
+            <div className="max-w-[640px] py-10 transition-transform duration-500 hover:translate-x-1 lg:py-[60px]">
+              <p className="font-regal text-[50px] leading-9 tracking-[0.01em]">
+                SPECIAL SPRING OFFER <br />
+                EARLY BIRD SPRING OFFER
+                <span className="mx-3 font-inter text-[50px] font-regular tracking-[0.02em]">10%</span>
+              </p>
 
-            <div className="mt-6 space-y-2 font-inter text-[20px] text-white/80">
-              <p>
-                <strong className="font-bold text-white">Travel Period:</strong> January 2026 - March 2026
-              </p>
-              <p>
-                <strong className="font-bold text-white">Validity For Booking From</strong> now until 10 February
-                2026
-              </p>
-              <p>
-                <strong className="font-bold text-white">Apply code:</strong> NY24673
-              </p>
+              <div className="mt-6 space-y-2 font-inter text-[20px] text-white/80">
+                <p>
+                  <strong className="font-bold text-white">Travel Period:</strong> January 2026 - March 2026
+                </p>
+                <p>
+                  <strong className="font-bold text-white">Validity For Booking From</strong> now until 10 February
+                  2026
+                </p>
+                <p>
+                  <strong className="font-bold text-white">Apply code:</strong> NY24673
+                </p>
+              </div>
+
+              <button className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent" style={{ color: NAVY }}>
+                BOOK
+              </button>
             </div>
-
-            <button className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent" style={{ color: NAVY }}>
-              BOOK
-            </button>
-          </div>
+          </RevealOnScroll>
         </Container>
       </div>
     </section>
