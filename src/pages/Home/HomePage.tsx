@@ -414,8 +414,15 @@ export function HomePage() {
 
           <div className="flex flex-col items-end">
             <motion.div
-              className="origin-top-right overflow-hidden rounded-tr-[160px] bg-black/5 scale-95 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700 hover:scale-[0.97]"
-              {...getRevealProps(0.12)}
+              className="origin-top-right overflow-hidden rounded-tr-[160px] bg-black/5 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{
+                duration: 2.5,
+                delay: 0.12,
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+              }}
             >
               <img
                 src="/images/home/immersive.jpg"

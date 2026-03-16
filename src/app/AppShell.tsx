@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Header } from '@/components/Header/Header'
@@ -9,7 +9,18 @@ function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (!('scrollRestoration' in window.history)) return
+
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+
+    return () => {
+      window.history.scrollRestoration = previous
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [pathname])
 
   return null
@@ -25,7 +36,7 @@ export function AppShell() {
       <Header />
       <ScrollToTopButton />
       <main className="pt-16">
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait" initial={!prefersReducedMotion}>
           <motion.div
             key={pathname}
             initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}

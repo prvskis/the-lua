@@ -3,6 +3,7 @@ import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
+import { TextLineReveal } from '@/components/TextLineReveal'
 
 const NAVY = '#222458'
 const GOLD = '#D9B07A'
@@ -387,18 +388,30 @@ export function DestinationPage() {
                 className="mt-4 max-w-[620px] space-y-5 font-inter text-[19px] leading-9 tracking-[0.04em]"
                 style={{ color: NAVY }}
               >
-                <p>
-                  THE LUA presents an 8-day, 7-night curated rail journey through Vietnam, connecting the timeless
-                  elegance of Hanoi with the vibrant energy of Ho Chi Minh City.
-                </p>
-                <p>
-                  Traveling in refined comfort, guests move seamlessly across heritage cities, coastal landscapes, and
-                  cultural landmarks, experiencing the country through a lens of depth, design, and discovery.
-                </p>
-                <p>
-                  Unpack once and let Vietnam unfold beyond your window — where every mile is shaped by culture,
-                  craftsmanship, and quiet sophistication.
-                </p>
+                <TextLineReveal
+                  as="p"
+                  text="THE LUA presents an 8-day, 7-night curated rail journey through Vietnam, connecting the timeless elegance of Hanoi with the vibrant energy of Ho Chi Minh City."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0}
+                  lineDelay={0.08}
+                />
+                <TextLineReveal
+                  as="p"
+                  text="Traveling in refined comfort, guests move seamlessly across heritage cities, coastal landscapes, and cultural landmarks, experiencing the country through a lens of depth, design, and discovery."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.12}
+                  lineDelay={0.08}
+                />
+                <TextLineReveal
+                  as="p"
+                  text="Unpack once and let Vietnam unfold beyond your window — where every mile is shaped by culture, craftsmanship, and quiet sophistication."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.24}
+                  lineDelay={0.08}
+                />
               </div>
               </div>
             </RevealOnScroll>
@@ -468,13 +481,14 @@ export function DestinationPage() {
             <DisplayTitle center className="mt-6">
               THE JOURNEY
             </DisplayTitle>
-            <p
+            <TextLineReveal
+              as="p"
+              text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
               className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
               style={{ color: `${NAVY}B3` }}
-            >
-              THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows
-              and landscapes are gently revealed, from North to South, or in reverse.
-            </p>
+              delay={0.04}
+              lineDelay={0.08}
+            />
           </div>
         </RevealOnScroll>
 

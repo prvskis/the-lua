@@ -3,6 +3,7 @@ import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
+import { TextLineReveal } from '@/components/TextLineReveal'
 
 const NAVY = '#222458'
 const GOLD = '#D9B07A'
@@ -146,7 +147,15 @@ function TrainFeatureBlock({
           style={{ color: `${NAVY}CC` }}
         >
           {description.map((paragraph, index) => (
-            <p key={`${title}-${index}`}>{paragraph}</p>
+            <TextLineReveal
+              key={`${title}-${index}`}
+              as="p"
+              text={paragraph}
+              className="font-inter text-[18px] leading-8 tracking-[0.03em] md:text-[19px]"
+              style={{ color: `${NAVY}CC` }}
+              delay={index * 0.12}
+              lineDelay={0.08}
+            />
           ))}
         </div>
       </div>
@@ -260,15 +269,22 @@ export function TrainPage() {
                 className="mt-6 max-w-[620px] space-y-5 font-inter text-[19px] leading-9 tracking-[0.04em]"
                 style={{ color: NAVY }}
               >
-                <p>
-                  THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time
-                  slows and landscapes are gently revealed, from North to South, or in reverse.
-                </p>
-                <p>
-                  Rather than moving endlessly between destinations, life aboard THE LUA is about staying. You settle
-                  into a single space while Vietnam unfolds beyond the window: highlands softened by morning mist,
-                  coastlines glowing in restrained light, towns and textures passing with quiet continuity.
-                </p>
+                <TextLineReveal
+                  as="p"
+                  text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0}
+                  lineDelay={0.08}
+                />
+                <TextLineReveal
+                  as="p"
+                  text="Rather than moving endlessly between destinations, life aboard THE LUA is about staying. You settle into a single space while Vietnam unfolds beyond the window: highlands softened by morning mist, coastlines glowing in restrained light, towns and textures passing with quiet continuity."
+                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  style={{ color: NAVY }}
+                  delay={0.12}
+                  lineDelay={0.08}
+                />
               </div>
               </div>
             </RevealOnScroll>
