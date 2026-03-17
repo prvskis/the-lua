@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import { useBookingModal } from '@/components/booking/BookingModalProvider'
 import { Container } from '@/components/layout/Container'
 import { TextLineReveal } from '@/components/TextLineReveal'
 import { Section } from '@/components/layout/Section'
@@ -80,7 +82,15 @@ type TripCard = {
   shape: 'left' | 'mid' | 'right'
 }
 
-function TripCardView({ c }: { c: TripCard }) {
+function TripCardView({
+  c,
+  onBook,
+  onViewMore,
+}: {
+  c: TripCard
+  onBook: (card: TripCard) => void
+  onViewMore: () => void
+}) {
   // quarter circle top-right (đúng vibe)
   const imgRadius =
     c.shape === 'left'
@@ -143,6 +153,7 @@ function TripCardView({ c }: { c: TripCard }) {
       <div className="mt-2 flex items-center justify-between">
         <button
           type="button"
+          onClick={onViewMore}
           className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           style={{ color: NAVY }}
         >
@@ -151,6 +162,7 @@ function TripCardView({ c }: { c: TripCard }) {
 
         <button
           type="button"
+          onClick={() => onBook(c)}
           className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
           BOOK
@@ -161,6 +173,8 @@ function TripCardView({ c }: { c: TripCard }) {
 }
 
 export function HomePage() {
+  const navigate = useNavigate()
+  const { openBookingModal } = useBookingModal()
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(2)
   const [testimonialStepWidth, setTestimonialStepWidth] = useState(0)
@@ -185,6 +199,15 @@ export function HomePage() {
 
   const getStaggerDelay = (baseDelay: number, index: number, step = 0.08) =>
     baseDelay + index * step
+
+  const handleTripBooking = (trip: TripCard) => {
+    openBookingModal({
+      origin: 'Home immersive destinations',
+      preferredJourney: trip.title,
+      route: trip.route.replaceAll('✦', ' - '),
+      travelWindow: trip.metaRight,
+    })
+  }
 
   const testimonials = [
     {
@@ -528,6 +551,7 @@ export function HomePage() {
             <motion.div className="mt-5" {...getRevealProps(0.18)}>
               <button
                 type="button"
+                onClick={() => navigate('/about#the-story')}
                 className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-8 py-2 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               >
                 <span className="relative z-10">
@@ -605,13 +629,21 @@ export function HomePage() {
               duration={0.7}
               initialScale={0.988}
             >
-              <TripCardView c={t} />
+              <TripCardView
+                c={t}
+                onBook={handleTripBooking}
+                onViewMore={() => navigate('/train#immersive-vietnam')}
+              />
             </RevealOnScroll>
           ))}
         </div>
 
         <motion.div className="mt-10 flex justify-end" {...getRevealProps(0.12)}>
-          <button className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2">
+          <button
+            type="button"
+            onClick={() => navigate('/destination#the-journey')}
+            className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          >
             <span className="relative z-10">SEE ALL</span>
 
             <span className="absolute inset-0 scale-x-0 origin-left bg-[#2A2B5E] transition-transform duration-300 group-hover:scale-x-100" />
@@ -662,7 +694,18 @@ export function HomePage() {
                 </p>
               </div>
 
-              <button className="font-inter text-[16px] font-bold tracking-[0.01em] mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4" style={{ color: NAVY }}>
+              <button
+                type="button"
+                onClick={() =>
+                  openBookingModal({
+                    origin: 'Home special spring offer',
+                    preferredJourney: 'Special Spring Offer',
+                    travelWindow: 'January 2026 - March 2026',
+                  })
+                }
+                className="font-inter text-[16px] font-bold tracking-[0.01em] mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4"
+                style={{ color: NAVY }}
+              >
                 BOOK
               </button>
             </div>

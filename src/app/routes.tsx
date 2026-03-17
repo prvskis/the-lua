@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { AppShell } from "./AppShell";
 
 import { HomePage } from "@/pages/Home/HomePage";
@@ -18,6 +18,13 @@ export const router = createBrowserRouter([
       { path: "/news", element: <NewsPage /> },
       { path: "/train", element: <TrainPage /> },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/terms", element: <Navigate to="/" replace /> },
+      { path: "/privacy", element: <Navigate to="/" replace /> },
+      { path: "/legal", element: <Navigate to="/" replace /> },
+      { path: "/cookies", element: <Navigate to="/" replace /> },
+      { path: "/accessibility", element: <Navigate to="/" replace /> },
+      { path: "/sitemap", element: <Navigate to="/" replace /> },
+      { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
 ]);

@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Section } from '@/components/layout/Section'
 
 const NAVY = '#222458'
+const INSTAGRAM_URL = 'https://www.instagram.com/theluatrain/'
 const INSTAGRAM_KEYS = ['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'] as const
 const LOOPED_INSTAGRAM_KEYS = [...INSTAGRAM_KEYS, ...INSTAGRAM_KEYS]
 
@@ -105,11 +106,16 @@ export function InstagramSection() {
             <span className="font-inter">@</span>THELUATRAIN
           </h2>
 
-          <button className="group inline-flex items-center gap-2 text-[16px] tracking-[0.12em] text-[#2A2B5E]/70 transition-colors hover:text-[#2A2B5E]">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 text-[16px] tracking-[0.12em] text-[#2A2B5E]/70 transition-colors hover:text-[#2A2B5E]"
+          >
             follow us
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             <span className="absolute mt-6 block h-px w-0 bg-[#D9B07A] transition-all duration-300 group-hover:w-[90px]" />
-          </button>
+          </a>
         </div>
       </RevealOnScroll>
 

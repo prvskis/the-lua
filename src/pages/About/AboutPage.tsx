@@ -1,5 +1,6 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
@@ -65,7 +66,7 @@ function NewsletterField({
   return (
     <label className={['relative block', className].join(' ')}>
       <span
-        className="absolute left-3 top-0 z-10 -translate-y-[52%] bg-[#E4D8C4] px-2.5 font-inter text-[14px] leading-none md:text-[15px]"
+        className="absolute left-3 top-0 z-10 -translate-y-[52%] bg-[#F6EFE4] px-2.5 font-inter text-[14px] leading-none md:text-[15px]"
         style={{ color: NAVY }}
       >
         {label}
@@ -220,6 +221,7 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 export function AboutPage() {
+  const { hash } = useLocation()
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(2)
   const [testimonialStepWidth, setTestimonialStepWidth] = useState(0)
   const [isTestimonialAnimating, setIsTestimonialAnimating] = useState(false)
@@ -359,6 +361,20 @@ export function AboutPage() {
     return () => window.removeEventListener('resize', measure)
   }, [])
 
+  useEffect(() => {
+    if (hash !== '#the-story') return
+
+    const timer = window.setTimeout(() => {
+      const section = document.getElementById('the-story')
+      if (!section) return
+
+      const top = section.getBoundingClientRect().top + window.scrollY - 120
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 120)
+
+    return () => window.clearTimeout(timer)
+  }, [hash])
+
   const handleTestimonialTransitionEnd = () => {
     const total = testimonials.length
 
@@ -463,7 +479,7 @@ export function AboutPage() {
         </div>
       </Section>
 
-      <section className="py-16 lg:py-20" style={{ backgroundColor: PAPER }}>
+      <section id="the-story" className="py-16 lg:py-20" style={{ backgroundColor: PAPER }}>
         <Container>
           <RevealOnScroll delay={0.04}>
             <DisplayTitle center>THE STORY</DisplayTitle>
@@ -488,7 +504,7 @@ export function AboutPage() {
       </section>
 
       <Section className="pt-0">
-        <div className="mx-auto max-w-[980px] rounded-tr-[110px] bg-[#E4D8C4] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
+        <div className="mx-auto max-w-[1120px] rounded-tr-[110px] bg-[#F6EFE4] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
           <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]" style={{ color: NAVY }}>
             STAY ON TRACK
           </h2>

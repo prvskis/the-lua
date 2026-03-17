@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
@@ -240,8 +241,23 @@ const featureBlocks: TrainFeatureBlockProps[] = [
 ]
 
 export function TrainPage() {
+  const { hash } = useLocation()
   const getStaggerDelay = (baseDelay: number, index: number, step = 0.1) =>
     baseDelay + index * step
+
+  useEffect(() => {
+    if (hash !== '#immersive-vietnam') return
+
+    const timer = window.setTimeout(() => {
+      const section = document.getElementById('immersive-vietnam')
+      if (!section) return
+
+      const top = section.getBoundingClientRect().top + window.scrollY - 120
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 120)
+
+    return () => window.clearTimeout(timer)
+  }, [hash])
 
   return (
     <div className="bg-white">
@@ -255,7 +271,7 @@ export function TrainPage() {
       </section>
 
       <Section>
-        <div>
+        <div id="immersive-vietnam">
           <RevealOnScroll delay={0.04}>
             <PageEyebrow />
           </RevealOnScroll>
@@ -298,7 +314,7 @@ export function TrainPage() {
         </div>
       </Section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-16 lg:py-20 mb-10">
         <Container>
           <div className="max-w-[980px]">
             <RevealOnScroll delay={0.04}>
@@ -319,19 +335,19 @@ export function TrainPage() {
 
               <div className="relative grid h-full grid-rows-2 gap-5">
                 <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.1} initialScale={0.994}>
-                  <div className="group aspect-square h-full overflow-hidden rounded-br-[110px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+                  <div className="group aspect-square h-full overflow-hidden rounded-br-[125px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
                     <img src="/images/train/inside-2.png" alt="Inside THE LUA 2" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
                   </div>
                 </RevealOnScroll>
 
                 <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.2} initialScale={0.994}>
-                  <div className="h-full aspect-square overflow-hidden rounded-tr-[110px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)] group">
+                  <div className="h-full aspect-square overflow-hidden rounded-tr-[125px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)] group">
                     <img src="/images/train/inside-3.png" alt="Inside THE LUA 3" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
                   </div>
                 </RevealOnScroll>
 
                 <span
-                  className="absolute -right-[50px] top-1/2 z-10 hidden -translate-y-1/2 text-[50px] leading-none lg:block"
+                  className="absolute -right-[80px] top-1/2 z-10 hidden -translate-y-1/2 text-[50px] leading-none lg:block"
                   style={{ color: GOLD }}
                 >
                   ✦
@@ -358,15 +374,15 @@ export function TrainPage() {
 
       <section className="py-14 lg:py-18">
         <Container>
-          <div className="relative grid gap-6 lg:grid-cols-[300px_1fr]">
-            <RevealOnScroll y={18} amount={0.08} duration={0.65} initialScale={0.994}>
-              <div className="group overflow-hidden rounded-br-[145px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+          <div className="relative grid gap-6 lg:grid-cols-[300px_1fr] lg:items-stretch">
+            <RevealOnScroll className="h-full" y={18} amount={0.08} duration={0.65} initialScale={0.994}>
+              <div className="group h-full overflow-hidden rounded-br-[145px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
                 <img src="/images/train/suite-2.png" alt="THE LUA Suite Detail" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.12} initialScale={0.994}>
-              <div className="group overflow-hidden rounded-bl-[145px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
+            <RevealOnScroll className="h-full" y={18} amount={0.08} duration={0.65} delay={0.12} initialScale={0.994}>
+              <div className="group h-full overflow-hidden rounded-bl-[145px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
                 <img src="/images/train/suite-3.png" alt="THE LUA Suite Interior" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>

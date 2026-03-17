@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useBookingModal } from '@/components/booking/BookingModalProvider'
 import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
@@ -12,9 +14,27 @@ type Journey = {
   title: string
   route: string
   tripType: string
+  experienceType: string
+  departureDate: string
   duration: string
   description: string
   image: string
+}
+
+function getRouteEndpoints(route: string) {
+  const segments = route.split('•').map((segment) => segment.trim())
+  return {
+    departureCity: segments[0] ?? '',
+    arrivalCity: segments[segments.length - 1] ?? '',
+  }
+}
+
+function getNightLabel(duration: string) {
+  const match = duration.match(/(\d+)\s*nights?/i)
+  if (!match) return 'See all'
+
+  const nightCount = Number.parseInt(match[1], 10)
+  return `${nightCount} ${nightCount === 1 ? 'night' : 'nights'}`
 }
 
 function DisplayTitle({
@@ -131,7 +151,15 @@ function TrainMiniIcon() {
   )
 }
 
-function JourneyCard({ journey }: { journey: Journey }) {
+function JourneyCard({
+  journey,
+  onBook,
+  onViewMore,
+}: {
+  journey: Journey
+  onBook: (journey: Journey) => void
+  onViewMore: () => void
+}) {
   return (
     <article className="group text-[#2A2B5E]">
       <div className="overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
@@ -172,6 +200,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
       <div className="mt-2 flex items-center justify-between">
         <button
           type="button"
+          onClick={onViewMore}
           className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           style={{ color: NAVY }}
         >
@@ -180,6 +209,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
 
         <button
           type="button"
+          onClick={() => onBook(journey)}
           className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
           BOOK
@@ -191,21 +221,32 @@ function JourneyCard({ journey }: { journey: Journey }) {
 
 function FilterSelect({
   label,
-  value = 'See all',
+  value,
+  options,
+  onChange,
 }: {
   label: string
-  value?: string
+  value: string
+  options: string[]
+  onChange: (value: string) => void
 }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="font-inter text-[12px] text-[#232566]/80">{label}</label>
-      <button
-        type="button"
-        className="flex h-[40px] items-center justify-between rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 font-inter text-[13px] text-[#232566]/80 transition-all duration-300 hover:border-[#2A2B5E]/60 hover:bg-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
-      >
-        <span>{value}</span>
-        <span className="text-[#C5A874]">⌄</span>
-      </button>
+      <div className="relative">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="h-[40px] w-full appearance-none rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 pr-10 font-inter text-[13px] text-[#232566]/80 transition-all duration-300 hover:border-[#2A2B5E]/60 hover:bg-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+        >
+          {options.map((option) => (
+            <option key={`${label}-${option}`} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#C5A874]">⌄</span>
+      </div>
     </div>
   )
 }
@@ -248,6 +289,8 @@ function StayOnTrackSection() {
 }
 
 function OfferBanner() {
+  const { openBookingModal } = useBookingModal()
+
   return (
     <section>
       <div
@@ -279,7 +322,18 @@ function OfferBanner() {
                 </p>
               </div>
 
-              <button className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent" style={{ color: NAVY }}>
+              <button
+                type="button"
+                onClick={() =>
+                  openBookingModal({
+                    origin: 'Destination special spring offer',
+                    preferredJourney: 'Special Spring Offer',
+                    travelWindow: 'January 2026 - March 2026',
+                  })
+                }
+                className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                style={{ color: NAVY }}
+              >
                 BOOK
               </button>
             </div>
@@ -291,6 +345,15 @@ function OfferBanner() {
 }
 
 export function DestinationPage() {
+  const { hash } = useLocation()
+  const navigate = useNavigate()
+  const { openBookingModal } = useBookingModal()
+  const [overnightFilter, setOvernightFilter] = useState('See all')
+  const [typeFilter, setTypeFilter] = useState('See all')
+  const [departureCityFilter, setDepartureCityFilter] = useState('See all')
+  const [arrivalCityFilter, setArrivalCityFilter] = useState('See all')
+  const [departureDateFilter, setDepartureDateFilter] = useState('See all')
+  const [durationFilter, setDurationFilter] = useState('See all')
   const getStaggerDelay = (baseDelay: number, index: number, step = 0.08) =>
     baseDelay + index * step
 
@@ -299,6 +362,8 @@ export function DestinationPage() {
       title: 'FROM HA NOI TO HO CHI MINH',
       route: 'Ha Noi • Hoi An • Da Nang • Ho Chi Minh city',
       tripType: 'One way',
+      experienceType: 'Signature Journey',
+      departureDate: 'January 2026',
       duration: '6 days 7 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ha Noi to Ho Chi Minh city',
       image: '/images/destination/journey-1.png',
@@ -307,6 +372,8 @@ export function DestinationPage() {
       title: 'FROM HO CHI MINH TO HA NOI',
       route: 'Ho Chi Minh city • Da Nang • Hoi An • Ha Noi',
       tripType: 'One way',
+      experienceType: 'Signature Journey',
+      departureDate: 'February 2026',
       duration: '6 days 7 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ho Chi Minh to Ha Noi capital',
       image: '/images/destination/journey-2.png',
@@ -315,6 +382,8 @@ export function DestinationPage() {
       title: 'FROM HA NOI TO LAN HA',
       route: 'Ha Noi • Ha Long • Lan Ha',
       tripType: 'One way',
+      experienceType: 'Northern Retreat',
+      departureDate: 'January 2026',
       duration: '3 days 2 nights',
       description: 'Set off on a three-day, two-night on way journey from Ha Noi to Lan Ha',
       image: '/images/destination/journey-3.png',
@@ -323,6 +392,8 @@ export function DestinationPage() {
       title: 'FROM HCM TO QUANG NAM',
       route: 'HCM • Nha Trang • Da Nang • Quang Nam',
       tripType: 'One way',
+      experienceType: 'Coastal Escape',
+      departureDate: 'March 2026',
       duration: '4 days 5 nights',
       description: 'Set off on a three-day, two-night on way journey from Ho Chi Minh to Quang Nam',
       image: '/images/destination/journey-4.png',
@@ -331,6 +402,8 @@ export function DestinationPage() {
       title: 'FROM DA NANG TO HUE',
       route: 'Da Nang • Hoi An • Hue',
       tripType: 'One way',
+      experienceType: 'Heritage Passage',
+      departureDate: 'February 2026',
       duration: '2 days 1 nights',
       description: 'Set off on a two-day, one-night on way journey from Da Nang to Hue',
       image: '/images/destination/journey-5.png',
@@ -339,6 +412,8 @@ export function DestinationPage() {
       title: 'FROM HA NOI TO NINH BINH',
       route: 'Ha Noi • Phu Ly • Ninh Binh',
       tripType: 'One way',
+      experienceType: 'Cultural Escape',
+      departureDate: 'March 2026',
       duration: '3 days 2 nights',
       description: 'Set off on a three-day, two-night on way journey from Ha Noi to Ninh Binh',
       image: '/images/destination/journey-6.png',
@@ -347,6 +422,8 @@ export function DestinationPage() {
       title: 'FROM HO CHI MINH TO DA NANG',
       route: 'Ho Chi Minh City • Nha Trang • Da Nang',
       tripType: 'One way',
+      experienceType: 'Coastal Escape',
+      departureDate: 'April 2026',
       duration: '4 days 5 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ho Chi Minh to Da Nang',
       image: '/images/destination/journey-7.png',
@@ -355,11 +432,87 @@ export function DestinationPage() {
       title: 'FROM HA NOI TO SAPA',
       route: 'Ho Chi Minh city • Da Nang • Hoi An • Ha Noi',
       tripType: 'One way',
+      experienceType: 'Mountain Escape',
+      departureDate: 'April 2026',
       duration: '2 days 1 nights',
       description: 'Set off on a two-day, one-night on way journey from Ha Noi to Sapa',
       image: '/images/destination/journey-8.png',
     },
   ]
+
+  useEffect(() => {
+    if (hash !== '#the-journey') return
+
+    const timer = window.setTimeout(() => {
+      const section = document.getElementById('the-journey')
+      if (!section) return
+
+      const top = section.getBoundingClientRect().top + window.scrollY - 120
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 120)
+
+    return () => window.clearTimeout(timer)
+  }, [hash])
+
+  const handleJourneyBooking = (journey: Journey) => {
+    openBookingModal({
+      origin: 'Destination journey card',
+      preferredJourney: journey.title,
+      route: journey.route.replaceAll('•', ' - '),
+      travelWindow: journey.duration,
+    })
+  }
+
+  const overnightOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => getNightLabel(journey.duration))))],
+    [journeys],
+  )
+  const typeOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => journey.experienceType)))],
+    [journeys],
+  )
+  const departureCityOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => getRouteEndpoints(journey.route).departureCity)))],
+    [journeys],
+  )
+  const arrivalCityOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => getRouteEndpoints(journey.route).arrivalCity)))],
+    [journeys],
+  )
+  const departureDateOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => journey.departureDate)))],
+    [journeys],
+  )
+  const durationOptions = useMemo(
+    () => ['See all', ...Array.from(new Set(journeys.map((journey) => journey.duration)))],
+    [journeys],
+  )
+
+  const filteredJourneys = useMemo(
+    () =>
+      journeys.filter((journey) => {
+        const { departureCity, arrivalCity } = getRouteEndpoints(journey.route)
+
+        return (
+          (overnightFilter === 'See all' || getNightLabel(journey.duration) === overnightFilter) &&
+          (typeFilter === 'See all' || journey.experienceType === typeFilter) &&
+          (departureCityFilter === 'See all' || departureCity === departureCityFilter) &&
+          (arrivalCityFilter === 'See all' || arrivalCity === arrivalCityFilter) &&
+          (departureDateFilter === 'See all' || journey.departureDate === departureDateFilter) &&
+          (durationFilter === 'See all' || journey.duration === durationFilter)
+        )
+      }),
+    [arrivalCityFilter, departureCityFilter, departureDateFilter, durationFilter, journeys, overnightFilter, typeFilter],
+  )
+
+  const resetFilters = () => {
+    setOvernightFilter('See all')
+    setTypeFilter('See all')
+    setDepartureCityFilter('See all')
+    setArrivalCityFilter('See all')
+    setDepartureDateFilter('See all')
+    setDurationFilter('See all')
+  }
 
   return (
     <div className="bg-white">
@@ -478,37 +631,63 @@ export function DestinationPage() {
       <OfferBanner />
 
       <Section>
-        <RevealOnScroll delay={0.04}>
-          <div className="text-center">
-            <DisplayTitle center className="mt-6">
-              THE JOURNEY
-            </DisplayTitle>
-            <TextLineReveal
-              as="p"
-              text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
-              className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
-              style={{ color: `${NAVY}B3` }}
-              delay={0.04}
-              lineDelay={0.08}
-            />
-          </div>
-        </RevealOnScroll>
+        <div id="the-journey">
+          <RevealOnScroll delay={0.04}>
+            <div className="text-center">
+              <DisplayTitle center className="mt-6">
+                THE JOURNEY
+              </DisplayTitle>
+              <TextLineReveal
+                as="p"
+                text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
+                className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
+                style={{ color: `${NAVY}B3` }}
+                delay={0.04}
+                lineDelay={0.08}
+              />
+            </div>
+          </RevealOnScroll>
+        </div>
 
         <RevealOnScroll className="mx-auto mt-10 max-w-[1120px] bg-[#F2E6D3] px-5 py-5" delay={0.08} y={20} amount={0.08}>
           <div className="grid gap-4 md:grid-cols-6">
-            <FilterSelect label="Overnight" value="DAYTRIPS" />
-            <FilterSelect label="Type" />
-            <FilterSelect label="Departure city" />
-            <FilterSelect label="Arrival city" />
-            <FilterSelect label="Departure date" value="Departure date" />
-            <FilterSelect label="Duration" />
+            <FilterSelect label="Overnight" value={overnightFilter} options={overnightOptions} onChange={setOvernightFilter} />
+            <FilterSelect label="Type" value={typeFilter} options={typeOptions} onChange={setTypeFilter} />
+            <FilterSelect
+              label="Departure city"
+              value={departureCityFilter}
+              options={departureCityOptions}
+              onChange={setDepartureCityFilter}
+            />
+            <FilterSelect
+              label="Arrival city"
+              value={arrivalCityFilter}
+              options={arrivalCityOptions}
+              onChange={setArrivalCityFilter}
+            />
+            <FilterSelect
+              label="Departure date"
+              value={departureDateFilter}
+              options={departureDateOptions}
+              onChange={setDepartureDateFilter}
+            />
+            <FilterSelect label="Duration" value={durationFilter} options={durationOptions} onChange={setDurationFilter} />
           </div>
 
-          <div className="mt-3 flex justify-end font-inter text-[12px] text-[#232566]/70">× Reset</div>
+          <div className="mt-3 flex items-center justify-between">
+            <p className="font-inter text-[12px] text-[#232566]/70">{filteredJourneys.length} journeys found</p>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="font-inter text-[12px] text-[#232566]/70 underline underline-offset-4 transition hover:text-[#232566] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+            >
+              × Reset
+            </button>
+          </div>
         </RevealOnScroll>
 
         <div className="mt-12 grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-          {journeys.map((journey, idx) => (
+          {filteredJourneys.map((journey, idx) => (
             <RevealOnScroll
               key={journey.title}
               delay={getStaggerDelay(0.08, idx, 0.06)}
@@ -517,10 +696,25 @@ export function DestinationPage() {
               duration={0.65}
               initialScale={0.994}
             >
-              <JourneyCard journey={journey} />
+              <JourneyCard
+                journey={journey}
+                onBook={handleJourneyBooking}
+                onViewMore={() => navigate('/train#immersive-vietnam')}
+              />
             </RevealOnScroll>
           ))}
         </div>
+
+        {filteredJourneys.length === 0 ? (
+          <div className="mt-10 rounded-tr-[38px] border border-[#D8C6A2] bg-[#F8F2E8] px-6 py-7 text-center">
+            <p className="font-inter text-[18px] font-semibold tracking-[0.04em]" style={{ color: NAVY }}>
+              No journeys match the current filters.
+            </p>
+            <p className="mt-3 font-inter text-[15px] leading-7" style={{ color: `${NAVY}B3` }}>
+              Refine your selections or reset the filters to explore the full collection again.
+            </p>
+          </div>
+        ) : null}
       </Section>
 
       <StayOnTrackSection />

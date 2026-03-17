@@ -1,15 +1,71 @@
-import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { NavLink, useLocation } from "react-router-dom"
+import { useBookingModal } from "@/components/booking/BookingModalProvider"
 import { Container } from "@/components/layout/Container"
 import { NAV_ITEMS, type NavItem as NavItemData } from "@/constants/nav"
 
 const NAVY = "#1E1F4B"
+
+type MenuShortcut = {
+  id: string
+  label: string
+  description: string
+  action?: "scroll-top" | "scroll-bottom"
+}
+
+const MENU_SHORTCUTS: readonly MenuShortcut[] = [
+  {
+    id: "journey-highlights",
+    label: "JOURNEY HIGHLIGHTS",
+    description: "Signature route, scenery, and slow-luxury moments onboard.",
+  },
+  {
+    id: "suites-cabins",
+    label: "SUITES & CABINS",
+    description: "Private rooms, amenities, and the comfort of each stay.",
+  },
+  {
+    id: "dining-on-board",
+    label: "DINING ON BOARD",
+    description: "Seasonal menus, lounge service, and refined train dining.",
+  },
+  {
+    id: "contact-concierge",
+    label: "CONTACT CONCIERGE",
+    description: "Jump to the contact area at the bottom of this page.",
+    action: "scroll-bottom",
+  },
+  {
+    id: "back-to-top",
+    label: "BACK TO TOP",
+    description: "Return to the top of the current page.",
+    action: "scroll-top",
+  },
+] as const
 
 function scrollToPageBottom() {
   window.scrollTo({
     top: document.documentElement.scrollHeight,
     behavior: "smooth",
   })
+}
+
+function scrollToPageTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  })
+}
+
+function handleMenuShortcut(action?: MenuShortcut["action"]) {
+  if (action === "scroll-bottom") {
+    scrollToPageBottom()
+  }
+
+  if (action === "scroll-top") {
+    scrollToPageTop()
+  }
 }
 
 function NavLabel({
@@ -71,12 +127,53 @@ function NavItem({ to, label, behavior }: NavItemData) {
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
+  const { openBookingModal } = useBookingModal()
+  const prefersReducedMotion = useReducedMotion()
+  const { pathname } = useLocation()
+  const menuRef = useRef<HTMLDivElement | null>(null)
+  const languageMenuRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setLanguageMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!menuOpen && !languageMenuOpen) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false)
+        setLanguageMenuOpen(false)
+      }
+    }
+
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target as Node
+      if (!menuRef.current?.contains(target)) {
+        setMenuOpen(false)
+      }
+      if (!languageMenuRef.current?.contains(target)) {
+        setLanguageMenuOpen(false)
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown)
+    window.addEventListener("mousedown", onPointerDown)
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown)
+      window.removeEventListener("mousedown", onPointerDown)
+    }
+  }, [languageMenuOpen, menuOpen])
 
   const mid = Math.ceil(NAV_ITEMS.length / 2)
   const leftNav = NAV_ITEMS.slice(0, mid)
@@ -100,10 +197,76 @@ export function Header() {
       >
         <div className="flex min-w-0 items-center justify-start gap-10 lg:gap-[100px]">
           {/* MENU */}
-          <button className="shrink-0 flex items-center gap-2 text-[12px] tracking-[0.22em] text-black/70">
-            <span className="text-lg">≡</span>
-            MENU
-          </button>
+          <div ref={menuRef} className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className="flex items-center gap-2 text-[12px] tracking-[0.22em] text-black/70 transition hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+              aria-haspopup="menu"
+              aria-expanded={menuOpen}
+              aria-controls="site-menu-panel"
+            >
+              <span className="text-lg">≡</span>
+              MENU
+            </button>
+
+            <AnimatePresence>
+              {menuOpen ? (
+                <motion.div
+                  id="site-menu-panel"
+                  initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute left-0 top-full z-[60] mt-4 w-[320px] overflow-hidden rounded-[18px] border border-[#E7D5BB]/90 bg-[#F8F2E8] p-2 shadow-[0_20px_50px_rgba(17,22,63,0.18)]"
+                  role="menu"
+                  aria-label="Site menu"
+                >
+                  <div className="border-b border-[#E7D5BB]/80 px-4 pb-3 pt-2">
+                    <p className="font-inter text-[11px] tracking-[0.28em] text-[#222458]/55">
+                      QUICK ACCESS
+                    </p>
+                  </div>
+
+                  <div className="grid gap-1 pt-2">
+                    {MENU_SHORTCUTS.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        disabled={!item.action}
+                        onClick={() => {
+                          if (!item.action) return
+                          setMenuOpen(false)
+                          window.setTimeout(() => handleMenuShortcut(item.action), 80)
+                        }}
+                        className={[
+                          "flex items-start justify-between gap-4 rounded-[12px] px-4 py-3 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2",
+                          item.action
+                            ? "hover:bg-white/85"
+                            : "cursor-not-allowed opacity-55",
+                        ].join(" ")}
+                        role="menuitem"
+                        aria-disabled={!item.action}
+                      >
+                        <span className="min-w-0">
+                          <span className="block font-inter text-[12px] tracking-[0.18em] text-[#222458]">
+                            {item.label}
+                          </span>
+                          <span className="mt-1 block font-inter text-[12px] leading-5 text-[#222458]/62">
+                            {item.description}
+                          </span>
+                        </span>
+
+                        <span className="pt-0.5 font-inter text-[10px] tracking-[0.18em] text-[#D9B07A]">
+                          {item.action ? "OPEN" : "SOON"}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
 
           {/* LEFT NAV */}
           <nav
@@ -147,11 +310,87 @@ export function Header() {
 
           {/* ACTIONS */}
           <div className="shrink-0 flex items-center gap-4 justify-end">
-            <button className="text-[11px] tracking-[0.22em] text-black/60">
-              EN ^
-            </button>
+            <div ref={languageMenuRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setLanguageMenuOpen((prev) => !prev)}
+                className="flex items-center gap-2 text-[11px] tracking-[0.22em] text-black/60 transition hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                aria-haspopup="menu"
+                aria-expanded={languageMenuOpen}
+                aria-controls="language-menu-panel"
+              >
+                EN
+                <span className={["text-[10px] transition-transform duration-200", languageMenuOpen ? "rotate-180" : ""].join(" ")}>
+                  ^
+                </span>
+              </button>
+
+              <AnimatePresence>
+                {languageMenuOpen ? (
+                  <motion.div
+                    id="language-menu-panel"
+                    initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute right-0 top-full z-[60] mt-4 w-[220px] overflow-hidden rounded-[18px] border border-[#E7D5BB]/90 bg-[#F8F2E8] p-2 shadow-[0_20px_50px_rgba(17,22,63,0.18)]"
+                    role="menu"
+                    aria-label="Language selector"
+                  >
+                    <div className="border-b border-[#E7D5BB]/80 px-4 pb-3 pt-2">
+                      <p className="font-inter text-[11px] tracking-[0.28em] text-[#222458]/55">
+                        LANGUAGE
+                      </p>
+                    </div>
+
+                    <div className="grid gap-1 pt-2">
+                      {[
+                        { code: "EN", label: "English", active: true },
+                        { code: "VI", label: "Vietnamese" },
+                        { code: "FR", label: "French" },
+                        { code: "JP", label: "Japanese" },
+                      ].map((language) => (
+                        <button
+                          key={language.code}
+                          type="button"
+                          disabled={!language.active}
+                          onClick={() => setLanguageMenuOpen(false)}
+                          className={[
+                            "flex items-center justify-between rounded-[12px] px-4 py-3 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2",
+                            language.active
+                              ? "bg-white/90 shadow-[0_8px_18px_rgba(34,36,88,0.08)]"
+                              : "cursor-not-allowed opacity-55",
+                          ].join(" ")}
+                          role="menuitem"
+                          aria-disabled={!language.active}
+                        >
+                          <span>
+                            <span className="block font-inter text-[12px] tracking-[0.18em] text-[#222458]">
+                              {language.code}
+                            </span>
+                            <span className="mt-1 block font-inter text-[12px] leading-5 text-[#222458]/62">
+                              {language.label}
+                            </span>
+                          </span>
+
+                          <span className="font-inter text-[10px] tracking-[0.18em] text-[#D9B07A]">
+                            {language.active ? "CURRENT" : "SOON"}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+            </div>
 
             <button
+              type="button"
+              onClick={() =>
+                openBookingModal({
+                  origin: `Header booking button (${pathname})`,
+                })
+              }
               className="rounded-lg px-5 py-2 text-[11px] tracking-[0.22em] text-white transition hover:opacity-95"
               style={{ backgroundColor: NAVY }}
             >
@@ -160,6 +399,7 @@ export function Header() {
           </div>
         </div>
       </Container>
+
     </header>
   )
 }
