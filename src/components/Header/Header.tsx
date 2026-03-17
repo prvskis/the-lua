@@ -284,14 +284,21 @@ export function Header() {
 
         {/* LOGO */}
         <div className="flex justify-center px-8 lg:px-10">
-          <img
-            src="/logos/logo-set.png"
-            alt="THE LUA"
+          <div
             className={[
-              "transition-all duration-500",
-              scrolled ? "h-12" : "h-20",
+              "relative overflow-hidden transition-all duration-500",
+              scrolled ? "h-12 w-[188px]" : "h-[100px] w-[188px]",
             ].join(" ")}
-          />
+          >
+            <img
+              src="/logos/logo-set.png"
+              alt="THE LUA"
+              className={[
+                "absolute left-1/2 top-0 max-w-none -translate-x-1/2 object-contain transition-all duration-500",
+                scrolled ? "translate-y-[1px] w-[40px]" : "translate-y-0  w-[55px]",
+              ].join(" ")}
+            />
+          </div>
         </div>
 
         <div className="flex min-w-0 items-center justify-end gap-5 lg:gap-[100px]">

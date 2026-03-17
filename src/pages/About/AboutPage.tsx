@@ -148,16 +148,16 @@ function AboutStoryBlock({ title, description, image, reverse = false }: StoryBl
   )
 }
 
-function TrainMiniIcon() {
+function TrainMiniIcon({ className = 'h-10 w-10' }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 48 48"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="1.9"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-10 w-10"
+      className={className}
     >
       <rect x="6" y="6" width="36" height="36" rx="8" />
       <rect x="12" y="12" width="10" height="12" rx="2" />
@@ -185,7 +185,7 @@ function WhyChooseCard({
       ].join(' ')}
     >
       <div className="flex h-full flex-col items-center justify-center text-center" style={{ color: NAVY }}>
-        <div className="mb-6 text-[34px] md:text-[38px]">{icon}</div>
+        <div className="mb-6 flex h-10 w-10 items-center justify-center md:h-11 md:w-11">{icon}</div>
         <h3 className="font-inter text-[12px] tracking-[0.02em] md:text-[13px]" style={{ color: `${NAVY}E0` }}>
           {title}
         </h3>
@@ -274,22 +274,22 @@ export function AboutPage() {
   const highlights = [
     {
       title: 'Intimate Concept',
-      icon: <FiStar aria-hidden="true" />,
+      icon: <FiStar aria-hidden="true" className="h-10 w-10" style={{ strokeWidth: 1.22 }} />,
       shapeClass: 'rounded-br-[92px]',
     },
     {
       title: '128 Curated Guests',
-      icon: <FiUsers aria-hidden="true" />,
+      icon: <FiUsers aria-hidden="true" className="h-10 w-10" style={{ strokeWidth: 1.22 }} />,
       shapeClass: 'rounded-bl-[92px]',
     },
     {
       title: 'Immersive Vietnam Route',
-      icon: <FiMap aria-hidden="true" />,
+      icon: <FiMap aria-hidden="true" className="h-10 w-10" style={{ strokeWidth: 1.22 }} />,
       shapeClass: 'rounded-tr-[92px]',
     },
     {
       title: '8 Immersive Cars',
-      icon: <TrainMiniIcon />,
+      icon: <TrainMiniIcon className="h-10 w-10" />,
       shapeClass: 'rounded-tl-[92px]',
     },
   ]
