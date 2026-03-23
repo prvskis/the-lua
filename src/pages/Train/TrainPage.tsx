@@ -138,15 +138,15 @@ function TrainFeatureBlock({
         />
       </div>
 
-      <div className={reverse ? 'lg:pl-8' : ''}>
+      <div>
         <h3
-          className="whitespace-pre-line font-regal text-[56px] leading-[0.95] tracking-[0.02em] md:text-[64px]"
+          className="whitespace-pre-line ml-[-2px] font-regal text-[56px] leading-[0.95] tracking-[0.02em] md:text-[64px]"
           style={{ color: NAVY }}
         >
           {title}
         </h3>
         <div
-          className="mt-6 max-w-[620px] space-y-3 font-inter text-[16px] leading-8 tracking-[0.03em]"
+          className="mt-6 max-w-[480px] space-y-3 font-inter text-[16px] leading-8 tracking-[0.03em]"
           style={{ color: `${NAVY}CC` }}
         >
           {description.map((paragraph, index) => (
