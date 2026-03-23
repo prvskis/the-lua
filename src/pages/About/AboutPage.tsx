@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
+import { ImageFrame } from '@/components/ImageFrame'
 import { Container } from '@/components/layout/Container'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
 import { TextLineReveal } from '@/components/TextLineReveal'
-import { FiMap, FiStar, FiUsers } from 'react-icons/fi'
+import { FiChevronDown, FiMap, FiStar, FiUsers } from 'react-icons/fi'
 
 const NAVY = '#222458'
 const PAPER = '#F6EFE4'
@@ -87,8 +88,8 @@ function NewsletterField({
               </option>
             ))}
           </select>
-          <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[18px] text-[#D2AF7A] md:text-[22px]">
-            ▼
+          <span className="pointer-events-none absolute right-6 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#D2AF7A]">
+            <FiChevronDown className="h-[18px] w-[18px] md:h-[22px] md:w-[22px]" strokeWidth={2.5} aria-hidden />
           </span>
         </div>
       ) : (
@@ -118,7 +119,7 @@ function AboutStoryBlock({ title, description, image, reverse = false }: StoryBl
           {title}
         </h3>
         <div
-          className="mt-6 max-w-[560px] space-y-2 font-inter text-[20px] leading-8 tracking-[0.02em]"
+          className="mt-6 max-w-[560px] space-y-2 font-inter text-[16px] leading-8 tracking-[0.02em]"
           style={{ color: `${NAVY}CC` }}
         >
           {description.map((paragraph, idx) => (
@@ -126,7 +127,7 @@ function AboutStoryBlock({ title, description, image, reverse = false }: StoryBl
               key={paragraph}
               as="p"
               text={paragraph}
-              className="font-inter text-[20px] leading-8 tracking-[0.02em]"
+              className="font-inter text-[16px] leading-8 tracking-[0.02em]"
               style={{ color: `${NAVY}CC` }}
               delay={idx * 0.12}
               lineDelay={0.08}
@@ -136,13 +137,13 @@ function AboutStoryBlock({ title, description, image, reverse = false }: StoryBl
       </div>
 
       <div className={['flex', reverse ? 'justify-start' : 'justify-end'].join(' ')}>
-        <div className="group w-full max-w-[480px] overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-          <img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
-          />
-        </div>
+        <ImageFrame
+          src={image}
+          alt={title}
+          ratio="aspect-[1/1]"
+          className="group w-full max-w-[480px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
+          imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+        />
       </div>
     </div>
   )
@@ -257,10 +258,8 @@ export function AboutPage() {
       image: '/images/about/story-3.png',
       description: [
         'The Lua exists in layers.',
-        'On the surface, it is refined and minimal. Beneath, it carries narrative and emotion.',
-        'At its core, it represents a Vietnam that is evolving, confident, contemporary, yet deeply rooted.',
-        'We believe immersion creates connection. And connection creates memory.',
-        'The Lua is not about travel alone. It is about moving through Vietnam and allowing Vietnam to move through you.',
+        'On the surface, it is refined and minimal. Beneath, it carries narrative and emotion. At its core, it represents a Vietnam that is evolving, confident, contemporary, yet deeply rooted.',
+        'We believe immersion creates connection. And connection creates memory. The Lua is not about travel alone. It is about moving through Vietnam and allowing Vietnam to move through you.',
       ],
     },
   ]
@@ -436,13 +435,13 @@ export function AboutPage() {
               </RevealOnScroll>
 
               <div
-                className="mt-6 max-w-[620px] space-y-5 font-inter text-[19px] leading-9 tracking-[0.04em]"
+                className="mt-6 max-w-[510px] space-y-5 font-inter text-[16px] leading-9 tracking-[0.04em]"
                 style={{ color: NAVY }}
               >
                 <TextLineReveal
                   as="p"
                   text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0.12}
                   lineDelay={0.09}
@@ -450,7 +449,7 @@ export function AboutPage() {
                 <TextLineReveal
                   as="p"
                   text="Rather than moving endlessly between destinations, life aboard THE LUA is about staying. You settle into a single space while Vietnam unfolds beyond the window, through coastlines, cities, highlands, and subtle details that might otherwise pass unnoticed."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0.2}
                   lineDelay={0.09}
@@ -458,7 +457,7 @@ export function AboutPage() {
                 <TextLineReveal
                   as="p"
                   text="It is a journey designed to be felt as much as seen, where memory, design, cuisine, and atmosphere shape the experience as deeply as the route itself."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0.28}
                   lineDelay={0.09}
@@ -487,7 +486,7 @@ export function AboutPage() {
           <TextLineReveal
             as="p"
             text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
-            className="mx-auto mt-5 max-w-[700px] text-center font-inter text-[19px] leading-8 tracking-[0.04em]"
+            className="mx-auto mt-5 max-w-[700px] text-center font-inter text-[16px] leading-8 tracking-[0.04em]"
             style={{ color: `${NAVY}B3` }}
             delay={0.08}
             lineDelay={0.09}
@@ -553,7 +552,7 @@ export function AboutPage() {
             <TextLineReveal
               as="p"
               text="Discover a deeper way to experience Vietnam — where culture is lived, not displayed, and every journey is crafted to immerse you in its heritage, rhythm, and spirit."
-              className="mx-auto mt-2 max-w-[680px] font-inter text-[18px] leading-[1.8] tracking-[0.04em]"
+              className="mx-auto mt-2 max-w-[720px] font-inter text-[16px] leading-[1.8] tracking-[0.04em]"
               style={{ color: `${NAVY}B3` }}
               delay={0.08}
               lineDelay={0.08}
@@ -615,7 +614,7 @@ export function AboutPage() {
             <TextLineReveal
               as="p"
               text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are"
-              className="mx-auto mt-5 max-w-[640px] text-center font-inter text-[18px] leading-8 tracking-[0.04em]"
+              className="mx-auto mt-5 max-w-[640px] text-center font-inter text-[16px] leading-8 tracking-[0.04em]"
               style={{ color: `${NAVY}B3` }}
               delay={0.08}
               lineDelay={0.08}
@@ -702,11 +701,11 @@ export function AboutPage() {
                           ))}
                         </div>
 
-                        <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
+                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-black/80">
                           {t.title}
                         </h3>
 
-                        <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
+                        <p className="mt-1 font-inter text-[16px] leading-6 text-black/65">
                           {t.body}
                         </p>
                       </div>

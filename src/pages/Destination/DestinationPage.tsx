@@ -6,6 +6,7 @@ import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { Section } from '@/components/layout/Section'
 import { InstagramSection } from '@/components/sections/InstagramSection'
 import { TextLineReveal } from '@/components/TextLineReveal'
+import { FiChevronDown } from 'react-icons/fi'
 
 const NAVY = '#222458'
 const GOLD = '#D9B07A'
@@ -116,8 +117,8 @@ function NewsletterField({
               </option>
             ))}
           </select>
-          <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[18px] text-[#D2AF7A] md:text-[22px]">
-            ▼
+          <span className="pointer-events-none absolute right-6 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#D2AF7A]">
+            <FiChevronDown className="h-[18px] w-[18px] md:h-[22px] md:w-[22px]" strokeWidth={2.5} aria-hidden />
           </span>
         </div>
       ) : (
@@ -170,7 +171,7 @@ function JourneyCard({
         />
       </div>
 
-      <h3 className="mt-6 font-inter text-[20px] font-extrabold tracking-[0em]" style={{ color: NAVY }}>
+      <h3 className="mt-6 font-inter text-[18px] font-extrabold tracking-[0em] md:text-[20px]" style={{ color: NAVY }}>
         {journey.title}
       </h3>
 
@@ -185,7 +186,7 @@ function JourneyCard({
 
       <div className="mt-4 h-px w-full bg-black/70" />
 
-      <div className="flex items-center py-2 font-inter text-[14px]" style={{ color: NAVY }}>
+      <div className="flex items-center py-2 font-inter text-[16px]" style={{ color: NAVY }}>
         <span>{journey.tripType}</span>
         <span className="mx-6 inline-flex items-center justify-center rounded-lg">
           <TrainMiniIcon />
@@ -195,13 +196,13 @@ function JourneyCard({
 
       <div className="h-px w-full bg-black/70" />
 
-      <p className="mt-2 font-inter text-[14px] leading-9 text-black">{journey.description}</p>
+      <p className="mt-2 font-inter text-[16px] leading-9 text-black">{journey.description}</p>
 
       <div className="mt-2 flex items-center justify-between">
         <button
           type="button"
           onClick={onViewMore}
-          className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="font-inter text-[16px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           style={{ color: NAVY }}
         >
           View more
@@ -210,9 +211,13 @@ function JourneyCard({
         <button
           type="button"
           onClick={() => onBook(journey)}
-          className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="group/book relative overflow-hidden rounded-tr-[20px] border border-transparent bg-[#1E1F4B] px-6 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
-          BOOK
+          <span className="relative z-10 transition-opacity duration-300 group-hover/book:opacity-0">BOOK</span>
+          <span className="absolute inset-0 scale-x-0 origin-left bg-white transition-transform duration-300 group-hover/book:scale-x-100" aria-hidden />
+          <span className="absolute inset-0 z-20 flex items-center justify-center text-[#2A2B5E] opacity-0 transition-opacity duration-300 group-hover/book:opacity-100" aria-hidden>
+            BOOK
+          </span>
         </button>
       </div>
     </article>
@@ -232,12 +237,12 @@ function FilterSelect({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-inter text-[12px] text-[#232566]/80">{label}</label>
+      <label className="font-inter text-[14px] text-[#232566]/80 md:text-[15px]">{label}</label>
       <div className="relative">
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-[40px] w-full appearance-none rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 pr-10 font-inter text-[13px] text-[#232566]/80 transition-all duration-300 hover:border-[#2A2B5E]/60 hover:bg-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="h-[40px] w-full appearance-none rounded-tr-[22px] border border-[#8F84A8] bg-transparent px-4 pr-10 font-inter text-[15px] text-[#232566]/80 transition-all duration-300 hover:border-[#2A2B5E]/60 hover:bg-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2 md:text-[16px]"
         >
           {options.map((option) => (
             <option key={`${label}-${option}`} value={option}>
@@ -245,7 +250,9 @@ function FilterSelect({
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#C5A874]">⌄</span>
+        <span className="pointer-events-none absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#C5A874]">
+          <FiChevronDown className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+        </span>
       </div>
     </div>
   )
@@ -255,16 +262,16 @@ function StayOnTrackSection() {
   return (
     <Section className="pt-0">
       <div className="mx-auto max-w-[1180px] rounded-tr-[110px] bg-[#F2E6D3] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
-        <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]" style={{ color: NAVY }}>
+        <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[64px]" style={{ color: NAVY }}>
           STAY ON TRACK
         </h2>
 
-        <p className="mt-5 max-w-[760px] font-inter text-[17px] leading-8" style={{ color: `${NAVY}CC` }}>
+        <p className="mt-5 max-w-[760px] font-inter text-[16px] leading-8" style={{ color: `${NAVY}CC` }}>
           Discover the Orient Express newsletter - explore at your leisure and be the first to discover upcoming
           routes, inspiring itineraries, and new ways to travel with wonder.
         </p>
 
-        <p className="mt-2 font-inter text-[18px] font-regular" style={{ color: NAVY }}>
+        <p className="mt-2 font-inter text-[16px] font-regular" style={{ color: NAVY }}>
           * Required fields
         </p>
 
@@ -309,7 +316,7 @@ function OfferBanner() {
                 <span className="mx-3 font-inter text-[50px] font-regular tracking-[0.02em]">10%</span>
               </p>
 
-              <div className="mt-6 space-y-2 font-inter text-[20px] text-white/80">
+              <div className="mt-6 space-y-2 font-inter text-[16px] text-white/80">
                 <p>
                   <strong className="font-bold text-white">Travel Period:</strong> January 2026 - March 2026
                 </p>
@@ -331,10 +338,14 @@ function OfferBanner() {
                     travelWindow: 'January 2026 - March 2026',
                   })
                 }
-                className="mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4 font-inter text-[16px] font-bold tracking-[0.01em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(17,22,63,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                style={{ color: NAVY }}
+                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-2 font-inter text-[16px] font-semibold tracking-[0.22em] transition-all duration-300 hover:border-[#222458] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                style={{ backgroundColor: '#F2E6D3', color: NAVY }}
               >
-                BOOK
+                <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0" style={{ color: NAVY }}>BOOK</span>
+                <span className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" style={{ backgroundColor: NAVY }} aria-hidden />
+                <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                  BOOK
+                </span>
               </button>
             </div>
           </RevealOnScroll>
@@ -536,17 +547,17 @@ export function DestinationPage() {
               <div>
               <DisplayTitle>ITINERARY</DisplayTitle>
 
-              <p className="font-inter text-[25px] font-bold" style={{ color: NAVY }}>
+              <p className="font-inter text-[24px] font-bold" style={{ color: NAVY }}>
                 Immersive Rail Journey Across Vietnam
               </p>
               <div
-                className="mt-4 max-w-[620px] space-y-5 font-inter text-[19px] leading-9 tracking-[0.04em]"
+                className="mt-4 max-w-[500px] space-y-5 font-inter text-[16px] leading-9 tracking-[0.04em]"
                 style={{ color: NAVY }}
               >
                 <TextLineReveal
                   as="p"
                   text="THE LUA presents an 8-day, 7-night curated rail journey through Vietnam, connecting the timeless elegance of Hanoi with the vibrant energy of Ho Chi Minh City."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0}
                   lineDelay={0.08}
@@ -554,7 +565,7 @@ export function DestinationPage() {
                 <TextLineReveal
                   as="p"
                   text="Traveling in refined comfort, guests move seamlessly across heritage cities, coastal landscapes, and cultural landmarks, experiencing the country through a lens of depth, design, and discovery."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0.12}
                   lineDelay={0.08}
@@ -562,7 +573,7 @@ export function DestinationPage() {
                 <TextLineReveal
                   as="p"
                   text="Unpack once and let Vietnam unfold beyond your window — where every mile is shaped by culture, craftsmanship, and quiet sophistication."
-                  className="font-inter text-[19px] leading-9 tracking-[0.04em]"
+                  className="font-inter text-[16px] leading-9 tracking-[0.04em]"
                   style={{ color: NAVY }}
                   delay={0.24}
                   lineDelay={0.08}
@@ -589,12 +600,12 @@ export function DestinationPage() {
               </div>
 
               <div className="lg:absolute lg:right-0 lg:w-[47%] lg:top-[75px]">
-                <h3 className="mb-6 text-center font-inter text-[20px] font-bold uppercase tracking-[0.02em] lg:text-left lg:text-[22px]" style={{ color: NAVY }}>
+                <h3 className="mb-6 text-center font-inter text-[24px] font-bold uppercase tracking-[0.02em] lg:text-left" style={{ color: NAVY }}>
                   OUR JOURNEYS
                 </h3>
 
                 <div className="overflow-hidden rounded-[22px] bg-[#F3E6CF] shadow-[0_10px_30px_rgba(34,36,88,0.08)]">
-                  <table className="w-full text-left font-inter text-[14px] text-[#232566]">
+                  <table className="w-full text-left font-inter text-[16px] text-[#232566]">
                     <thead>
                       <tr className="border-b border-[#D8C6A2]">
                         <th className="px-5 py-4 font-bold">ITINERARY</th>
@@ -640,7 +651,7 @@ export function DestinationPage() {
               <TextLineReveal
                 as="p"
                 text="THE LUA offers an unhurried rail journey through Vietnam, up to 7 days of quiet passage where time slows and landscapes are gently revealed, from North to South, or in reverse."
-                className="mx-auto mt-5 max-w-[700px] font-inter text-[18px] leading-8 tracking-[0.04em]"
+                className="mx-auto mt-5 max-w-[700px] font-inter text-[16px] leading-8 tracking-[0.04em]"
                 style={{ color: `${NAVY}B3` }}
                 delay={0.04}
                 lineDelay={0.08}
@@ -675,11 +686,11 @@ export function DestinationPage() {
           </div>
 
           <div className="mt-3 flex items-center justify-between">
-            <p className="font-inter text-[12px] text-[#232566]/70">{filteredJourneys.length} journeys found</p>
+            <p className="font-inter text-[14px] text-[#232566]/70 md:text-[15px]">{filteredJourneys.length} journeys found</p>
             <button
               type="button"
               onClick={resetFilters}
-              className="font-inter text-[12px] text-[#232566]/70 underline underline-offset-4 transition hover:text-[#232566] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+              className="font-inter text-[14px] text-[#232566]/70 underline underline-offset-4 transition hover:text-[#232566] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2 md:text-[15px]"
             >
               × Reset
             </button>
@@ -707,10 +718,10 @@ export function DestinationPage() {
 
         {filteredJourneys.length === 0 ? (
           <div className="mt-10 rounded-tr-[38px] border border-[#D8C6A2] bg-[#F8F2E8] px-6 py-7 text-center">
-            <p className="font-inter text-[18px] font-semibold tracking-[0.04em]" style={{ color: NAVY }}>
+            <p className="font-inter text-[24px] font-semibold tracking-[0.04em]" style={{ color: NAVY }}>
               No journeys match the current filters.
             </p>
-            <p className="mt-3 font-inter text-[15px] leading-7" style={{ color: `${NAVY}B3` }}>
+            <p className="mt-3 font-inter text-[16px] leading-7" style={{ color: `${NAVY}B3` }}>
               Refine your selections or reset the filters to explore the full collection again.
             </p>
           </div>

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useBookingModal } from '@/components/booking/BookingModalProvider'
+import { ImageFrame } from '@/components/ImageFrame'
 import { Container } from '@/components/layout/Container'
 import { TextLineReveal } from '@/components/TextLineReveal'
 import { Section } from '@/components/layout/Section'
@@ -9,12 +10,28 @@ import { InstagramSection } from '@/components/sections/InstagramSection'
 
 const NAVY = '#222458'
 const PAPER = '#F6EFE4'
+const GOLD = '#F2E6D3'
 
 const HERO_SLIDES = [
   { kind: 'video', src: '/videos/hero-1.mp4' },
   { kind: 'image', src: '/images/home/hero-2.png', alt: 'THE LUA Hero 2' },
   { kind: 'image', src: '/images/home/hero-3.png', alt: 'THE LUA Hero 3' },
 ] as const
+
+const INSIDE_GALLERY_IMAGES = [
+  { src: '/images/home/inside-1.jpg', alt: 'Inside 1' },
+  { src: '/images/home/inside-2.jpg', alt: 'Inside 2' },
+  { src: '/images/home/inside-3.jpg', alt: 'Inside 3' },
+  { src: '/images/home/inside-4.jpg', alt: 'Inside 4' },
+  { src: '/images/home/inside-5.jpg', alt: 'Inside 5' },
+  { src: '/images/home/inside-6.jpg', alt: 'Inside 6' },
+  { src: '/images/home/inside-7.jpg', alt: 'Inside 7' },
+  { src: '/images/home/inside-8.jpg', alt: 'Inside 8' },
+  { src: '/images/home/inside-9.jpg', alt: 'Inside 9' },
+  { src: '/images/home/inside-10.jpg', alt: 'Inside 10' },
+] as const
+
+const LOOPED_INSIDE_GALLERY_IMAGES = [...INSIDE_GALLERY_IMAGES, ...INSIDE_GALLERY_IMAGES]
 
 function DisplayTitle({
   children,
@@ -28,7 +45,7 @@ function DisplayTitle({
   return (
     <h2
       className={[
-        'font-regal text-[65px] leading-none tracking-[0.01px]',
+        'font-regal text-[64px] leading-none tracking-[0.01px]',
         center ? 'text-center' : '',
         className,
       ].join(' ')}
@@ -102,23 +119,21 @@ function TripCardView({
   return (
     <article className="group text-[#2A2B5E]">
       {/* IMAGE */}
-      <div
+      <ImageFrame
+        src={c.img}
+        alt={c.title}
+        ratio="aspect-[1.02/1]"
         className={`overflow-hidden bg-black/5 ${imgRadius} transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]`}
-      >
-        <img
-          src={c.img}
-          alt={c.title}
-          className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
-        />
-      </div>
+        imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+      />
 
       {/* TITLE */}
-      <h3 className="font-inter text-[20px] font-extrabold tracking-[0.01em] mt-6" style={{ color: NAVY }}>
+      <h3 className="font-inter text-[21px] font-extrabold tracking-[0.01em] mt-6" style={{ color: NAVY }}>
         {c.title}
       </h3>
 
       {/* ROUTE */}
-      <p className="font-inter font-[400] mt-3 text-[14px] tracking-[0.01em]" style={{ color: NAVY }}>
+      <p className="font-inter font-[400] mt-3 text-[15px] tracking-[0.01em]" style={{ color: NAVY }}>
         {c.route.split('✦').map((segment, idx, arr) => (
           <span key={`${c.title}-${idx}`}>
             {segment.trim()}
@@ -131,7 +146,7 @@ function TripCardView({
       <div className="mt-4 h-px w-full bg-black/70" />
 
       {/* META ROW (two sides + center icon) */}
-      <div className="font-inter font-[400] flex items-center py-2 text-[14px]" style={{ color: NAVY }}>
+      <div className="font-inter font-[400] flex items-center py-2 text-[15px]" style={{ color: NAVY }}>
         <span>{c.metaLeft}</span>
 
         <span className="inline-flex items-center mx-6 justify-center rounded-lg">
@@ -145,7 +160,7 @@ function TripCardView({
       <div className="h-px w-full bg-black/70" />
 
       {/* DESC */}
-      <p className="font-inter font-[400] mt-2 text-[14px] leading-9 text-black">
+      <p className="font-inter font-[400] mt-2 text-[15px] leading-9 text-black">
         {c.desc}
       </p>
 
@@ -154,7 +169,7 @@ function TripCardView({
         <button
           type="button"
           onClick={onViewMore}
-          className="font-inter text-[17px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="font-inter text-[15px] tracking-[0.01em] underline underline-offset-8 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           style={{ color: NAVY }}
         >
           View more
@@ -163,9 +178,13 @@ function TripCardView({
         <button
           type="button"
           onClick={() => onBook(c)}
-          className="rounded-tr-[20px] bg-[#1E1F4B] px-6 py-1.5 text-[20px] tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(30,31,75,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="group/book relative overflow-hidden rounded-tr-[20px] border border-transparent bg-[#1E1F4B] px-6 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
-          BOOK
+          <span className="relative z-10 transition-opacity duration-300 group-hover/book:opacity-0">BOOK</span>
+          <span className="absolute inset-0 scale-x-0 origin-left bg-white transition-transform duration-300 group-hover/book:scale-x-100" aria-hidden />
+          <span className="absolute inset-0 z-20 flex items-center justify-center text-[#2A2B5E] opacity-0 transition-opacity duration-300 group-hover/book:opacity-100" aria-hidden>
+            BOOK
+          </span>
         </button>
       </div>
     </article>
@@ -176,14 +195,22 @@ export function HomePage() {
   const navigate = useNavigate()
   const { openBookingModal } = useBookingModal()
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const [insideGalleryIndex, setInsideGalleryIndex] = useState(0)
+  const [insideGalleryStepWidth, setInsideGalleryStepWidth] = useState(0)
+  const [insideGalleryTransitionEnabled, setInsideGalleryTransitionEnabled] = useState(true)
+  const [isInsideGalleryAnimating, setIsInsideGalleryAnimating] = useState(false)
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(2)
   const [testimonialStepWidth, setTestimonialStepWidth] = useState(0)
   const [isTestimonialAnimating, setIsTestimonialAnimating] = useState(false)
   const [isTestimonialTransitionEnabled, setIsTestimonialTransitionEnabled] = useState(true)
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   const immersiveSectionRef = useRef<HTMLDivElement | null>(null)
+  const insideGalleryTrackRef = useRef<HTMLDivElement | null>(null)
+  const firstInsideGallerySlideRef = useRef<HTMLDivElement | null>(null)
+  const insideGallerySectionRef = useRef<HTMLDivElement | null>(null)
   const testimonialTrackRef = useRef<HTMLDivElement | null>(null)
   const firstTestimonialRef = useRef<HTMLDivElement | null>(null)
+  const isInsideGalleryInView = useInView(insideGallerySectionRef, { once: true, amount: 0.08 })
 
   const getRevealProps = (delay = 0) =>
     ({
@@ -266,6 +293,12 @@ export function HomePage() {
     setActiveTestimonialIndex(testimonials.length + idx)
   }
 
+  const handleInsideGalleryNext = () => {
+    if (isInsideGalleryAnimating || !insideGalleryStepWidth) return
+    setIsInsideGalleryAnimating(true)
+    setInsideGalleryIndex((prev) => prev + 1)
+  }
+
   useEffect(() => {
     const active = HERO_SLIDES[activeHeroSlide]
     const v = heroVideoRef.current
@@ -289,6 +322,29 @@ export function HomePage() {
   }, [activeHeroSlide])
 
   useLayoutEffect(() => {
+    const measureInsideGallery = () => {
+      if (!insideGalleryTrackRef.current || !firstInsideGallerySlideRef.current) return
+
+      const slides = insideGalleryTrackRef.current.children
+      const firstSlide = slides[0] as HTMLElement | undefined
+      const secondSlide = slides[1] as HTMLElement | undefined
+
+      if (firstSlide && secondSlide) {
+        setInsideGalleryStepWidth(secondSlide.offsetLeft - firstSlide.offsetLeft)
+        return
+      }
+
+      setInsideGalleryStepWidth(firstInsideGallerySlideRef.current.getBoundingClientRect().width)
+    }
+
+    measureInsideGallery()
+
+    window.addEventListener('resize', measureInsideGallery)
+
+    return () => window.removeEventListener('resize', measureInsideGallery)
+  }, [])
+
+  useLayoutEffect(() => {
     const measure = () => {
       if (!testimonialTrackRef.current || !firstTestimonialRef.current) return
 
@@ -303,6 +359,23 @@ export function HomePage() {
 
     return () => window.removeEventListener('resize', measure)
   }, [])
+
+  const handleInsideGalleryTransitionEnd = () => {
+    if (insideGalleryIndex < INSIDE_GALLERY_IMAGES.length) {
+      setIsInsideGalleryAnimating(false)
+      return
+    }
+
+    setInsideGalleryTransitionEnabled(false)
+    setInsideGalleryIndex(0)
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setInsideGalleryTransitionEnabled(true)
+        setIsInsideGalleryAnimating(false)
+      })
+    })
+  }
 
   const handleTestimonialTransitionEnd = () => {
     const total = testimonials.length
@@ -478,7 +551,7 @@ export function HomePage() {
               <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
 
               <p
-                className="font-inter text-[25px] font-bold"
+                className="font-inter text-[24px] font-bold"
                 style={{ color: NAVY }}
               >
                 Viet Nam Train And Immersive Culture
@@ -490,11 +563,11 @@ export function HomePage() {
               </div>
             </motion.div>
 
-            <div className="mt-3 space-y-5 tracking-[0.04em] font-inter font-[400] text-[20px] leading-9" style={{ color: NAVY }}>
+            <div className="mt-3 space-y-5 tracking-[0.04em] font-inter font-[400] text-[16px] leading-9" style={{ color: NAVY }}>
               <TextLineReveal
                 as="p"
                 text="From North to South, THE LUA redefines the art of travel through a moving cultural experience shaped by light, craft, cuisine, and landscape."
-                className="tracking-[0.04em] font-inter font-[400] text-[20px] leading-9"
+                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
                 style={{ color: NAVY }}
                 delay={0.08}
                 lineDelay={0.09}
@@ -503,27 +576,9 @@ export function HomePage() {
               <TextLineReveal
                 as="p"
                 text="Step aboard a journey where every detail is intentionally composed — where handcrafted materials meet contemporary design, where regional flavors unfold with the changing scenery, and where each window becomes a cinematic frame of Vietnam in motion."
-                className="tracking-[0.04em] font-inter font-[400] text-[20px] leading-9"
+                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
                 style={{ color: NAVY }}
                 delay={0.16}
-                lineDelay={0.09}
-              />
-
-              <TextLineReveal
-                as="p"
-                text="Every moment is a departure from the ordinary: an immersion into the textures, stories, and quiet beauty of a nation seen slowly and felt deeply."
-                className="tracking-[0.04em] font-inter font-[400] text-[20px] leading-9"
-                style={{ color: NAVY }}
-                delay={0.24}
-                lineDelay={0.09}
-              />
-
-              <TextLineReveal
-                as="p"
-                text="Come aboard, travel gently, and be moved."
-                className="tracking-[0.04em] font-inter font-[400] text-[20px] leading-9"
-                style={{ color: NAVY }}
-                delay={0.32}
                 lineDelay={0.09}
               />
             </div>
@@ -531,7 +586,7 @@ export function HomePage() {
 
           <div className="flex flex-col items-end">
             <motion.div
-              className="origin-top-right overflow-hidden rounded-tr-[160px] bg-black/5 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700"
+              className="origin-top-right overflow-hidden rounded-tr-[140px] bg-black/5 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.18 }}
@@ -552,7 +607,7 @@ export function HomePage() {
               <button
                 type="button"
                 onClick={() => navigate('/about#the-story')}
-                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-8 py-2 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-5 py-1 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               >
                 <span className="relative z-10">
                   SEE MORE
@@ -572,38 +627,79 @@ export function HomePage() {
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <motion.div {...getRevealProps(0.04)}>
             <DisplayTitle center>WHAT&apos;S INSIDE</DisplayTitle>
-            <p className="font-inter font-[400] mx-auto mt-4 max-w-[720px] text-center text-[20px] leading-8 text-[#2A2B5E]/70 tracking-[0.06em]" style={{ color: NAVY }}>
+            <p className="font-inter font-[400] mx-auto mt-4 max-w-[800px] text-center text-[24px] leading-8 text-[#2A2B5E]/70 tracking-[0.06em]" style={{ color: NAVY }}>
               An immersive journey through Vietnam's culture, movement, <br />
               and living heritage.
             </p>
           </motion.div>
+        </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {[
-              { src: '/images/home/inside-1.jpg', alt: 'Inside 1', radius: 'rounded-tr-[160px]' },
-              { src: '/images/home/inside-2.jpg', alt: 'Inside 2', radius: 'rounded-tr-[160px]' },
-              { src: '/images/home/inside-3.jpg', alt: 'Inside 3', radius: 'rounded-tr-[160px]' },
-            ].map((i, idx) => (
-              <RevealOnScroll
-                key={idx}
-                delay={getStaggerDelay(0.12, idx, 0.18)}
-                y={18}
-                amount={0.06}
-                duration={0.8}
-                initialScale={0.992}
+        <div ref={insideGallerySectionRef} className="relative left-1/2 mt-12 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1800px] overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={isInsideGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div
-                  className={`group overflow-hidden bg-black/5 ${i.radius} rounded-tr-2xl shadow-[0_18px_40px_rgba(34,36,88,0.06)] transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.1)]`}
+                  ref={insideGalleryTrackRef}
+                  className="flex gap-6"
+                  style={{
+                    transform: `translateX(-${insideGalleryIndex * insideGalleryStepWidth}px)`,
+                    transition: insideGalleryTransitionEnabled
+                      ? 'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)'
+                      : 'none',
+                  }}
+                  onTransitionEnd={handleInsideGalleryTransitionEnd}
                 >
-                  <img
-                    src={i.src}
-                    alt={i.alt}
-                    className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                  />
+                  {LOOPED_INSIDE_GALLERY_IMAGES.map((image, idx) => (
+                    <motion.div
+                      key={`${image.src}-${idx}`}
+                      ref={idx === 0 ? firstInsideGallerySlideRef : undefined}
+                      className="group shrink-0 basis-[80%] sm:basis-[calc((100%_-_1.5rem)/2)] md:basis-[calc((100%_-_6rem)/5)]"
+                      initial={{ opacity: 0, y: 26 }}
+                      animate={isInsideGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.18 + (idx % INSIDE_GALLERY_IMAGES.length) * 0.12,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      <ImageFrame
+                        src={image.src}
+                        alt={image.alt}
+                        ratio="aspect-[1/1.5]"
+                        className="rounded-tr-[140px] bg-black/5 shadow-[0_18px_40px_rgba(34,36,88,0.06)] transition-shadow duration-300 group-hover:shadow-[0_22px_42px_rgba(34,36,88,0.1)]"
+                        imageClassName="transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                      />
+                    </motion.div>
+                  ))}
                 </div>
-              </RevealOnScroll>
-            ))}
+              </motion.div>
           </div>
+
+          <motion.button
+            type="button"
+            onClick={handleInsideGalleryNext}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={isInsideGalleryInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute right-2 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+            aria-label="Next"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="h-[18px] w-[18px] text-[#222458]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3.25"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              aria-hidden="true"
+            >
+              <path d="M9.5 5.5 16 12l-6.5 6.5" />
+            </svg>
+          </motion.button>
         </div>
       </section>
 
@@ -613,7 +709,7 @@ export function HomePage() {
           <p className="font-inter text-[24px] font-bold tracking-[0.01em]" style={{ color: NAVY }}>
             EXPLORE THE IMMERSIVE DESTINATIONS
           </p>
-          <p className="font-inter font-[400] text-[20px] leading-8 text-[#2A2B5E]/70 tracking-[0.06em]" style={{ color: NAVY }}>
+          <p className="font-inter font-[400] text-[16px] leading-8 text-[#2A2B5E]/70 tracking-[0.06em]" style={{ color: NAVY }}>
             Rooted in the immersive of classic rail travel and shaped <br />
             by contemporary comfort
           </p>
@@ -703,10 +799,14 @@ export function HomePage() {
                     travelWindow: 'January 2026 - March 2026',
                   })
                 }
-                className="font-inter text-[16px] font-bold tracking-[0.01em] mt-8 rounded-2xl bg-[#EFE3D1] px-6 py-4"
-                style={{ color: NAVY }}
+                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-2 font-inter text-[16px] font-semibold tracking-[0.22em] transition-all duration-300 hover:border-[#222458] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                style={{ backgroundColor: GOLD, color: NAVY }}
               >
-                BOOK
+                <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0" style={{ color: NAVY }}>BOOK</span>
+                <span className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" style={{ backgroundColor: NAVY }} aria-hidden />
+                <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                  BOOK
+                </span>
               </button>
             </div>
           </Container>

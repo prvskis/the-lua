@@ -6,10 +6,10 @@ export type NavItem = {
 
 export const NAV_ITEMS = [
   { to: '/', label: 'HOME' },
-  { to: '/about', label: 'ABOUT' },
+  { to: '/train', label: 'SERVICES' },
   { to: '/destination', label: 'DESTINATION' },
   { to: '/news', label: 'NEWS' },
-  { to: '/train', label: 'THE TRAIN' },
+  { to: '/about', label: 'ABOUT' },
   { to: '/contact', label: 'CONTACT', behavior: 'scroll-bottom' },
 ] as const satisfies readonly NavItem[]
 

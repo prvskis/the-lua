@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ImageFrame } from '@/components/ImageFrame'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import { InstagramSection } from '@/components/sections/InstagramSection'
+import { FiChevronDown } from 'react-icons/fi'
 
 const NAVY = '#222458'
 const GOLD = '#D9B07A'
@@ -72,8 +74,8 @@ function NewsletterField({
               </option>
             ))}
           </select>
-          <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[18px] text-[#D2AF7A] md:text-[22px]">
-            ▼
+          <span className="pointer-events-none absolute right-6 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#D2AF7A]">
+            <FiChevronDown className="h-[18px] w-[18px] md:h-[22px] md:w-[22px]" strokeWidth={2.5} aria-hidden />
           </span>
         </div>
       ) : (
@@ -90,13 +92,13 @@ function NewsletterField({
 function NewsCard({ item, onDiscover }: { item: NewsItem; onDiscover: (item: NewsItem) => void }) {
   return (
     <article className="group flex h-full flex-col text-[#2A2B5E]">
-      <div className="overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-        <img
-          src={item.image}
-          alt={item.title}
-          className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
-        />
-      </div>
+      <ImageFrame
+        src={item.image}
+        alt={item.title}
+        ratio="aspect-[1.02/1]"
+        className="rounded-tr-[140px] bg-black/5 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
+        imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
+      />
 
       <p
         className="mt-4 font-inter text-[13px] tracking-[0.02em]"
@@ -106,14 +108,14 @@ function NewsCard({ item, onDiscover }: { item: NewsItem; onDiscover: (item: New
       </p>
 
       <h3
-        className="mt-1 max-w-[320px] font-inter text-[18px] font-extrabold leading-[1.45] tracking-[0.01em]"
+        className="mt-1 max-w-[320px] font-inter text-[18px] font-extrabold leading-[1.45] tracking-[0.01em] md:text-[20px]"
         style={{ color: NAVY }}
       >
         {item.title}
       </h3>
 
       <p
-        className="mt-2 max-w-[320px] flex-1 font-inter text-[14px] leading-[2.2] tracking-[0.015em]"
+        className="mt-2 max-w-[320px] flex-1 font-inter text-[16px] leading-[2.2] tracking-[0.015em]"
         style={{ color: `${NAVY}CC` }}
       >
         {item.excerpt}
@@ -122,7 +124,7 @@ function NewsCard({ item, onDiscover }: { item: NewsItem; onDiscover: (item: New
       <button
         type="button"
         onClick={() => onDiscover(item)}
-        className="mt-3 w-fit font-inter text-[15px] font-semibold tracking-[0.01em] underline underline-offset-4 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+        className="mt-3 w-fit font-inter text-[16px] font-semibold tracking-[0.01em] underline underline-offset-4 decoration-[#2A2B5E]/50 transition-all duration-300 hover:text-[#2A2B5E] hover:decoration-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         style={{ color: NAVY }}
       >
         Discover
@@ -135,16 +137,16 @@ function StayOnTrackSection() {
   return (
     <Section className="pt-0">
       <div className="mx-auto max-w-[1180px] rounded-tr-[110px] bg-[#F2E6D3] px-7 py-9 sm:px-10 lg:px-12 lg:py-10">
-        <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]" style={{ color: NAVY }}>
+        <h2 className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[64px]" style={{ color: NAVY }}>
           STAY ON TRACK
         </h2>
 
-        <p className="mt-5 max-w-[760px] font-inter text-[17px] leading-8" style={{ color: `${NAVY}CC` }}>
+        <p className="mt-5 max-w-[760px] font-inter text-[16px] leading-8" style={{ color: `${NAVY}CC` }}>
           Discover the Orient Express newsletter - explore at your leisure and be the first to discover upcoming
           routes, inspiring itineraries, and new ways to travel with wonder.
         </p>
 
-        <p className="mt-2 font-inter text-[18px] font-regular" style={{ color: NAVY }}>
+        <p className="mt-2 font-inter text-[16px] font-regular" style={{ color: NAVY }}>
           * Required fields
         </p>
 
@@ -331,15 +333,15 @@ export function NewsPage() {
               <div className="grid max-h-[90vh] lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="bg-[#232566] p-6 sm:p-8 lg:p-10">
                   <p className="font-inter text-[11px] tracking-[0.28em] text-[#F5E7D0]/80">NEWS FEATURE</p>
-                  <h2 className="mt-4 font-regal text-[38px] leading-[0.95] text-[#FFF9F0] sm:text-[48px]">
+                  <h2 className="mt-4 font-regal text-[42px] leading-[0.95] text-[#FFF9F0] md:text-[48px]">
                     {selectedNewsItem.title}
                   </h2>
-                  <p className="mt-5 font-inter text-[14px] tracking-[0.12em] text-white/70">{selectedNewsItem.date}</p>
-                  <p className="mt-5 max-w-[360px] font-inter text-[15px] leading-7 text-white/80">
+                  <p className="mt-5 font-inter text-[16px] tracking-[0.12em] text-white/70">{selectedNewsItem.date}</p>
+                  <p className="mt-5 max-w-[360px] font-inter text-[16px] leading-7 text-white/80">
                     {selectedNewsItem.excerpt}
                   </p>
 
-                  <div className="mt-8 overflow-hidden rounded-tr-[42px] bg-black/10">
+                  <div className="mt-8 overflow-hidden rounded-tr-[140px] bg-black/10">
                     <img src={selectedNewsItem.image} alt={selectedNewsItem.title} className="h-full w-full object-cover" />
                   </div>
                 </div>
@@ -348,7 +350,7 @@ export function NewsPage() {
                   <div className="flex items-start justify-between gap-5">
                     <div>
                       <p className="font-inter text-[11px] tracking-[0.28em] text-[#222458]/55">EDITORIAL DETAIL</p>
-                      <p className="mt-3 max-w-[420px] font-inter text-[15px] leading-7 text-[#222458]/76">
+                      <p className="mt-3 max-w-[420px] font-inter text-[16px] leading-7 text-[#222458]/76">
                         A closer look at the story behind this announcement, written in the same refined tone as the
                         rest of THE LUA experience.
                       </p>

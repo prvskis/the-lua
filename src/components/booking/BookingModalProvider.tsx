@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { FiChevronDown } from 'react-icons/fi'
 
 type BookingModalPayload = {
   origin?: string
@@ -272,16 +273,21 @@ function BookingModal({
                     <div className="grid gap-5 sm:grid-cols-[150px_1fr]">
                       <FieldShell>
                         <FieldLabel>Title</FieldLabel>
-                        <select
-                          value={form.title}
-                          onChange={(event) => onChange('title', event.target.value)}
-                          className={inputClassName('appearance-none pr-10')}
-                        >
-                          <option>Mr.</option>
-                          <option>Mrs.</option>
-                          <option>Ms.</option>
-                          <option>Mx.</option>
-                        </select>
+                        <div className="relative">
+                          <select
+                            value={form.title}
+                            onChange={(event) => onChange('title', event.target.value)}
+                            className={inputClassName('appearance-none pr-10')}
+                          >
+                            <option>Mr.</option>
+                            <option>Mrs.</option>
+                            <option>Ms.</option>
+                            <option>Mx.</option>
+                          </select>
+                          <span className="pointer-events-none absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#222458]/55">
+                            <FiChevronDown className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+                          </span>
+                        </div>
                       </FieldShell>
 
                       <FieldShell>
@@ -353,32 +359,42 @@ function BookingModal({
 
                       <FieldShell>
                         <FieldLabel>Guests</FieldLabel>
-                        <select
-                          value={form.guests}
-                          onChange={(event) => onChange('guests', event.target.value)}
-                          className={inputClassName('appearance-none')}
-                        >
-                          <option>1 Guest</option>
-                          <option>2 Guests</option>
-                          <option>3 Guests</option>
-                          <option>4 Guests</option>
-                          <option>5+ Guests</option>
-                        </select>
+                        <div className="relative">
+                          <select
+                            value={form.guests}
+                            onChange={(event) => onChange('guests', event.target.value)}
+                            className={inputClassName('appearance-none pr-10')}
+                          >
+                            <option>1 Guest</option>
+                            <option>2 Guests</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                            <option>5+ Guests</option>
+                          </select>
+                          <span className="pointer-events-none absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#222458]/55">
+                            <FiChevronDown className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+                          </span>
+                        </div>
                       </FieldShell>
 
                       <FieldShell>
                         <FieldLabel>Cabin type</FieldLabel>
-                        <select
-                          value={form.cabinType}
-                          onChange={(event) => onChange('cabinType', event.target.value)}
-                          className={inputClassName('appearance-none')}
-                        >
-                          <option value="">Open to recommendation</option>
-                          <option>Deluxe Cabin</option>
-                          <option>Premium Suite</option>
-                          <option>Signature Suite</option>
-                          <option>Private Charter</option>
-                        </select>
+                        <div className="relative">
+                          <select
+                            value={form.cabinType}
+                            onChange={(event) => onChange('cabinType', event.target.value)}
+                            className={inputClassName('appearance-none pr-10')}
+                          >
+                            <option value="">Open to recommendation</option>
+                            <option>Deluxe Cabin</option>
+                            <option>Premium Suite</option>
+                            <option>Signature Suite</option>
+                            <option>Private Charter</option>
+                          </select>
+                          <span className="pointer-events-none absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-[#222458]/55">
+                            <FiChevronDown className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+                          </span>
+                        </div>
                       </FieldShell>
                     </div>
 

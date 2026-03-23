@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { NavLink, useLocation } from "react-router-dom"
 import { useBookingModal } from "@/components/booking/BookingModalProvider"
+import { FiChevronDown } from "react-icons/fi"
 import { Container } from "@/components/layout/Container"
 import { NAV_ITEMS, type NavItem as NavItemData } from "@/constants/nav"
 
@@ -327,9 +328,11 @@ export function Header() {
                 aria-controls="language-menu-panel"
               >
                 EN
-                <span className={["text-[10px] transition-transform duration-200", languageMenuOpen ? "rotate-180" : ""].join(" ")}>
-                  ^
-                </span>
+                <FiChevronDown
+                  className={["h-3.5 w-3.5 transition-transform duration-200", languageMenuOpen ? "rotate-180" : ""].join(" ")}
+                  strokeWidth={2.5}
+                  aria-hidden
+                />
               </button>
 
               <AnimatePresence>
@@ -398,10 +401,14 @@ export function Header() {
                   origin: `Header booking button (${pathname})`,
                 })
               }
-              className="rounded-lg px-5 py-2 text-[11px] tracking-[0.22em] text-white transition hover:opacity-95"
+              className="group relative overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-2 text-[11px] font-semibold tracking-[0.22em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               style={{ backgroundColor: NAVY }}
             >
-              BOOK
+              <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0">BOOK</span>
+              <span className="absolute inset-0 scale-x-0 origin-left bg-white transition-transform duration-300 group-hover:scale-x-100" aria-hidden />
+              <span className="absolute inset-0 z-20 flex items-center justify-center text-[#2A2B5E] opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                BOOK
+              </span>
             </button>
           </div>
         </div>

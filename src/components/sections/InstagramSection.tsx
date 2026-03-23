@@ -1,10 +1,11 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { ImageFrame } from '@/components/ImageFrame'
 import { Section } from '@/components/layout/Section'
 
 const NAVY = '#222458'
 const INSTAGRAM_URL = 'https://www.instagram.com/theluatrain/'
-const INSTAGRAM_KEYS = ['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5'] as const
+const INSTAGRAM_KEYS = ['ig-1', 'ig-2', 'ig-3', 'ig-4', 'ig-5', 'ig-6', 'ig-7', 'ig-8', 'ig-9', 'ig-10', "ig-11", "ig-12"] as const
 const LOOPED_INSTAGRAM_KEYS = [...INSTAGRAM_KEYS, ...INSTAGRAM_KEYS]
 
 function RevealOnScroll({
@@ -99,10 +100,10 @@ export function InstagramSection() {
             <span className="mt-[2px] inline-block h-px w-40 bg-black/20" />
           </div>
 
-          <p className="font-inter text-[30px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
+          <p className="font-inter text-[24px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
             INSTAGRAM
           </p>
-          <h2 className="font-regal text-[45px] leading-none tracking-[0.01em] md:text-[50px]" style={{ color: NAVY }}>
+          <h2 className="font-regal text-[24px] leading-none tracking-[0.01em] md:text-[64px]" style={{ color: NAVY }}>
             <span className="font-inter">@</span>THELUATRAIN
           </h2>
 
@@ -139,7 +140,7 @@ export function InstagramSection() {
                 <motion.div
                   key={`${k}-${idx}`}
                   ref={idx === 0 ? firstSlideRef : undefined}
-                  className="group shrink-0 basis-[80%] rounded-tr-[180px] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
+                  className="group shrink-0 basis-[80%] rounded-tr-[140px] overflow-hidden sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-4rem)/5)]"
                   initial={{ opacity: 0, y: 26 }}
                   animate={isGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
                   transition={{
@@ -148,10 +149,12 @@ export function InstagramSection() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  <img
+                  <ImageFrame
                     src={`/images/home/${k}.jpg`}
                     alt={k}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                    ratio="aspect-[1/1.5]"
+                    className="rounded-tr-[140px]"
+                    imageClassName="transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                   />
                 </motion.div>
               ))}
