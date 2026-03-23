@@ -45,7 +45,7 @@ const FOOTER_INFO_LINKS: readonly FooterPopupItem[] = [
     id: "terms",
     label: "General Term Of Use",
     title: "General Terms of Use",
-    intro: "A concise overview of how THE LUA digital experience is presented and how guests may interact with it.",
+    intro: "A overview of how THE LUA digital experience is presented and how guests may interact with it.",
     details: [
       "This site is designed to present routes, stories, and the design language of THE LUA in a calm editorial format.",
       "Booking and contact forms are treated as expressions of interest rather than instant reservation confirmations.",
@@ -55,7 +55,7 @@ const FOOTER_INFO_LINKS: readonly FooterPopupItem[] = [
     id: "privacy",
     label: "Privacy Policy",
     title: "Privacy Policy",
-    intro: "A short summary of how guest information should be handled across contact and booking touchpoints.",
+    intro: "A short summary of how guest information should be handled across contact and booking.",
     details: [
       "Information shared through forms may include contact details and travel preferences so our concierge team can respond thoughtfully.",
       "Guest information should be used with restraint, clarity, and respect for privacy at every stage of the experience.",
@@ -103,7 +103,7 @@ const FOOTER_SITE_LINKS: readonly FooterSiteLink[] = [
     id: "career",
     label: "Career",
     title: "Career Information",
-    intro: "A quick way to learn how to connect with THE LUA regarding future opportunities.",
+    intro: "A quick way to learn how to connect with THE LUA career - regarding our future opportunities.",
     details: [
       "For career interest, guests and candidates may reach out directly to our team via the listed email contact.",
       "As the project evolves, career information can be expanded into a dedicated recruitment flow if needed.",
@@ -126,7 +126,7 @@ const FOOTER_BOTTOM_POPUPS: readonly FooterPopupItem[] = [
     id: "sitemap",
     label: "Sitemap",
     title: "Sitemap Overview",
-    intro: "A simple guide to the main areas currently available across THE LUA site.",
+    intro: "A simple guide to the main areas currently available across THE LUA.",
     details: [
       "Primary navigation currently includes Home, About, Destinations, News, and The Train, with shared booking access across the site.",
       "Deep links and section-based navigation are used throughout to keep the experience fluid rather than fragmented.",
@@ -402,7 +402,7 @@ export function Footer() {
               <div className="grid lg:grid-cols-[0.88fr_1.12fr]">
                 <div className="bg-[linear-gradient(180deg,#272865_0%,#1E1F4B_100%)] px-6 py-8 text-white sm:px-8 lg:px-10">
                   <p className="font-inter text-[11px] tracking-[0.28em] text-[#F5E7D0]/82">FOOTER INFORMATION</p>
-                  <h2 className="mt-4 font-regal text-[40px] leading-[0.96] text-[#FFF9F0] sm:text-[48px]">
+                  <h2 className="mt-4 font-inter text-[40px] font-semibold leading-[1.05] tracking-[0.02em] text-[#FFF9F0] sm:text-[48px]">
                     {activePopup.title}
                   </h2>
                   <p className="mt-5 max-w-[320px] font-inter text-[15px] leading-7 text-white/88">
@@ -478,7 +478,7 @@ export function Footer() {
               <div className="grid lg:grid-cols-[0.86fr_1.14fr]">
                 <div className="bg-[linear-gradient(180deg,#272865_0%,#1E1F4B_100%)] px-6 py-8 text-white sm:px-8 lg:px-10">
                   <p className="font-inter text-[11px] tracking-[0.28em] text-[#F5E7D0]/82">GUEST FEEDBACK</p>
-                  <h2 className="mt-4 font-regal text-[40px] leading-[0.96] text-[#FFF9F0] sm:text-[48px]">
+                  <h2 className="mt-4 font-inter text-[40px] font-semibold leading-[1.05] tracking-[0.02em] text-[#FFF9F0] sm:text-[48px]">
                     Share Your Experience
                   </h2>
                   <p className="mt-5 max-w-[320px] font-inter text-[15px] leading-7 text-white/88">
@@ -513,7 +513,9 @@ export function Footer() {
                   {feedbackSubmitted ? (
                     <div className="mt-8 rounded-tr-[28px] border border-[#E2D3B9] bg-white/68 px-5 py-6">
                       <p className="font-inter text-[11px] tracking-[0.28em] text-[#222458]/55">THANK YOU</p>
-                      <p className="mt-4 font-regal text-[34px] leading-none text-[#222458]">Feedback received</p>
+                      <p className="mt-4 font-inter text-[32px] font-semibold leading-tight tracking-[0.02em] text-[#222458] sm:text-[34px]">
+                        Feedback received
+                      </p>
                       <p className="mt-4 font-inter text-[15px] leading-7 text-[#222458]/76">
                         Your rating has been recorded in this preview flow. In a live setup, this is where the feedback
                         would be sent to the team.

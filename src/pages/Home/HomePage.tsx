@@ -544,7 +544,7 @@ export function HomePage() {
       <Section>
         <div
           ref={immersiveSectionRef}
-          className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
+          className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
         >
           <div>
             <motion.div {...getRevealProps(0.02)}>
@@ -563,7 +563,7 @@ export function HomePage() {
               </div>
             </motion.div>
 
-            <div className="mt-3 space-y-5 tracking-[0.04em] font-inter font-[400] text-[16px] leading-9" style={{ color: NAVY }}>
+            <div className="mt-3 space-y-5 max-w-[500px] tracking-[0.04em] font-inter font-[400] text-[16px] leading-9" style={{ color: NAVY }}>
               <TextLineReveal
                 as="p"
                 text="From North to South, THE LUA redefines the art of travel through a moving cultural experience shaped by light, craft, cuisine, and landscape."
@@ -599,7 +599,7 @@ export function HomePage() {
               <img
                 src="/images/home/immersive.jpg"
                 alt="Immersive"
-                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03] max-h-[600px] max-w-[400]"
               />
             </motion.div>
 
@@ -607,7 +607,7 @@ export function HomePage() {
               <button
                 type="button"
                 onClick={() => navigate('/about#the-story')}
-                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-5 py-1 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-5 py-2 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               >
                 <span className="relative z-10">
                   SEE MORE
@@ -738,7 +738,7 @@ export function HomePage() {
           <button
             type="button"
             onClick={() => navigate('/destination#the-journey')}
-            className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+            className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-5 py-2 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           >
             <span className="relative z-10">SEE ALL</span>
 
@@ -769,7 +769,7 @@ export function HomePage() {
           }}
         >
           <Container>
-            <div className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px] hover:translate-x-1">
+            <div className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px]">
               <p className="font-regal text-[50px] tracking-[0.01em] leading-9">
                 SPECIAL SPRING OFFER <br />
                 EARLY BIRD SPRING OFFER
@@ -799,12 +799,12 @@ export function HomePage() {
                     travelWindow: 'January 2026 - March 2026',
                   })
                 }
-                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-2 font-inter text-[16px] font-semibold tracking-[0.22em] transition-all duration-300 hover:border-[#222458] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                style={{ backgroundColor: GOLD, color: NAVY }}
+                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border-2 border-transparent px-5 py-1.5 font-inter text-[16px] font-semibold tracking-[0.22em] transition-all duration-300 hover:border-[#F2E6D3] hover:shadow-[0_0_0_1px_rgba(242,230,211,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                style={{ backgroundColor: GOLD, color: NAVY, borderColor: GOLD }}
               >
                 <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0" style={{ color: NAVY }}>BOOK</span>
                 <span className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" style={{ backgroundColor: NAVY }} aria-hidden />
-                <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                <span className="absolute inset-0 z-20 flex items-center justify-center text-[#F2E6D3] opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
                   BOOK
                 </span>
               </button>

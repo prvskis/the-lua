@@ -309,7 +309,7 @@ function OfferBanner() {
       >
         <Container>
           <RevealOnScroll delay={0.06} y={18} amount={0.08} duration={0.6}>
-            <div className="max-w-[640px] py-10 transition-transform duration-500 hover:translate-x-1 lg:py-[60px]">
+            <div className="max-w-[640px] py-10 transition-transform duration-500 lg:py-[60px]">
               <p className="font-regal text-[50px] leading-9 tracking-[0.01em]">
                 SPECIAL SPRING OFFER <br />
                 EARLY BIRD SPRING OFFER
