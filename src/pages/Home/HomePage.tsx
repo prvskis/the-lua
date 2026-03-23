@@ -540,90 +540,8 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      {/* IMMERSIVE VIETNAM */}
-      <Section>
-        <div
-          ref={immersiveSectionRef}
-          className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
-        >
-          <div>
-            <motion.div {...getRevealProps(0.02)}>
-              <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
-
-              <p
-                className="font-inter text-[24px] font-bold"
-                style={{ color: NAVY }}
-              >
-                Viet Nam Train And Immersive Culture
-              </p>
-
-              <div className="mx-auto flex max-w-[620px] items-center gap-6 text-black/30">
-                <span className="text-[#D8B387] text-[40px]">✦</span>
-                <span className="inline-block h-[1px] w-[430px] bg-[#D8B387] mt-[3.5px]" />
-              </div>
-            </motion.div>
-
-            <div className="mt-3 space-y-5 max-w-[500px] tracking-[0.04em] font-inter font-[400] text-[16px] leading-9" style={{ color: NAVY }}>
-              <TextLineReveal
-                as="p"
-                text="From North to South, THE LUA redefines the art of travel through a moving cultural experience shaped by light, craft, cuisine, and landscape."
-                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
-                style={{ color: NAVY }}
-                delay={0.08}
-                lineDelay={0.09}
-              />
-
-              <TextLineReveal
-                as="p"
-                text="Step aboard a journey where every detail is intentionally composed — where handcrafted materials meet contemporary design, where regional flavors unfold with the changing scenery, and where each window becomes a cinematic frame of Vietnam in motion."
-                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
-                style={{ color: NAVY }}
-                delay={0.16}
-                lineDelay={0.09}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col items-end">
-            <motion.div
-              className="origin-top-right overflow-hidden rounded-tr-[140px] bg-black/5 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.18 }}
-              transition={{
-                duration: 2.5,
-                delay: 0.12,
-                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-              }}
-            >
-              <img
-                src="/images/home/immersive.jpg"
-                alt="Immersive"
-                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03] max-h-[600px] max-w-[400]"
-              />
-            </motion.div>
-
-            <motion.div className="mt-5" {...getRevealProps(0.18)}>
-              <button
-                type="button"
-                onClick={() => navigate('/about#the-story')}
-                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-5 py-2 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
-              >
-                <span className="relative z-10">
-                  SEE MORE
-                </span>
-                <span className="absolute inset-0 scale-x-0 origin-left bg-[#2A2B5E] transition-transform duration-300 group-hover:scale-x-100" />
-                <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition duration-300 group-hover:opacity-100">
-                  SEE MORE
-                </span>
-              </button>
-            </motion.div>
-          </div>
-        </div>
-      </Section>
-
       {/* WHAT'S INSIDE */}
-      <section className="py-16" style={{ backgroundColor: PAPER }}>
+      <section className="py-16">
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
           <motion.div {...getRevealProps(0.04)}>
             <DisplayTitle center>WHAT&apos;S INSIDE</DisplayTitle>
@@ -703,6 +621,84 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* IMMERSIVE VIETNAM */}
+      <Section className="bg-[#F6EFE4]">
+        <div
+          ref={immersiveSectionRef}
+          className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
+        >
+          <div>
+            <motion.div {...getRevealProps(0.02)}>
+              <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
+
+              <p
+                className="font-inter text-[24px] font-bold"
+                style={{ color: NAVY }}
+              >
+                Viet Nam Train And Immersive Culture
+              </p>
+
+            </motion.div>
+
+            <div className="mt-3 space-y-5 max-w-[500px] tracking-[0.04em] font-inter font-[400] text-[16px] leading-9" style={{ color: NAVY }}>
+              <TextLineReveal
+                as="p"
+                text="From North to South, THE LUA redefines the art of travel through a moving cultural experience shaped by light, craft, cuisine, and landscape."
+                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
+                style={{ color: NAVY }}
+                delay={0.08}
+                lineDelay={0.09}
+              />
+
+              <TextLineReveal
+                as="p"
+                text="Step aboard a journey where every detail is intentionally composed — where handcrafted materials meet contemporary design, where regional flavors unfold with the changing scenery, and where each window becomes a cinematic frame of Vietnam in motion."
+                className="tracking-[0.04em] font-inter font-[400] text-[16px] leading-9"
+                style={{ color: NAVY }}
+                delay={0.16}
+                lineDelay={0.09}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col items-end">
+            <motion.div
+              className="origin-top-right overflow-hidden rounded-tr-[140px] bg-black/5 shadow-[0_30px_60px_rgba(34,36,88,0.08)] transition-transform duration-700"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{
+                duration: 2.5,
+                delay: 0.12,
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+              }}
+            >
+              <img
+                src="/images/home/immersive.jpg"
+                alt="Immersive"
+                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03] max-h-[600px] max-w-[400]"
+              />
+            </motion.div>
+
+            <motion.div className="mt-5" {...getRevealProps(0.18)}>
+              <button
+                type="button"
+                onClick={() => navigate('/about#the-story')}
+                className="group relative overflow-hidden rounded-none rounded-tr-[20px] border border-[#2A2B5E] bg-transparent px-5 py-2 text-[16px] font-semibold tracking-[0.06em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+              >
+                <span className="relative z-10">
+                  SEE MORE
+                </span>
+                <span className="absolute inset-0 scale-x-0 origin-left bg-[#2A2B5E] transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition duration-300 group-hover:opacity-100">
+                  SEE MORE
+                </span>
+              </button>
+            </motion.div>
+          </div>
+        </div>
+      </Section>            
+
       {/* EXPLORE THE IMMERSIVE */}
       <Section>
         <motion.div className="flex flex-col gap-4" {...getRevealProps(0.05)}>
@@ -773,12 +769,12 @@ export function HomePage() {
               <p className="font-regal text-[50px] tracking-[0.01em] leading-9">
                 SPECIAL SPRING OFFER <br />
                 EARLY BIRD SPRING OFFER
-                <span className="mx-3 font-inter text-[50px] font-regular tracking-[0.02em]">
+                <span className="mx-3 font-inter text-[54px] font-bold tracking-[0.02em]">
                   10%
                 </span>
               </p>
 
-              <div className="mt-6 space-y-2 font-inter text-[20px] text-white/80">
+              <div className="mt-6 space-y-2 font-inter text-[16px] text-white/80">
                 <p>
                   <strong className="font-bold text-white">Travel Period:</strong> January 2026 - March 2026
                 </p>
@@ -799,7 +795,7 @@ export function HomePage() {
                     travelWindow: 'January 2026 - March 2026',
                   })
                 }
-                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border-2 border-transparent px-5 py-1.5 font-inter text-[16px] font-semibold tracking-[0.22em] transition-all duration-300 hover:border-[#F2E6D3] hover:shadow-[0_0_0_1px_rgba(242,230,211,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border-1.5 border-transparent px-5 py-1.5 font-inter text-[16px] font-semibold tracking-[0.1em] transition-all duration-300 hover:border-[#F2E6D3] hover:shadow-[0_0_0_1px_rgba(242,230,211,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{ backgroundColor: GOLD, color: NAVY, borderColor: GOLD }}
               >
                 <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0" style={{ color: NAVY }}>BOOK</span>
@@ -813,7 +809,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS (static version trước, sau nâng lên carousel) */}
       {/* TESTIMONIALS */}
       <section className="py-14 mb-10" style={{ backgroundColor: PAPER }}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
@@ -851,7 +846,7 @@ export function HomePage() {
                     ref={idx === 0 ? firstTestimonialRef : undefined}
                     className="flex shrink-0 basis-full items-stretch lg:basis-[calc((100%_-_2.5rem)/2)]"
                   >
-                    <article className="relative flex min-h-full w-full flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]">
+                    <article className="relative flex min-h-full w-full flex-col rounded-[6px] border border-black/10 bg-white px-6 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]">
                       <div className="flex-1">
                         {/* stars */}
                         <div className="mb-6 flex items-center gap-2 text-[#D9B07A]" aria-label="5 out of 5 stars">
@@ -868,11 +863,11 @@ export function HomePage() {
                           ))}
                         </div>
 
-                        <h3 className="mt-2 font-inter text-[22px] font-extrabold tracking-[0.02em] text-black/80">
+                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-black/80">
                           {t.title}
                         </h3>
 
-                        <p className="mt-1 font-inter text-[15px] leading-6 text-black/65">
+                        <p className="mt-1 font-inter text-[16px] leading-6 text-black/65">
                           {t.body}
                         </p>
                       </div>
@@ -890,7 +885,7 @@ export function HomePage() {
                           />
                         </div>
                         <div>
-                          <div className="text-[16px] font-semibold text-black/55">{t.name}</div>
+                          <div className="text-[15px] font-semibold text-black/55">{t.name}</div>
                           <div className="text-[14px] text-black/30">{t.date}</div>
                         </div>
                       </div>

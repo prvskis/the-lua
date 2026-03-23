@@ -144,7 +144,7 @@ function BookingModal({
                   <p className="font-inter text-[11px] tracking-[0.34em] text-[#F5E7D0]">BOOKING ENQUIRY</p>
                   <h2
                     id="booking-modal-title"
-                    className="mt-4 max-w-[280px] font-regal text-[42px] leading-[0.95] text-[#FFF9F0] sm:text-[52px]"
+                    className="mt-4 max-w-[320px] font-inter text-[52px] font-semibold leading-[0.95] tracking-[0.01em] text-[#FFF9F0] sm:text-[56px]"
                   >
                     Reserve Your Journey
                   </h2>
@@ -221,7 +221,7 @@ function BookingModal({
                 {submitted ? (
                   <div className="mt-10 rounded-tr-[44px] border border-[#DEC9A5] bg-white/65 px-6 py-7 shadow-[0_20px_45px_rgba(34,36,88,0.08)] sm:px-8">
                     <p className="font-inter text-[11px] tracking-[0.28em] text-[#222458]/55">ENQUIRY PREVIEW</p>
-                    <h3 className="mt-4 font-regal text-[36px] leading-none" style={{ color: NAVY }}>
+                    <h3 className="mt-4 font-regal text-[36px] leading-none tracking-[0.01em]" style={{ color: NAVY }}>
                       Thank You
                     </h3>
                     <p className="mt-4 max-w-[480px] font-inter text-[15px] leading-7 text-[#222458]/78">
@@ -411,18 +411,31 @@ function BookingModal({
                     <div className="flex flex-wrap items-center gap-3 pt-2">
                       <button
                         type="submit"
-                        className="rounded-tr-[24px] px-6 py-3 font-inter text-[12px] font-semibold tracking-[0.2em] text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                        className="group relative overflow-hidden rounded-tr-[20px] border border-[#222458] px-5 py-1.5 font-inter text-[15px] font-semibold tracking-[0.1em] text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
                         style={{ backgroundColor: NAVY }}
                       >
-                        SEND ENQUIRY
+                        <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0">
+                          SEND ENQUIRY
+                        </span>
+                        <span className="absolute inset-0 origin-left scale-x-0 bg-[#F2E6D3] transition-transform duration-300 group-hover:scale-x-100" aria-hidden />
+                        <span className="absolute inset-0 z-20 flex items-center justify-center text-[#222458] opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                          SEND ENQUIRY
+                        </span>
                       </button>
 
                       <button
                         type="button"
                         onClick={onClose}
-                        className="rounded-tr-[24px] border border-[#2E2A67]/55 px-6 py-3 font-inter text-[12px] font-semibold tracking-[0.2em] text-[#222458] transition-all duration-200 hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                        className="group relative overflow-hidden rounded-tr-[20px] border border-[#222458] px-5 py-1.5 font-inter text-[15px] font-semibold tracking-[0.1em] text-[#222458] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                        style={{ backgroundColor: '#F2E6D3' }}
                       >
-                        NOT NOW
+                        <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0">
+                          NOT NOW
+                        </span>
+                        <span className="absolute inset-0 origin-left scale-x-0 bg-[#222458] transition-transform duration-300 group-hover:scale-x-100" aria-hidden />
+                        <span className="absolute inset-0 z-20 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+                          NOT NOW
+                        </span>
                       </button>
                     </div>
                   </form>

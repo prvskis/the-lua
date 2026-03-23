@@ -543,10 +543,7 @@ export function AboutPage() {
       <Section>
         <RevealOnScroll delay={0.04} y={0} duration={0.55} initialScale={0.985}>
           <div className="text-center">
-            <div className="mt-[-80px] text-[36px]" style={{ color: GOLD }}>
-              ✦
-            </div>
-            <DisplayTitle center className="mt-6 text-[44px] md:text-[58px]">
+            <DisplayTitle center className="text-[44px] md:text-[58px]">
               WHY CHOOSE US <span className="font-inter font-light">?</span>
             </DisplayTitle>
             <TextLineReveal
@@ -606,9 +603,6 @@ export function AboutPage() {
         <Container>
           <RevealOnScroll delay={0.04}>
             <div className="text-center">
-              <div className="mb-10 mt-[-80px] text-[36px]" style={{ color: GOLD }}>
-                ✦
-              </div>
               <DisplayTitle center>MEET OUR TEAM</DisplayTitle>
             </div>
             <TextLineReveal
@@ -637,7 +631,6 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* TESTIMONIALS (static version trước, sau nâng lên carousel) */}
       {/* TESTIMONIALS */}
       <section className="py-14 mb-10" style={{ backgroundColor: PAPER }}>
         <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
@@ -684,7 +677,7 @@ export function AboutPage() {
                     ref={idx === 0 ? firstTestimonialRef : undefined}
                     className="flex shrink-0 basis-full items-stretch lg:basis-[calc((100%_-_2.5rem)/2)]"
                   >
-                    <article className="relative flex min-h-full w-full flex-col rounded-[6px] border border-black/10 bg-white px-10 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]">
+                    <article className="relative flex min-h-full w-full flex-col rounded-[6px] border border-black/10 bg-white px-6 py-8 shadow-[0_16px_40px_rgba(34,36,88,0.06)] transition-[box-shadow,border-color] duration-300 hover:border-[#D9B07A]/35 hover:shadow-[0_24px_50px_rgba(34,36,88,0.1)]">
                       <div className="flex-1">
                         {/* stars */}
                         <div className="mb-6 flex items-center gap-2 text-[#D9B07A]" aria-label="5 out of 5 stars">

@@ -320,34 +320,34 @@ export function TrainPage() {
         </div>
       </Section>
 
-      <section className="py-16 lg:py-20 mb-10">
+      <section className="py-16 lg:py-10">
         <Container>
           <div className="max-w-[980px]">
             <RevealOnScroll delay={0.04}>
               <h2
-                className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[48px]"
+                className="font-regal text-[42px] leading-none tracking-[0.01em] md:text-[64px]"
                 style={{ color: NAVY }}
               >
                 INSIDE THE LUA TRAIN
               </h2>
             </RevealOnScroll>
 
-            <div className="mt-10 grid gap-5 lg:h-[640px] lg:grid-cols-[minmax(0,1fr)_255px] lg:items-stretch">
+            <div className="mt-6 grid gap-5 lg:h-[640px] lg:grid-cols-[minmax(0,1fr)_255px] lg:items-stretch">
               <RevealOnScroll y={18} amount={0.08} duration={0.65} initialScale={0.994}>
                 <ImageFrame
                   src="/images/train/inside-1.png"
                   alt="Inside THE LUA"
-                  className="group h-full rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
+                  className="group h-[550px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
                   imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
                 />
               </RevealOnScroll>
 
-              <div className="relative grid h-full grid-rows-2 gap-5">
+              <div className="relative grid h-[550px] grid-rows-2 gap-5">
                 <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.1} initialScale={0.994}>
                   <ImageFrame
                     src="/images/train/inside-2.png"
                     alt="Inside THE LUA 2"
-                    ratio="aspect-square"
+                    ratio="aspect-[1.15/1]"
                     className="group h-full rounded-br-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
                     imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
                   />
@@ -357,14 +357,14 @@ export function TrainPage() {
                   <ImageFrame
                     src="/images/train/inside-3.png"
                     alt="Inside THE LUA 3"
-                    ratio="aspect-square"
+                    ratio="aspect-[1.15/1]"
                     className="group h-full rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
                     imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
                   />
                 </RevealOnScroll>
 
                 <span
-                  className="absolute -right-[60px] top-1/2 z-10 hidden -translate-y-1/2 text-[50px] leading-none lg:block"
+                  className="absolute -right-[40px] top-1/2 z-10 hidden -translate-y-1/2 text-[50px] leading-none lg:block"
                   style={{ color: GOLD }}
                 >
                   ✦

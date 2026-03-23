@@ -94,11 +94,6 @@ export function InstagramSection() {
     <Section>
       <RevealOnScroll delay={0.04} y={18} amount={0.08} duration={0.55}>
         <div className="mt-[-70px] text-center">
-          <div className="mx-auto flex max-w-[620px] items-center justify-center gap-4 text-black/30">
-            <span className="mt-[2px] inline-block h-px w-40 bg-black/20" />
-            <span className="text-[40px] text-[#D9B07A]">✦</span>
-            <span className="mt-[2px] inline-block h-px w-40 bg-black/20" />
-          </div>
 
           <p className="font-inter text-[24px] font-bold tracking-[0.06em]" style={{ color: NAVY }}>
             INSTAGRAM

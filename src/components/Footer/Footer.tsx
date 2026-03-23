@@ -179,46 +179,55 @@ export function Footer() {
     return (
       <>
       <footer className="bg-[#232566] font-inter text-[#F4E9D6]">
-        <div className="mx-auto px-6 pt-16 lg:px-8 lg:pt-20">
-          <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-x-24 lg:items-start">
-            {/* LEFT */}
-            <div className="grid max-w-[520px] gap-12 lg:justify-self-end lg:gap-14">
-              {/* Contact */}
+        <div className="mx-auto max-w-[1280px] px-6 pb-2 pt-14 lg:px-10 lg:pt-16">
+          <div className="grid gap-10 lg:grid-cols-[180px_minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-x-12 lg:items-start">
+            {/* LEFT: LOGO */}
+            <div className="flex justify-center lg:justify-start">
+              <Link to="/" aria-label="Go to homepage">
+                <img
+                  src="/logos/logo-set-light.png"
+                  alt="THE LUA"
+                  className="h-[156px] mt-10 w-auto object-contain lg:h-[190px]"
+                />
+              </Link>
+            </div>
+
+            {/* CENTER: CONTACT + LINKS */}
+            <div className="space-y-8 lg:pt-1">
               <div>
-                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Contact</h3>
-  
-                <div className="mt-2 space-y-4 text-[15px] leading-7 text-[#F4E9D6]/90">
-                  <div className="flex items-start gap-4">
-                    <FiPhone className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
+                <h3 className="font-work text-[26px] font-semibold leading-none tracking-[0.005em]">Contact</h3>
+
+                <div className="mt-4 space-y-4 text-[16px] leading-7 text-[#F4E9D6]/90">
+                  <div className="flex items-start gap-3">
+                    <FiPhone className="mt-1 w-5 shrink-0 text-[20px] leading-none" aria-hidden="true" />
                     <a href={CONTACT_PHONE_HREF} className="transition hover:opacity-75">
                       {CONTACT_PHONE}
                     </a>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <FiMail className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
+                  <div className="flex items-start gap-3">
+                    <FiMail className="mt-1 w-5 shrink-0 text-[20px] leading-none" aria-hidden="true" />
                     <a href={CONTACT_EMAIL_HREF} className="transition hover:opacity-75">
                       {CONTACT_EMAIL}
                     </a>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <FiMapPin className="mt-1 w-8 shrink-0 text-[22px] leading-none" aria-hidden="true" />
+                  <div className="flex items-start gap-3">
+                    <FiMapPin className="mt-1 w-5 shrink-0 text-[18px] leading-none" aria-hidden="true" />
                     <a
                       href={CONTACT_MAP_HREF}
                       target="_blank"
                       rel="noreferrer"
-                      className="max-w-[320px] transition hover:opacity-75"
+                      className="max-w-[340px] transition hover:opacity-75"
                     >
                       {CONTACT_ADDRESS}
                     </a>
                   </div>
                 </div>
               </div>
-  
-              {/* Links */}
-              <div className="grid grid-cols-2 gap-x-10 gap-y-8 text-[15px] leading-7 text-[#F4E9D6]/90">
-                <div className="space-y-3">
+
+              <div className="grid grid-cols-2 gap-x-9 gap-y-5 text-[16px] leading-7 text-[#F4E9D6]/90">
+                <div className="space-y-1.5">
                   {FOOTER_INFO_LINKS.map((item) => (
                     <button
                       key={item.id}
@@ -230,8 +239,8 @@ export function Footer() {
                     </button>
                   ))}
                 </div>
-  
-                <div className="space-y-3">
+
+                <div className="space-y-1.5">
                   {FOOTER_SITE_LINKS.map((item) =>
                     "to" in item ? (
                       <Link
@@ -255,23 +264,12 @@ export function Footer() {
                 </div>
               </div>
             </div>
-  
-            {/* CENTER */}
-            <div className="flex items-center justify-center lg:pt-10">
-              <Link to="/" aria-label="Go to homepage">
-                <img
-                  src="/logos/logo-set-light.png"
-                  alt="THE LUA"
-                  className="h-[160px] mt-20 w-auto object-contain lg:h-[180px]"
-                />
-              </Link>
-            </div>
-  
-            {/* RIGHT */}
-            <div className="grid max-w-[520px] ml-[20px] gap-10 lg:justify-self-start lg:gap-11">
+
+            {/* RIGHT: SOCIAL + FEEDBACK + NEWSLETTER */}
+            <div className="space-y-7 lg:pl-3">
               <div>
-                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Follow Us</h3>
-                <div className="mt-4 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
+                <h3 className="font-work text-[24px] font-semibold leading-none tracking-[0.005em]">Follow Us</h3>
+                <div className="mt-4 flex items-center gap-5 text-[34px] text-[#F4E9D6]/95">
                   {SOCIAL_LINKS.map((item) => {
                     const Icon = item.icon
                     return (
@@ -289,10 +287,10 @@ export function Footer() {
                   })}
                 </div>
               </div>
-  
+
               <div>
-                <h3 className="font-work text-[25px] tracking-[0.005em] font-semibold">Share Your Feed Back</h3>
-                <div className="mt-5 flex items-center gap-6 text-[36px] text-[#F4E9D6]/95">
+                <h3 className="font-work text-[24px] font-semibold leading-none tracking-[0.005em]">Share Your Feed Back</h3>
+                <div className="mt-4 flex items-center gap-5 text-[34px] text-[#F4E9D6]/95">
                   {FEEDBACK_LINKS.map((item) => {
                     const Icon = item.icon
                     return item.kind === "external" ? (
@@ -323,15 +321,15 @@ export function Footer() {
                   })}
                 </div>
               </div>
-  
+
               <div>
-                <h3 className="font-work text-[25px] font-semibold">Newsletter</h3>
-                <p className="mt-3 text-[15px] leading-6 text-[#F4E9D6]/85">
-                  Elevate your next THE LUA TRAIN experience by receiving our newsletter.
+                <h3 className="font-work text-[24px] font-semibold leading-none tracking-[0.005em]">Share Your Feed Back</h3>
+                <p className="font-inter mt-3 max-w-[430px] text-[16px] leading-6 text-[#F4E9D6]/85">
+                  Elevate your next THE LUA TRAIN by receiving our newsletter.
                 </p>
-  
+
                 <form
-                  className="mt-2 flex max-w-[360px] overflow-hidden rounded-tr-[18px] bg-[#F4E9D6]"
+                  className="font-inter mt-3 flex max-w-[420px] overflow-hidden rounded-tr-[18px] bg-[#F4E9D6]"
                   action={CONTACT_EMAIL_HREF}
                   method="get"
                 >
@@ -339,12 +337,12 @@ export function Footer() {
                   <input
                     type="email"
                     name="body"
-                    placeholder="MartinEdwards@gmail.com"
-                    className="font-inter h-[44px] min-w-0 flex-1 bg-transparent px-4 text-[15px] text-[#8C7C61] outline-none placeholder:text-[#C5B391]"
+                    placeholder="MartinEdward@gmail.com"
+                    className="h-[42px] min-w-0 flex-1 bg-transparent px-4 text-[16px] text-[#8C7C61] outline-none placeholder:text-[#C5B391]"
                   />
                   <button
                     type="submit"
-                    className="px-4 text-[12px] font-semibold tracking-[0.18em] text-[#232566] transition hover:bg-[#EBDDCA]"
+                    className="px-4 text-[16px] font-semibold tracking-[0.18em] text-[#232566] transition hover:bg-[#EBDDCA]"
                   >
                     JOIN
                   </button>
@@ -355,9 +353,9 @@ export function Footer() {
         </div>
   
         {/* BOTTOM BAR */}
-        <div className="mt-12 border-t border-[#F4E9D6]/55">
-          <div className="mx-auto flex max-w-[1000px] flex-col gap-4 px-6 py-5 text-[14px] text-[#F4E9D6]/90 md:flex-row md:items-center md:justify-between lg:px-8">
-            <div className="flex items-center gap-8 md:gap-10">
+        <div className="mt-8 border-t border-[#F4E9D6]/55">
+          <div className="mx-auto flex max-w-[1280px] flex-col gap-3 px-6 py-4 text-[14px] text-[#F4E9D6]/90 md:flex-row md:items-center md:justify-between lg:px-10">
+            <div className="flex items-center gap-6 md:gap-8">
               {FOOTER_BOTTOM_POPUPS.map((item) => (
                 <button
                   key={item.id}
@@ -369,7 +367,7 @@ export function Footer() {
                 </button>
               ))}
             </div>
-  
+
             <p className="text-left md:text-right">Bản quyền © 2026 thuộc về THELUA©</p>
           </div>
         </div>
