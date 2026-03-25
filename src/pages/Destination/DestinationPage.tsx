@@ -533,7 +533,6 @@ export function DestinationPage() {
           alt="THE LUA Destinations Hero"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#11163F]/30" />
       </section>
 
       <Section>

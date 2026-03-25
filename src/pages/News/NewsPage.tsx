@@ -276,7 +276,6 @@ export function NewsPage() {
           alt="THE LUA News Hero"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#11163F]/30" />
       </section>
 
       <section className="pb-16 pt-6 lg:pb-20 lg:pt-8">

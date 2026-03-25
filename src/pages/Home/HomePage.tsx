@@ -24,7 +24,6 @@ const INSIDE_GALLERY_IMAGES = [
   { src: '/images/home/inside-3.jpg', alt: 'Inside 3' },
   { src: '/images/home/inside-4.jpg', alt: 'Inside 4' },
   { src: '/images/home/inside-5.jpg', alt: 'Inside 5' },
-  { src: '/images/home/inside-6.jpg', alt: 'Inside 6' },
   { src: '/images/home/inside-7.jpg', alt: 'Inside 7' },
   { src: '/images/home/inside-8.jpg', alt: 'Inside 8' },
   { src: '/images/home/inside-9.jpg', alt: 'Inside 9' },

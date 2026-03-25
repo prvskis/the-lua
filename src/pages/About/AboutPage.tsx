@@ -406,7 +406,6 @@ export function AboutPage() {
           alt="About THE LUA"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#11163F]/35" />
       </section>
 
       <Section>
