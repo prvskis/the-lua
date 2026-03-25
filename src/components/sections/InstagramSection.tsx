@@ -145,7 +145,7 @@ export function InstagramSection() {
                   }}
                 >
                   <ImageFrame
-                    src={`/images/home/${k}.jpg`}
+                    src={`/images/home/${k}.webp`}
                     alt={k}
                     ratio="aspect-[1/1.5]"
                     className="rounded-tr-[140px]"

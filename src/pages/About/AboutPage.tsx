@@ -235,7 +235,7 @@ export function AboutPage() {
   const storyBlocks: StoryBlockProps[] = [
     {
       title: 'HERITAGE CONCEPT',
-      image: '/images/about/story-1.png',
+      image: '/images/about/story-1.webp',
       description: [
         'The Lua is an open invitation to experience Vietnam beyond the mere surface.',
         'Not as a destination, but as a living atmosphere felt through rhythm, texture, memory, and movement.',
@@ -245,7 +245,7 @@ export function AboutPage() {
     },
     {
       title: 'DESIGNED AS\nA JOURNEY CULTURE',
-      image: '/images/about/story-2.png',
+      image: '/images/about/story-2.webp',
       reverse: true,
       description: [
         'At The Lua, design is not decoration, it is translation.',
@@ -255,7 +255,7 @@ export function AboutPage() {
     },
     {
       title: 'LAYERS OF\nMEANING',
-      image: '/images/about/story-3.png',
+      image: '/images/about/story-3.webp',
       description: [
         'The Lua exists in layers.',
         'On the surface, it is refined and minimal. Beneath, it carries narrative and emotion. At its core, it represents a Vietnam that is evolving, confident, contemporary, yet deeply rooted.',
@@ -265,9 +265,9 @@ export function AboutPage() {
   ]
 
   const members: TeamMember[] = [
-    { name: 'JUHOON', role: 'CEO, Founder', image: '/images/about/team-1.png' },
-    { name: 'KRISAN DO', role: 'Business Development Manager', image: '/images/about/team-2.png' },
-    { name: 'MARTIN EDWARDS', role: 'Operation Manager', image: '/images/about/team-3.png' },
+    { name: 'JUHOON', role: 'CEO, Founder', image: '/images/about/team-1.webp' },
+    { name: 'KRISAN DO', role: 'Business Development Manager', image: '/images/about/team-2.webp' },
+    { name: 'MARTIN EDWARDS', role: 'Operation Manager', image: '/images/about/team-3.webp' },
   ]
 
   const highlights = [
@@ -300,7 +300,7 @@ export function AboutPage() {
         'Coming here with my family. I have to say that this is one of the most amazing trip that i have experienced in 2026 and it was a truly memorable journey. The train was comfortable, elegant, and very well organized. The staff were attentive and made us feel welcome throughout the trip. We especially enjoyed watching the scenery together and sharing meals on board. It was relaxing, meaningful, and a beautiful way to experience Vietnam. I would highly recommend The Lua for families looking for a refined yet comfortable journey.',
       name: 'Timothee Chalamet',
       date: '11/3/2026',
-      avatar: '/images/home/avatar-1.jpg',
+      avatar: '/images/home/avatar-1.webp',
     },
     {
       title: 'VIET NAM IS SO AWSOME',
@@ -308,7 +308,7 @@ export function AboutPage() {
         "The food here is so good. I can't stop myself eating all the Vietnamese foods. Wish i had more time to enjoy this amazing trip. The staff is very kind and i really love there humor. They kinda funny and take care of me in a little things. My husband even made a plan for the next trip in THE LUA, he even invited his friends and his co-workers. can’t deny the immersive culture they gave us and we learned a lots about Viet Nam through this trip. I will come back soon to have another amazing trip in THE LUA.",
       name: 'Conan Gray',
       date: '10/2/2026',
-      avatar: '/images/home/avatar-2.jpg',
+      avatar: '/images/home/avatar-2.webp',
     },
     {
       title: 'A BEAUTIFUL WAY TO SEE VIET NAM',
@@ -316,7 +316,7 @@ export function AboutPage() {
         'This journey felt very different from a normal holiday. Everything moved at a gentle pace and gave us time to really enjoy each moment. I loved how the scenery changed through the window during the day, and how peaceful the atmosphere became in the evening. The design of the train was elegant, the service was thoughtful, and every part of the experience felt carefully prepared. It gave us a deeper connection to Viet Nam, not only through the places we passed, but through the food, the stories, and the small details on board. I would absolutely choose THE LUA again.',
       name: 'Lily Collins',
       date: '20/3/2026',
-      avatar: '/images/home/avatar-1.jpg',
+      avatar: '/images/home/avatar-1.webp',
     },
   ] as const
 
@@ -402,7 +402,7 @@ export function AboutPage() {
     <div className="bg-white">
       <section className="relative -mt-16 h-[calc(88vh+4rem)] min-h-[620px] w-full overflow-hidden">
         <img
-          src="/images/about/hero.png"
+          src="/images/about/hero.webp"
           alt="About THE LUA"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -467,7 +467,7 @@ export function AboutPage() {
             <RevealOnScroll className="flex justify-end" delay={0.14} y={22} amount={0.08} initialScale={0.992}>
               <div className="group w-full max-w-[620px] overflow-hidden rounded-tl-[140px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.12)]">
                 <img
-                  src="/images/about/immersive.png"
+                  src="/images/about/immersive.webp"
                   alt="Immersive Vietnam"
                   className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
                 />
@@ -560,17 +560,17 @@ export function AboutPage() {
           <div className="grid grid-cols-2 gap-4">
             <RevealOnScroll className="h-full" delay={0.1} y={0} amount={0.08} duration={0.55} initialScale={0.97}>
               <div className="group h-full overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-                <img src="/images/about/why-1.png" alt="The Lua experience 1" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/about/why-1.webp" alt="The Lua experience 1" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
             <RevealOnScroll className="h-full" delay={0.2} y={0} amount={0.08} duration={0.55} initialScale={0.97}>
               <div className="group h-full overflow-hidden rounded-tl-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-                <img src="/images/about/why-2.png" alt="The Lua experience 2" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/about/why-2.webp" alt="The Lua experience 2" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
             <RevealOnScroll className="col-span-2 h-full" delay={0.3} y={0} amount={0.08} duration={0.6} initialScale={0.97}>
               <div className="group h-full overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-                <img src="/images/about/why-3.png" alt="The Lua experience 3" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/about/why-3.webp" alt="The Lua experience 3" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
           </div>
@@ -652,7 +652,7 @@ export function AboutPage() {
             <div
               className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-center bg-no-repeat"
               style={{
-                backgroundImage: "url('/images/home/texture-pattern.png')",
+                backgroundImage: "url('/images/home/texture-pattern.webp')",
                 backgroundSize: '100% 100%',
                 opacity: 1,
               }}

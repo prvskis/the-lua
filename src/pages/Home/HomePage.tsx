@@ -14,20 +14,20 @@ const GOLD = '#F2E6D3'
 
 const HERO_SLIDES = [
   { kind: 'video', src: '/videos/hero-1.mp4' },
-  { kind: 'image', src: '/images/home/hero-2.png', alt: 'THE LUA Hero 2' },
-  { kind: 'image', src: '/images/home/hero-3.png', alt: 'THE LUA Hero 3' },
+  { kind: 'image', src: '/images/home/hero-2.webp', alt: 'THE LUA Hero 2' },
+  { kind: 'image', src: '/images/home/hero-3.webp', alt: 'THE LUA Hero 3' },
 ] as const
 
 const INSIDE_GALLERY_IMAGES = [
-  { src: '/images/home/inside-1.jpg', alt: 'Inside 1' },
-  { src: '/images/home/inside-2.jpg', alt: 'Inside 2' },
-  { src: '/images/home/inside-3.jpg', alt: 'Inside 3' },
-  { src: '/images/home/inside-4.jpg', alt: 'Inside 4' },
-  { src: '/images/home/inside-5.jpg', alt: 'Inside 5' },
-  { src: '/images/home/inside-7.jpg', alt: 'Inside 7' },
-  { src: '/images/home/inside-8.jpg', alt: 'Inside 8' },
-  { src: '/images/home/inside-9.jpg', alt: 'Inside 9' },
-  { src: '/images/home/inside-10.jpg', alt: 'Inside 10' },
+  { src: '/images/home/inside-1.webp', alt: 'Inside 1' },
+  { src: '/images/home/inside-2.webp', alt: 'Inside 2' },
+  { src: '/images/home/inside-3.webp', alt: 'Inside 3' },
+  { src: '/images/home/inside-4.webp', alt: 'Inside 4' },
+  { src: '/images/home/inside-5.webp', alt: 'Inside 5' },
+  { src: '/images/home/inside-7.webp', alt: 'Inside 7' },
+  { src: '/images/home/inside-8.webp', alt: 'Inside 8' },
+  { src: '/images/home/inside-9.webp', alt: 'Inside 9' },
+  { src: '/images/home/inside-10.webp', alt: 'Inside 10' },
 ] as const
 
 const LOOPED_INSIDE_GALLERY_IMAGES = [...INSIDE_GALLERY_IMAGES, ...INSIDE_GALLERY_IMAGES]
@@ -242,7 +242,7 @@ export function HomePage() {
         'Coming here with my family. I have to say that this is one of the most amazing trip that i have experienced in 2026 and it was a truly memorable journey. The train was comfortable, elegant, and very well organized. The staff were attentive and made us feel welcome throughout the trip. We especially enjoyed watching the scenery together and sharing meals on board. It was relaxing, meaningful, and a beautiful way to experience Vietnam. I would highly recommend The Lua for families looking for a refined yet comfortable journey.',
       name: 'Timothee Chalamet',
       date: '11/3/2026',
-      avatar: '/images/home/avatar-1.jpg',
+      avatar: '/images/home/avatar-1.webp',
     },
     {
       title: 'VIET NAM IS SO AWSOME',
@@ -250,7 +250,7 @@ export function HomePage() {
         "The food here is so good. I can't stop myself eating all the Vietnamese foods. Wish i had more time to enjoy this amazing trip. The staff is very kind and i really love there humor. They kinda funny and take care of me in a little things. My husband even made a plan for the next trip in THE LUA, he even invited his friends and his co-workers. can’t deny the immersive culture they gave us and we learned a lots about Viet Nam through this trip. I will come back soon to have another amazing trip in THE LUA.",
       name: 'Conan Gray',
       date: '10/2/2026',
-      avatar: '/images/home/avatar-2.jpg',
+      avatar: '/images/home/avatar-2.webp',
     },
     {
       title: 'A BEAUTIFUL WAY TO SEE VIET NAM',
@@ -258,7 +258,7 @@ export function HomePage() {
         'This journey felt very different from a normal holiday. Everything moved at a gentle pace and gave us time to really enjoy each moment. I loved how the scenery changed through the window during the day, and how peaceful the atmosphere became in the evening. The design of the train was elegant, the service was thoughtful, and every part of the experience felt carefully prepared. It gave us a deeper connection to Viet Nam, not only through the places we passed, but through the food, the stories, and the small details on board. I would absolutely choose THE LUA again.',
       name: 'Lily Collins',
       date: '20/3/2026',
-      avatar: '/images/home/avatar-1.jpg',
+      avatar: '/images/home/avatar-1.webp',
     },
   ] as const
 
@@ -402,7 +402,7 @@ export function HomePage() {
 
   const trips: TripCard[] = [
     {
-      img: '/images/home/explore-1.jpg',
+      img: '/images/home/explore-1.webp',
       title: 'FROM HA NOI TO HO CHI MINH',
       route: 'Ha Noi ✦ Hoi An ✦ Da Nang ✦ Ho Chi Minh city',
       metaLeft: 'One way',
@@ -411,7 +411,7 @@ export function HomePage() {
       shape: 'left',
     },
     {
-      img: '/images/home/explore-2.jpg',
+      img: '/images/home/explore-2.webp',
       title: 'FROM HO CHI MINH TO HA NOI',
       route: 'Ho Chi Minh city ✦ Da Nang ✦ Hoi An ✦ Ha Noi',
       metaLeft: 'One way',
@@ -420,7 +420,7 @@ export function HomePage() {
       shape: 'mid',
     },
     {
-      img: '/images/home/explore-3.jpg',
+      img: '/images/home/explore-3.webp',
       title: 'FROM HA NOI TO LAN HA',
       route: 'Ha Noi ✦ Ha Long ✦ Lan Ha',
       metaLeft: 'One way',
@@ -468,7 +468,7 @@ export function HomePage() {
           aria-hidden={activeHeroSlide !== 1}
         >
           <img
-            src="/images/home/hero-2.png"
+            src="/images/home/hero-2.webp"
             alt="THE LUA Hero 2"
             className="absolute inset-0 block h-full w-full object-cover"
             style={{ scale: 1.15 }}
@@ -484,7 +484,7 @@ export function HomePage() {
           aria-hidden={activeHeroSlide !== 2}
         >
           <img
-            src="/images/home/hero-3.png"
+            src="/images/home/hero-3.webp"
             alt="THE LUA Hero 3"
             className="absolute inset-0 block h-full w-full object-cover"
             style={{ scale: 1.15 }}
@@ -673,7 +673,7 @@ export function HomePage() {
               }}
             >
               <img
-                src="/images/home/immersive.jpg"
+                src="/images/home/immersive.webp"
                 alt="Immersive"
                 className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03] max-h-[600px] max-w-[400]"
               />
@@ -759,7 +759,7 @@ export function HomePage() {
             mb-40
           "
           style={{
-            backgroundImage: "url('/images/home/background-offer.png')",
+            backgroundImage: "url('/images/home/background-offer.webp')",
             transform: 'scale(1.003)',
           }}
         >
@@ -821,7 +821,7 @@ export function HomePage() {
             <div
               className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-center bg-no-repeat"
               style={{
-                backgroundImage: "url('/images/home/texture-pattern.png')",
+                backgroundImage: "url('/images/home/texture-pattern.webp')",
                 backgroundSize: '100% 100%',
                 opacity: 1,
               }}
@@ -947,7 +947,7 @@ export function HomePage() {
       <div className="mb-20 w-full bg-white py-8">
         <div className="w-full overflow-hidden" aria-hidden="true">
           <img
-            src="/images/home/texture-section.png"
+            src="/images/home/texture-section.webp"
             alt=""
             className="h-full w-full object-cover transition-transform duration-700"
           />

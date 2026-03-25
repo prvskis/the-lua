@@ -181,7 +181,7 @@ export function NewsPage() {
       title: 'Redefining Cultural Travel in Modern Vietnam',
       excerpt:
         'Industry experts highlight how The Lua moves beyond conventional luxury, positioning itself as a brand thoughtfully built on depth, identity, and richly immersive storytelling.',
-      image: '/images/news/news-1.png',
+      image: '/images/news/news-1.webp',
       content: [
         'The Lua is increasingly being recognized as a new expression of cultural travel in Vietnam, one that shifts the conversation away from conventional notions of luxury and toward meaning, rhythm, and identity.',
         'Rather than presenting travel as a checklist of destinations, the concept frames the journey itself as the destination, where landscapes, cuisine, design, and atmosphere unfold together as one continuous narrative.',
@@ -193,7 +193,7 @@ export function NewsPage() {
       title: 'An Immersive Journey Through Festive Vietnam',
       excerpt:
         'As the festive season approaches, The Lua creates a space where travelers can experience Vietnam’s traditions in an intimate and meaningful way.',
-      image: '/images/news/news-2.png',
+      image: '/images/news/news-2.webp',
       content: [
         'Seasonal programming aboard The Lua allows festive traditions to be experienced as atmosphere rather than spectacle, with design, music, cuisine, and storytelling woven into the guest journey.',
         'Instead of staging culture at a distance, the train creates a setting where traditions feel close, tactile, and intimate, allowing travelers to encounter celebration as a living part of the voyage.',
@@ -205,7 +205,7 @@ export function NewsPage() {
       title: 'Designing Heritage Through Contemporary Train Travel',
       excerpt:
         'The Lua unveils its curated routes, blending railway journeys with authentic cultural narratives across Vietnam.',
-      image: '/images/news/news-3.png',
+      image: '/images/news/news-3.webp',
       content: [
         'Through its route planning and onboard curation, The Lua explores how contemporary rail travel can become a vessel for heritage rather than simply a mode of transportation.',
         'Craftsmanship, material language, and regional storytelling shape the guest experience, allowing tradition to be interpreted with confidence and modern restraint.',
@@ -217,7 +217,7 @@ export function NewsPage() {
       title: 'Train & Culture Reimagined by The Lua Experience',
       excerpt:
         'Exploring the visual language and design philosophy that transforms traditional Vietnamese values into a refined, immersive train experience.',
-      image: '/images/news/news-4.png',
+      image: '/images/news/news-4.webp',
       content: [
         'The Lua’s visual identity is informed by a dialogue between refinement and familiarity, where Vietnamese references are translated into spatial rhythm, proportion, and atmosphere.',
         'Rather than relying on nostalgia, the project seeks to reinterpret traditional values in a way that feels current, cinematic, and quietly luxurious.',
@@ -229,7 +229,7 @@ export function NewsPage() {
       title: 'From Rice to Silk: The Meaning of THE LUA',
       excerpt:
         'An in-depth look at how The Lua draws inspiration from lúa, lụa, and lửa to shape a brand rooted in Vietnamese civilization and modern expression.',
-      image: '/images/news/news-5.png',
+      image: '/images/news/news-5.webp',
       content: [
         'The name THE LUA draws from layered Vietnamese references, evoking grain, silk, and flame as symbols of nourishment, refinement, and inner vitality.',
         'Together, these meanings shape a brand language that feels rooted in the country’s cultural memory while remaining forward-looking in expression.',
@@ -241,7 +241,7 @@ export function NewsPage() {
       title: 'The Lua Officially Launches the Immersive Vietnam Experience',
       excerpt:
         'The Lua officially launches its concept of Immersive Vietnam, redefining train travel as a layered cultural experience that connects movement with heritage.',
-      image: '/images/news/news-6.png',
+      image: '/images/news/news-6.webp',
       content: [
         'With the launch of Immersive Vietnam, The Lua formalizes its ambition to redefine train travel as a cultural experience rather than a purely logistical one.',
         'The concept brings together movement, design, cuisine, storytelling, and regional context into a single guest journey that feels composed from beginning to end.',
@@ -272,7 +272,7 @@ export function NewsPage() {
     <div className="bg-white">
       <section className="relative -mt-16 h-[calc(88vh+4rem)] min-h-[620px] w-full overflow-hidden">
         <img
-          src="/images/news/hero.png"
+          src="/images/news/hero.webp"
           alt="THE LUA News Hero"
           className="absolute inset-0 h-full w-full object-cover"
         />

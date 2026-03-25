@@ -211,7 +211,7 @@ function StayOnTrackSection() {
 const featureBlocks: TrainFeatureBlockProps[] = [
   {
     title: 'THE EXPERIENCE CAR',
-    image: '/images/train/experience-car.png',
+    image: '/images/train/experience-car.webp',
     imageAlt: 'The Experience Car',
     description: [
       'The Experience Carriage is thoughtfully styled around Vietnam’s major festivals, transforming with the seasons to reflect their colors, atmosphere, and emotional spirit.',
@@ -222,7 +222,7 @@ const featureBlocks: TrainFeatureBlockProps[] = [
   },
   {
     title: 'THE DINING CAR',
-    image: '/images/train/dining-car.png',
+    image: '/images/train/dining-car.webp',
     imageAlt: 'The Dining Car',
     reverse: true,
     description: [
@@ -233,7 +233,7 @@ const featureBlocks: TrainFeatureBlockProps[] = [
   },
   {
     title: 'THE SUITES',
-    image: '/images/train/suite-1.png',
+    image: '/images/train/suite-1.webp',
     imageAlt: 'The Suites',
     description: [
       'The Sleeping Cabin is thoughtfully designed with traditional Vietnamese handicrafts, creating a warm and intimate atmosphere in every detail. Through its layout, materials, and interior elements, guests are introduced to the diverse craft villages found across Vietnam.',
@@ -265,7 +265,7 @@ export function TrainPage() {
     <div className="bg-white">
       <section className="relative -mt-16 h-[calc(88vh+4rem)] min-h-[620px] w-full overflow-hidden">
         <img
-          src="/images/train/hero.png"
+          src="/images/train/hero.webp"
           alt="THE LUA Train Hero"
           className="absolute left-0 right-0 top-[-0.75rem] h-[calc(100%+1.5rem)] w-full object-[center_30%] object-cover"
         />
@@ -309,7 +309,7 @@ export function TrainPage() {
 
             <RevealOnScroll className="flex justify-end" delay={0.14} y={22} amount={0.08} initialScale={0.992}>
               <ImageFrame
-                src="/images/train/immersive.png"
+                src="/images/train/immersive.webp"
                 alt="Immersive Vietnam"
                 ratio="aspect-[1/1.08]"
                 className="group w-full max-w-[620px] rounded-tl-[140px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.12)]"
@@ -335,7 +335,7 @@ export function TrainPage() {
             <div className="mt-6 grid gap-5 lg:h-[640px] lg:grid-cols-[minmax(0,1fr)_255px] lg:items-stretch">
               <RevealOnScroll y={18} amount={0.08} duration={0.65} initialScale={0.994}>
                 <ImageFrame
-                  src="/images/train/inside-1.png"
+                  src="/images/train/inside-1.webp"
                   alt="Inside THE LUA"
                   className="group h-[550px] rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
                   imageClassName="transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]"
@@ -345,7 +345,7 @@ export function TrainPage() {
               <div className="relative grid h-[550px] grid-rows-2 gap-5">
                 <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.1} initialScale={0.994}>
                   <ImageFrame
-                    src="/images/train/inside-2.png"
+                    src="/images/train/inside-2.webp"
                     alt="Inside THE LUA 2"
                     ratio="aspect-[1.15/1]"
                     className="group h-full rounded-br-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
@@ -355,7 +355,7 @@ export function TrainPage() {
 
                 <RevealOnScroll y={18} amount={0.08} duration={0.65} delay={0.2} initialScale={0.994}>
                   <ImageFrame
-                    src="/images/train/inside-3.png"
+                    src="/images/train/inside-3.webp"
                     alt="Inside THE LUA 3"
                     ratio="aspect-[1.15/1]"
                     className="group h-full rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]"
@@ -394,13 +394,13 @@ export function TrainPage() {
           <div className="relative grid gap-6 lg:grid-cols-[300px_1fr] lg:items-stretch">
             <RevealOnScroll className="h-full" y={18} amount={0.08} duration={0.65} initialScale={0.994}>
               <div className="group h-full overflow-hidden rounded-br-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-                <img src="/images/train/suite-2.png" alt="THE LUA Suite Detail" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/train/suite-2.webp" alt="THE LUA Suite Detail" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll className="h-full" y={18} amount={0.08} duration={0.65} delay={0.12} initialScale={0.994}>
               <div className="group h-full overflow-hidden rounded-bl-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_20px_40px_rgba(34,36,88,0.12)]">
-                <img src="/images/train/suite-3.png" alt="THE LUA Suite Interior" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/train/suite-3.webp" alt="THE LUA Suite Interior" className="h-full w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
 

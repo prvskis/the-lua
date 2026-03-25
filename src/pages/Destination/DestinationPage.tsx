@@ -303,7 +303,7 @@ function OfferBanner() {
       <div
         className="w-full overflow-hidden bg-cover bg-center bg-no-repeat text-white"
         style={{
-          backgroundImage: "url('/images/home/background-offer.png')",
+          backgroundImage: "url('/images/home/background-offer.webp')",
           transform: 'scale(1.003)',
         }}
       >
@@ -377,7 +377,7 @@ export function DestinationPage() {
       departureDate: 'January 2026',
       duration: '6 days 7 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ha Noi to Ho Chi Minh city',
-      image: '/images/destination/journey-1.png',
+      image: '/images/destination/journey-1.webp',
     },
     {
       title: 'FROM HO CHI MINH TO HA NOI',
@@ -387,7 +387,7 @@ export function DestinationPage() {
       departureDate: 'February 2026',
       duration: '6 days 7 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ho Chi Minh to Ha Noi capital',
-      image: '/images/destination/journey-2.png',
+      image: '/images/destination/journey-2.webp',
     },
     {
       title: 'FROM HA NOI TO LAN HA',
@@ -397,7 +397,7 @@ export function DestinationPage() {
       departureDate: 'January 2026',
       duration: '3 days 2 nights',
       description: 'Set off on a three-day, two-night on way journey from Ha Noi to Lan Ha',
-      image: '/images/destination/journey-3.png',
+      image: '/images/destination/journey-3.webp',
     },
     {
       title: 'FROM HCM TO QUANG NAM',
@@ -407,7 +407,7 @@ export function DestinationPage() {
       departureDate: 'March 2026',
       duration: '4 days 5 nights',
       description: 'Set off on a three-day, two-night on way journey from Ho Chi Minh to Quang Nam',
-      image: '/images/destination/journey-4.png',
+      image: '/images/destination/journey-4.webp',
     },
     {
       title: 'FROM DA NANG TO HUE',
@@ -417,7 +417,7 @@ export function DestinationPage() {
       departureDate: 'February 2026',
       duration: '2 days 1 nights',
       description: 'Set off on a two-day, one-night on way journey from Da Nang to Hue',
-      image: '/images/destination/journey-5.png',
+      image: '/images/destination/journey-5.webp',
     },
     {
       title: 'FROM HA NOI TO NINH BINH',
@@ -427,7 +427,7 @@ export function DestinationPage() {
       departureDate: 'March 2026',
       duration: '3 days 2 nights',
       description: 'Set off on a three-day, two-night on way journey from Ha Noi to Ninh Binh',
-      image: '/images/destination/journey-6.png',
+      image: '/images/destination/journey-6.webp',
     },
     {
       title: 'FROM HO CHI MINH TO DA NANG',
@@ -437,7 +437,7 @@ export function DestinationPage() {
       departureDate: 'April 2026',
       duration: '4 days 5 nights',
       description: 'Set off on a six-day, seven-night on way journey from Ho Chi Minh to Da Nang',
-      image: '/images/destination/journey-7.png',
+      image: '/images/destination/journey-7.webp',
     },
     {
       title: 'FROM HA NOI TO SAPA',
@@ -447,7 +447,7 @@ export function DestinationPage() {
       departureDate: 'April 2026',
       duration: '2 days 1 nights',
       description: 'Set off on a two-day, one-night on way journey from Ha Noi to Sapa',
-      image: '/images/destination/journey-8.png',
+      image: '/images/destination/journey-8.webp',
     },
   ]
 
@@ -529,7 +529,7 @@ export function DestinationPage() {
     <div className="bg-white">
       <section className="relative -mt-16 h-[calc(88vh+4rem)] min-h-[620px] w-full overflow-hidden">
         <img
-          src="/images/destination/hero.png"
+          src="/images/destination/hero.webp"
           alt="THE LUA Destinations Hero"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -583,7 +583,7 @@ export function DestinationPage() {
 
             <RevealOnScroll className="flex justify-end" delay={0.14} y={22} amount={0.08} initialScale={0.992}>
               <div className="group w-full max-w-[620px] overflow-hidden rounded-tr-[140px] bg-black/5 transition-shadow duration-300 hover:shadow-[0_22px_42px_rgba(34,36,88,0.12)]">
-                <img src="/images/destination/intinerary.png" alt="Destinations intro" className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
+                <img src="/images/destination/intinerary.webp" alt="Destinations intro" className="w-full object-cover transition-[filter] duration-300 ease-out group-hover:brightness-[1.03]" />
               </div>
             </RevealOnScroll>
           </div>
@@ -595,7 +595,7 @@ export function DestinationPage() {
           <RevealOnScroll className="relative mx-auto mt-12 max-w-[1100px]" delay={0.06} y={24} amount={0.08}>
             <div className="relative min-h-[700px] lg:min-h-[750px]">
               <div className="relative z-0 flex justify-center lg:absolute lg:left-0 lg:top-0 lg:w-[68%] lg:justify-start">
-                <img src="/images/destination/map.png" alt="Vietnam map" className="w-full max-w-[800px] object-contain" />
+                <img src="/images/destination/map.webp" alt="Vietnam map" className="w-full max-w-[800px] object-contain" />
               </div>
 
               <div className="lg:absolute lg:right-0 lg:w-[47%] lg:top-[75px]">
