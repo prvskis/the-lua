@@ -125,9 +125,9 @@ function BookingModal({
             aria-modal="true"
             aria-labelledby="booking-modal-title"
           >
-            <div className="grid max-h-[min(92vh,920px)] lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="grid max-h-[min(92vh,920px)] lg:grid-cols-[0.95fr_0.95fr]">
               <div
-                className="relative overflow-hidden px-6 py-7 sm:px-8 lg:px-10 lg:py-10"
+                className="relative overflow-hidden px-4 py-7 sm:px-8 lg:px-10 lg:py-10"
                 style={{
                   background: 'linear-gradient(180deg, #272865 0%, #1E1F4B 100%)',
                 }}
@@ -144,7 +144,7 @@ function BookingModal({
                   <p className="font-inter text-[11px] tracking-[0.34em] text-[#F5E7D0]">BOOKING ENQUIRY</p>
                   <h2
                     id="booking-modal-title"
-                    className="mt-4 max-w-[320px] font-inter text-[52px] font-semibold leading-[0.95] tracking-[0.01em] text-[#FFF9F0] sm:text-[56px]"
+                    className="mt-4 max-w-[420px] font-inter text-[40px] font-semibold leading-[0.95] tracking-[0.01em] text-[#FFF9F0] sm:text-[38px]"
                   >
                     Reserve Your Journey
                   </h2>
@@ -186,7 +186,7 @@ function BookingModal({
                   </div>
 
                   <div className="mt-10 flex items-center gap-3 text-white/80">
-                    <span className="text-[22px]" style={{ color: GOLD }}>
+                    <span className="mb-1 text-[22px]" style={{ color: '#F5F5DC' }}>
                       ✦
                     </span>
                     <p className="font-inter text-[12px] tracking-[0.14em]">

@@ -63,14 +63,14 @@ function DisplayTitle({
 
 function PageEyebrow() {
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-inter text-[18px] tracking-[0.04em] md:text-[22px]">
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-inter text-[18px] tracking-[0.04em] md:text-[24px]">
       <span className="text-[36px] leading-none" style={{ color: GOLD }}>
         ✦
       </span>
-      <span className="font-bold" style={{ color: NAVY }}>
+      <span className="font-bold ml-[-4px]" style={{ color: NAVY }}>
         THE LUA TRAIN
       </span>
-      <span className="text-[25px] font-light leading-none text-[#232566]/80">|</span>
+      <span className="text-[24px] font-light leading-none text-[#232566]/80">|</span>
       <span className="font-normal" style={{ color: NAVY }}>
         THE DESTINATIONS
       </span>
@@ -541,13 +541,13 @@ export function DestinationPage() {
             <PageEyebrow />
           </RevealOnScroll>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:items-center lg:gap-10">
+          <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,545px)_minmax(0,1fr)] lg:items-center lg:gap-10">
             <RevealOnScroll delay={0.08}>
               <div>
               <DisplayTitle>ITINERARY</DisplayTitle>
 
-              <p className="font-inter text-[24px] font-bold" style={{ color: NAVY }}>
-                Immersive Rail Journey Across Vietnam
+              <p className="font-inter text-[24px] font-semibold" style={{ color: NAVY }}>
+                IMMERSIVE RAIL JOURNEY ACROSS VIETNAM
               </p>
               <div
                 className="mt-4 max-w-[500px] space-y-5 font-inter text-[16px] leading-9 tracking-[0.04em]"

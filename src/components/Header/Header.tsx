@@ -401,7 +401,7 @@ export function Header() {
                   origin: `Header booking button (${pathname})`,
                 })
               }
-              className="group relative overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+              className="font-inter group relative overflow-hidden rounded-tr-[20px] border border-transparent px-5 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               style={{ backgroundColor: NAVY }}
             >
               <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0">BOOK</span>

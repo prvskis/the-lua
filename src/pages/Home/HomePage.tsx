@@ -177,7 +177,7 @@ function TripCardView({
         <button
           type="button"
           onClick={() => onBook(c)}
-          className="group/book relative overflow-hidden rounded-tr-[20px] border border-transparent bg-[#1E1F4B] px-6 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+          className="group/book relative overflow-hidden rounded-tr-[20px] border border-transparent bg-[#1E1F4B] px-5 py-1.5 text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:border-[#2A2B5E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
         >
           <span className="relative z-10 transition-opacity duration-300 group-hover/book:opacity-0">BOOK</span>
           <span className="absolute inset-0 scale-x-0 origin-left bg-white transition-transform duration-300 group-hover/book:scale-x-100" aria-hidden />
@@ -624,17 +624,17 @@ export function HomePage() {
       <Section className="bg-[#F6EFE4]">
         <div
           ref={immersiveSectionRef}
-          className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
+          className="grid lg:grid-cols-[0.95fr_0.95fr] lg:items-start"
         >
           <div>
             <motion.div {...getRevealProps(0.02)}>
               <DisplayTitle>IMMERSIVE VIETNAM</DisplayTitle>
 
               <p
-                className="font-inter text-[24px] font-bold"
+                className="font-inter text-[24px] font-semibold"
                 style={{ color: NAVY }}
               >
-                Viet Nam Train And Immersive Culture
+                VIETNAM TRAIN AND IMMERSIVE CULTURE
               </p>
 
             </motion.div>
@@ -733,7 +733,7 @@ export function HomePage() {
           <button
             type="button"
             onClick={() => navigate('/destination#the-journey')}
-            className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-5 py-2 text-[12px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+            className="group relative overflow-hidden rounded-tr-[20px] border border-[#2A2B5E] px-5 py-1.5 text-[16px] font-semibold tracking-[0.18em] text-[#2A2B5E] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,36,88,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
           >
             <span className="relative z-10">SEE ALL</span>
 
@@ -794,7 +794,7 @@ export function HomePage() {
                     travelWindow: 'January 2026 - March 2026',
                   })
                 }
-                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border-1.5 border-transparent px-5 py-1.5 font-inter text-[16px] font-semibold tracking-[0.1em] transition-all duration-300 hover:border-[#F2E6D3] hover:shadow-[0_0_0_1px_rgba(242,230,211,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="group relative mt-8 overflow-hidden rounded-tr-[20px] border-1.5 border-transparent px-5 py-1.5 text-[16px] font-semibold tracking-[0.05em] transition-all duration-300 hover:border-[#F2E6D3] hover:shadow-[0_0_0_1px_rgba(242,230,211,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2E6D3] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{ backgroundColor: GOLD, color: NAVY, borderColor: GOLD }}
               >
                 <span className="relative z-10 transition-opacity duration-300 group-hover:opacity-0" style={{ color: NAVY }}>BOOK</span>
