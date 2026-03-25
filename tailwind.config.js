@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        /** Body / UI text on light backgrounds — đồng bộ với NAVY (#222458) trong pages */
+        navy: "#222458",
+      },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
         work: ['Work Sans', 'sans-serif'],

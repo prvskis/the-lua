@@ -180,7 +180,7 @@ export function NewsPage() {
       date: 'February 2026',
       title: 'Redefining Cultural Travel in Modern Vietnam',
       excerpt:
-        'Industry experts highlight how The Lua moves beyond conventional luxury, positioning itself as a brand built on depth, identity, and immersive storytelling.',
+        'Industry experts highlight how The Lua moves beyond conventional luxury, positioning itself as a brand thoughtfully built on depth, identity, and richly immersive storytelling.',
       image: '/images/news/news-1.png',
       content: [
         'The Lua is increasingly being recognized as a new expression of cultural travel in Vietnam, one that shifts the conversation away from conventional notions of luxury and toward meaning, rhythm, and identity.',

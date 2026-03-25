@@ -237,7 +237,7 @@ export function AboutPage() {
       title: 'HERITAGE CONCEPT',
       image: '/images/about/story-1.png',
       description: [
-        'The Lua is an invitation to experience Vietnam beyond the surface.',
+        'The Lua is an open invitation to experience Vietnam beyond the mere surface.',
         'Not as a destination, but as a living atmosphere felt through rhythm, texture, memory, and movement.',
         'Vietnam is not only landscapes or heritage sites, it is the quiet hum of a train at dusk, the glow of warm light through a window, and the layered stories carried across generations.',
         'We do not present Vietnam. We immerse you in it.',
@@ -250,7 +250,7 @@ export function AboutPage() {
       description: [
         'At The Lua, design is not decoration, it is translation.',
         'We translate the spirit of Vietnam into form, proportion, material, and tone. Each detail holds a layer of meaning: movement reflects progress, structure reflects resilience, softness reflects humanity.',
-        'Every piece becomes a vessel carrying culture forward without nostalgia, preserving identity without standing still.',
+        'Every piece becomes a vessel carrying culture forward without nostalgia, preserving identity without ever standing still.',
       ],
     },
     {
@@ -693,11 +693,11 @@ export function AboutPage() {
                           ))}
                         </div>
 
-                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-black/80">
+                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-navy/80">
                           {t.title}
                         </h3>
 
-                        <p className="mt-1 font-inter text-[16px] leading-6 text-black/65">
+                        <p className="mt-1 font-inter text-[16px] leading-6 text-navy/65">
                           {t.body}
                         </p>
                       </div>
@@ -715,8 +715,8 @@ export function AboutPage() {
                           />
                         </div>
                         <div>
-                          <div className="text-[16px] font-semibold text-black/55">{t.name}</div>
-                          <div className="text-[14px] text-black/30">{t.date}</div>
+                          <div className="text-[16px] font-semibold text-navy/55">{t.name}</div>
+                          <div className="text-[14px] text-navy/30">{t.date}</div>
                         </div>
                       </div>
 

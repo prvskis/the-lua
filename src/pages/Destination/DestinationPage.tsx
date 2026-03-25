@@ -196,7 +196,7 @@ function JourneyCard({
 
       <div className="h-px w-full bg-black/70" />
 
-      <p className="mt-2 font-inter text-[16px] leading-9 text-black">{journey.description}</p>
+      <p className="mt-2 font-inter text-[16px] leading-9 text-navy">{journey.description}</p>
 
       <div className="mt-2 flex items-center justify-between">
         <button

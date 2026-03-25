@@ -159,7 +159,7 @@ function TripCardView({
       <div className="h-px w-full bg-black/70" />
 
       {/* DESC */}
-      <p className="font-inter font-[400] mt-2 text-[15px] leading-9 text-black">
+      <p className="font-inter font-[400] mt-2 text-[15px] leading-9 text-navy">
         {c.desc}
       </p>
 
@@ -862,11 +862,11 @@ export function HomePage() {
                           ))}
                         </div>
 
-                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-black/80">
+                        <h3 className="mt-2 font-inter text-[24px] font-extrabold tracking-[0.02em] text-navy/80">
                           {t.title}
                         </h3>
 
-                        <p className="mt-1 font-inter text-[16px] leading-6 text-black/65">
+                        <p className="mt-1 font-inter text-[16px] leading-6 text-navy/65">
                           {t.body}
                         </p>
                       </div>
@@ -884,8 +884,8 @@ export function HomePage() {
                           />
                         </div>
                         <div>
-                          <div className="text-[15px] font-semibold text-black/55">{t.name}</div>
-                          <div className="text-[14px] text-black/30">{t.date}</div>
+                          <div className="text-[15px] font-semibold text-navy/55">{t.name}</div>
+                          <div className="text-[14px] text-navy/30">{t.date}</div>
                         </div>
                       </div>
 

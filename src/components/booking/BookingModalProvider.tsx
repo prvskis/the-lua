@@ -39,7 +39,6 @@ type BookingModalContextValue = {
 
 const NAVY = '#222458'
 const PAPER = '#F6EFE4'
-const GOLD = '#D9B07A'
 
 const defaultFormState: BookingFormState = {
   title: 'Mr.',

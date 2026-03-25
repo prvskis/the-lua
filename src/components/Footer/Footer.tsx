@@ -226,7 +226,7 @@ export function Footer() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-x-9 gap-y-5 text-[16px] leading-7 text-[#F4E9D6]/90">
+              <div className="grid grid-cols-2 gap-x-9 gap-y-5 text-[16px] leading-7 text-[#F4E9D6]">
                 <div className="space-y-1.5">
                   {FOOTER_INFO_LINKS.map((item) => (
                     <button

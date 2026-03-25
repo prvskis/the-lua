@@ -90,11 +90,11 @@ function NavItem({ to, label, behavior }: NavItemData) {
       <button
         type="button"
         onClick={scrollToPageBottom}
-        className="group relative text-black/70 transition hover:text-black"
+        className="group relative text-navy/70 transition hover:text-navy"
       >
         <span className="relative inline-block">
           <NavLabel label={label} />
-          <span className="absolute left-1/2 -bottom-1 h-px w-0 -translate-x-1/2 bg-black transition-all duration-300 group-hover:w-full" />
+          <span className="absolute left-1/2 -bottom-1 h-px w-0 -translate-x-1/2 bg-navy transition-all duration-300 group-hover:w-full" />
         </span>
       </button>
     )
@@ -107,7 +107,7 @@ function NavItem({ to, label, behavior }: NavItemData) {
       className={({ isActive }) =>
         [
           "group relative transition",
-          isActive ? "text-black font-semibold" : "text-black/70 hover:text-black",
+          isActive ? "text-navy font-semibold" : "text-navy/70 hover:text-navy",
         ].join(" ")
       }
     >
@@ -116,7 +116,7 @@ function NavItem({ to, label, behavior }: NavItemData) {
           <NavLabel label={label} active={isActive} />
           <span
             className={[
-              "absolute left-1/2 -bottom-1 h-px -translate-x-1/2 bg-black transition-all duration-300",
+              "absolute left-1/2 -bottom-1 h-px -translate-x-1/2 bg-navy transition-all duration-300",
               isActive ? "w-full" : "w-0 group-hover:w-full",
             ].join(" ")}
           />
@@ -202,7 +202,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMenuOpen((prev) => !prev)}
-              className="flex items-center gap-2 text-[12px] tracking-[0.22em] text-black/70 transition hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+              className="flex items-center gap-2 text-[12px] tracking-[0.22em] text-navy/70 transition hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
               aria-haspopup="menu"
               aria-expanded={menuOpen}
               aria-controls="site-menu-panel"
@@ -322,7 +322,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setLanguageMenuOpen((prev) => !prev)}
-                className="flex items-center gap-2 text-[11px] tracking-[0.22em] text-black/60 transition hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
+                className="flex items-center gap-2 text-[11px] tracking-[0.22em] text-navy/60 transition hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B07A] focus-visible:ring-offset-2"
                 aria-haspopup="menu"
                 aria-expanded={languageMenuOpen}
                 aria-controls="language-menu-panel"

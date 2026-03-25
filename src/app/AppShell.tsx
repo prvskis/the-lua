@@ -33,7 +33,7 @@ export function AppShell() {
 
   return (
     <BookingModalProvider>
-      <div className="min-h-screen bg-white text-black">
+      <div className="min-h-screen bg-white text-navy">
         <ScrollToTopOnRouteChange />
         <Header />
         <ScrollToTopButton />
